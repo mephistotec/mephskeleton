@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy_service-restapi-deployment
+  namespace: mango
+spec:
+  selector:
+    matchLabels:
+      k8s-app: dummy_service-restapi
+  template:
+    metadata:
+      labels:
+        k8s-app: dummy_service-restapi
+      annotations:
+        # If the app requires AWS permissions request a new
+        # iam role with the desired set of permissions and use
+        # it here as dummy_service-restapi.services.<env>.k8s.mango
+        iam.amazonaws.com/role: nopermissions.services.<env>.k8s.mango
+    spec:
+      containers:
+        - name: app
+          envFrom:
+            - configMapRef:
+                name: configmap-dummy_service-restapi
+          image: 495248209902.dkr.ecr.eu-west-1.amazonaws.com/mango/meph/dummy_service-restapi:<version>
+          ports:
+            # do not use priviledged ports
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            # Limits impose a restriction on how much of a given compute resource
+            # the container can get. If the limit is surpassed, the container
+            # might be terminated, depending on  the cluster available resources
+            limits:
+              cpu: <limit_cpu_value_restapi>
+              memory: <limit_memory_value_restapi>
+            # Resources specify that a container will reserve the given amount of
+            # the given compute resource for itself. Those resources are not available
+            # for any other container in the whole cluster, even if not used
+            requests:
+              cpu: <request_cpu_value_restapi>
+              memory: <request_memory_value_restapi>

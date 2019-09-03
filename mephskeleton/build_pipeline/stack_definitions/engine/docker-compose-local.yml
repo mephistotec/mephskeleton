@@ -1,0 +1,5 @@
+version: '3.4'
+services:
+    mephskeleton_engine:
+      volumes:
+        - ${PATH_CREDENTIALS_AWS_LOCAL}:/root/.aws

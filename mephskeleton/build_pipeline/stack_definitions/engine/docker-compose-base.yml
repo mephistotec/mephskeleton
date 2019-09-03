@@ -1,0 +1,11 @@
+version: '3.4'
+services:
+  mephskeleton_engine:
+    image: ${DOCKER_ENGINE_IMAGE_NAME}:${DOCKER_STACK_IMAGE_VERSION}
+    environment:
+      - MODEL_DATASOURCE_URL=${MODEL_DATASOURCE_URL}
+      - MODEL_DATASOURCE_USER=${MODEL_DATASOURCE_USER}
+      - ACTIVE_PROFILES=${ACTIVE_PROFILES}
+      - ENV_JAVA_OPTS=${ENV_JAVA_OPTS_ENGINE}
+    healthcheck:
+      test: ["CMD", "wget", "--tries=1", "--spider", "http://localhost:8080/health"]

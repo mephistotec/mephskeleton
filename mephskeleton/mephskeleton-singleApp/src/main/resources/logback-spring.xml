@@ -1,0 +1,88 @@
+<configuration>
+	<if condition='isDefined("catalina.home")'>
+		<then>
+			<property name="log.folder" value="${catalina.base}/logs"/>
+		</then>
+		<else>
+			<property name="log.folder" value="/var/log/tomcat8"/>
+		</else>
+	</if>
+	<property name="LOG_FILE" value="${log.folder}/mephskeleton-spring.log"/>
+	<!--	<include resource="org/springframework/boot/logging/logback/base.xml" />-->
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<logger name="org.springframework" level="ERROR"/>
+	<springProperty scope="context" name="app_name" source="spring.application.name" />
+	<springProperty scope="context" name="log_level_default" source="logging.level.default" default="INFO"/>
+
+	<appender name="fileAppenderJson" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.folder}/mephskeleton.json.log</file>
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<pattern>
+					<pattern>
+						{
+						"timestamp": "%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}",
+						"thread": "%thread",
+						"level": "%level",
+						"class": "%logger{40}",
+						"msg": "%message",
+						"applicationName": "${project.name}",
+						"span": "%X{X-B3-SpanId:-}",
+						"parent": "%X{X-B3-ParentSpanId:-}",
+						"exportable":
+						"%X{X-Span-Export:-}"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${log.folder}/mephskeleton.%i.json.log.gz</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>10MB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.folder}/mephskeleton.log</file>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{DD/MM HH:mm:ss.SSS} [%thread] %-5level [${project.name}] [TraceId: %X{X-B3-TraceId:-0}, SpanId: %X{X-B3-SpanId:-0}, SpanExport: %X{X-Span-Export:-0}] %logger{36} - %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${log.folder}/mephskeleton.%i.log.gz</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>10MB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{DD/MM HH:mm:ss.SSS} [%thread] %-5level [${project.name}] [TraceId: %X{X-B3-TraceId:-0}, SpanId: %X{X-B3-SpanId:-0}, SpanExport: %X{X-Span-Export:-0}] %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<springProfile name="dev">
+		<root level="${log_level_default}">
+			<appender-ref ref="consoleAppender" />
+		</root>
+	</springProfile>
+
+	<!-- Resto de paquetes de la aplicación. -->
+	<springProfile name="test, pre, pro">
+		<root level="${log_level_default}">
+			<appender-ref ref="consoleAppender" />
+			<appender-ref ref="fileAppender" />
+			<appender-ref ref="fileAppenderJson" />
+		</root>
+	</springProfile>
+</configuration>

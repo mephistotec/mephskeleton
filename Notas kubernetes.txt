@@ -1,0 +1,47 @@
+Deployment.xml
+
+	modified:   mephskeleton/build_pipeline/utils_pipeline.sh
+
+Creacion proyecto
+
+./create_project.sh com.meph mngpatilleditor com.meph FULL softbase cicd.sysops cicd.sysops DOCKER_WDPRE jira.mangodev.net/stash/scm/sb/mngpatilleditor.git  jira.mangodev.net/stash/projects/SB/repos/mngpatilleditor
+
+./create_project.sh com.meph dummy_service com.meph MICROSERVICE meph user_cicd user_s3 DOCKER jira.mangodev.net/stash/scm/sb/mngpatilleditor.git  jira.mangodev.net/stash/projects/SB/repos/mngpatilleditor
+
+URLS
+
+https://jira.mangodev.net/stash/projects/CPDE/repos/login-utils/browse
+
+
+
+
+- Hemos de inyectar el nombre (<name>)
+- Hemos de inyectar reponname y version <mango/softbase/aplicacion> : version --> tiempo de ejecucion
+- Hemos de inyectar la DOCKER_IMAGE_NAME
+- Hemos de inyectar DOCKER_STACK_VERSION
+
+{
+    "repository": {
+        "registryId": "495248209902",
+        "repositoryName": "mango/softbase/mngpatilleditor",
+        "repositoryArn": "arn:aws:ecr:eu-west-1:495248209902:repository/mango/softbase/mngpatilleditor",
+        "createdAt": 1556189803.0,
+        "repositoryUri": "495248209902.dkr.ecr.eu-west-1.amazonaws.com/mango/softbase/mngpatilleditor"
+    }
+}
+
+
+Variables que dependen de entorno
+    <pick-one-alb-endpoint>
+    <env>
+    <version>
+
+
+Para trabajar en local:
+- aws-login (kubernetes-master para poder kubectl)
+- eks-loadenv mango.dev / mango.pre / mango.pro
+
+ ----------- IMPORTANTE -----------------
+Falta tarea de despliegue en test - docker
+
+

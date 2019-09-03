@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+    mephskeleton_restapi:
+      depends_on:
+        - mephskeleton_bbddtest
+        - mephskeleton_mockserver
+      networks:
+        test_integ_network:
+          aliases:
+            - mephskeleton_restapi_external
+        test_bakcend:
+          aliases:
+            - ${DOCKER_RESTAPI_IMAGE_NAME}
+      secrets:                    # secrets block only for 'web' service
+        - mephskeleton_bbdd_PASSWORD_SECRET

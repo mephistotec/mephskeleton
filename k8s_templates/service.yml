@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: <name>
+  namespace: mango
+  labels:
+    k8s-app: <name>
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 80
+  selector:
+    k8s-app: <name>
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: <name>
+  namespace: mango
+  labels:
+    k8s-app: <name>
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    # Fill the following key with one of those values.
+    #
+    # DEV:
+    # - Public access: alb-eks-external-dev-884795006.eu-west-1.elb.amazonaws.com
+    # - Private access: internal-alb-eks-internal-dev-1937715155.eu-west-1.elb.amazonaws.com
+    #
+    # PRE:
+    # - Public access: alb-eks-external-pre-1820232153.eu-west-1.elb.amazonaws.com
+    # - Private access: internal-alb-eks-internal-pre-2139479291.eu-west-1.elb.amazonaws.com
+    #
+    # PRO:
+    # - Public access: alb-eks-external-pro-354372081.eu-west-1.elb.amazonaws.com
+    # - Private access: internal-alb-eks-internal-pro-1001902958.eu-west-1.elb.amazonaws.com
+    external-dns.alpha.kubernetes.io/target: <pick-one-alb-endpoint>
+spec:
+  rules:
+    - host: <name>.<env>.k8s.mango
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: <name>
+              servicePort: http

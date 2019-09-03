@@ -1,0 +1,22 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: dummy_service-restapi-pdb
+  namespace: mango
+spec:
+  # Considerations: if when configuring a pdb for a set of pods the calculated
+  # "Allowed disruptions" value is 0, maintenance operations on the node will be
+  # prevented. For example if we have 2 pods and set up minAvailable as the 80%
+  # the value of "Allowed disruptions" will be 0:
+  #
+  # $ kubectl get pdb -owide
+  # NAME         MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+  # alpine-pod   80%             N/A               0                     28m
+  #
+  # PLEASE TAKE INTO ACCOUNT THAT ALLOWED DISRUPTIONS WILL BE DIFFERENT FROM 0
+  # WHEN THE DEPLOYMENT ITS AT ITS MINIMUN NUMBER OF PODS
+  #
+  minAvailable: 50%
+  selector:
+    matchLabels:
+      k8s-app: dummy_service-restapi

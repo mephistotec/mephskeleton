@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+    dummy_service_engine:
+      depends_on:
+        - dummy_service_bbddtest
+        - dummy_service_mockserver
+      ports:
+        - "8888:8080"
+      networks:
+        test_integ_network:
+          aliases:
+            - dummy_service_engine_external
+        test_bakcend:
+          aliases:
+            - ${DOCKER_ENGINE_IMAGE_NAME}
+      secrets:                    # secrets block only for 'web' service
+        - dummy_service_bbdd_PASSWORD_SECRET

@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  mephskeleton_singleapp:
+    depends_on:
+      - mephskeleton_bbddtest
+      - mephskeleton_mockserver
+    networks:
+      test_integ_network:
+        aliases:
+          - mephskeleton_singleapp_external
+      test_bakcend:
+        aliases:
+          - ${DOCKER_SINGLEAPP_IMAGE_NAME}
+    secrets:                    # secrets block only for 'web' service
+      - mephskeleton_bbdd_PASSWORD_SECRET

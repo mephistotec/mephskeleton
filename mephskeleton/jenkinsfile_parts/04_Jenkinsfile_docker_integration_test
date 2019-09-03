@@ -1,0 +1,12 @@
+       stage('Integration Test') {
+            steps
+            {
+              withCredentials([usernamePassword(credentialsId: '#cicd.sysops#', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
+              {
+                //milestone(5)
+                dir('./build_pipeline') {
+                    sh './03_test_integracion.sh -f jenkins'
+                }
+              }
+            }
+       }

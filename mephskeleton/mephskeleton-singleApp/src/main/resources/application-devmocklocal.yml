@@ -1,0 +1,30 @@
+server:
+  port: 8280
+jasypt:
+  encryptor:
+    password: 1234567890
+spring:
+   datasource:
+      url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(service_name=xe)))
+      username: DB_INTEG_USER
+      password: DB_INTEG_USER
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      initial-size: 5
+      max-active: 10
+      min-idle: 5
+      max-idle: 5
+      testWhileIdle : true
+      timeBetweenEvictionRunsMillis: 600000
+      validationQuery : SELECT 1 from dual
+   jpa:
+      databasePlatform: org.hibernate.dialect.Oracle10gDialect
+      show-sql: true
+      hibernate:
+         ddl-auto:
+flyway:
+  enabled: false
+hibernate:
+  jdbc:
+    batch_size: 1000
+logging:
+  config: classpath:logback-dev.xml

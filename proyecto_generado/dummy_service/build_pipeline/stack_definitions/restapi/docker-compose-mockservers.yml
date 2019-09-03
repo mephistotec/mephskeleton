@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+    dummy_service_restapi:
+      depends_on:
+        - dummy_service_bbddtest
+        - dummy_service_mockserver
+      networks:
+        test_integ_network:
+          aliases:
+            - dummy_service_restapi_external
+        test_bakcend:
+          aliases:
+            - ${DOCKER_RESTAPI_IMAGE_NAME}
+      secrets:                    # secrets block only for 'web' service
+        - dummy_service_bbdd_PASSWORD_SECRET

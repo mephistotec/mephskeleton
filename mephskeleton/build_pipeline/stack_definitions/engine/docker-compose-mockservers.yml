@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+    mephskeleton_engine:
+      depends_on:
+        - mephskeleton_bbddtest
+        - mephskeleton_mockserver
+      ports:
+        - "8888:8080"
+      networks:
+        test_integ_network:
+          aliases:
+            - mephskeleton_engine_external
+        test_bakcend:
+          aliases:
+            - ${DOCKER_ENGINE_IMAGE_NAME}
+      secrets:                    # secrets block only for 'web' service
+        - mephskeleton_bbdd_PASSWORD_SECRET

@@ -1,0 +1,45 @@
+jasypt:
+  encryptor:
+    password: ${APP_ENC_CLASS:}
+spring:
+   datasource:
+      url: ${MODEL_DATASOURCE_URL}
+      username: ${MODEL_DATASOURCE_USER}
+      password: ${MODEL_DATASOURCE_PASSWORD}
+      driver-name: oracle.jdbc.OracleDriver
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+   tomcat:
+      initialSize: 5
+      maxActive: 5
+      testWhileIdle: true
+      timeBetweenEvictionRunsMillis: 360000
+      validationQuery: SELECT 1 FROM DUAL
+   jpa:
+      databasePlatform: org.hibernate.dialect.Oracle10gDialect
+      show-sql: false
+      hibernate:
+         ddl-auto:
+   jmx:
+      default-domain: mephskeleton
+   application:
+      name: mephskeleton
+flyway:
+  enabled: false
+hibernate:
+  jdbc:
+    batch_size: 1000
+logging:
+  config: classpath:logback-spring.xml
+info:
+  app:
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+endpoints:
+  jmx:
+    domain: mephskeleton
+    unique-names: true
+management:
+  endpoints:
+    web:
+      base-path: /

@@ -1,0 +1,35 @@
+       stage('Zip S3 BATCH pre') {
+            when {  expression { return env.GIT_BRANCH.contains('/release/') || env.GIT_BRANCH.contains('/hotfix/') } }
+            steps
+            {
+              withCredentials([usernamePassword(credentialsId: 'cicd.sysops', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
+              {
+                  withCredentials([usernamePassword(credentialsId: 'cicd.sysops.s3.deploy', usernameVariable: 'CICD_S3_USER', passwordVariable: 'CICD_S3_PASS')])
+                   {
+                        //milestone(6)
+                          echo 'Desplegamos en PRE'
+                          dir('./build_pipeline') {
+                              sh './04_deploy_batch.sh -f jenkins -f registrymng_pre -e pre'
+                          script
+                          {
+                              LAST_GROUPNAME_WDPRE = readFile('./tmp/zip_s3_files/LAST_GROUPNAME_WDPRE.txt').trim()
+                              LAST_ARTIFACT_WDPRE = readFile('./tmp/zip_s3_files/LAST_ARTIFACT_WDPRE.txt').trim()
+                              LAST_VERSION_WDPRE = readFile('./tmp/zip_s3_files/LAST_VERSION_WDPRE.txt').trim()
+                          }
+                      }
+                    }
+              }
+            }
+       }
+
+      stage('Deploy WDPRE pre' ) {
+            when {  expression { return env.GIT_BRANCH.contains('/release/') || env.GIT_BRANCH.contains('/hotfix/') } }
+            steps
+            {
+               //milestone(7)
+               echo 'Desplegamos en PRE lsdonains {' +  LAST_GROUPNAME_WDPRE + '}  {' + LAST_ARTIFACT_WDPRE + '} {' + LAST_VERSION_WDPRE + '}'
+               dir('./build_pipeline') {
+                   build job:'softbase/utils/deploy_wdpre_pre', parameters: [[$class: 'StringParameterValue', name: 'GROUPNAME', value: LAST_GROUPNAME_WDPRE],[$class: 'StringParameterValue', name: 'ARTIFACT', value: LAST_ARTIFACT_WDPRE],[$class: 'StringParameterValue', name: 'VERSION', value: LAST_VERSION_WDPRE]]
+               }
+           }
+      }
