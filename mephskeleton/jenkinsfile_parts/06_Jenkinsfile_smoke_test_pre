@@ -2,7 +2,7 @@
             when {  expression { return env.GIT_BRANCH.contains('/release/') || env.GIT_BRANCH.contains('/hotfix/') } }
             steps
             {
-              withCredentials([usernamePassword(credentialsId: '#cicd.sysops#', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
+              withCredentials([usernamePassword(credentialsId: '#jenkins.credentials.id#', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
               {
                 //milestone(7)
                   echo 'Desplegamos en PRE'

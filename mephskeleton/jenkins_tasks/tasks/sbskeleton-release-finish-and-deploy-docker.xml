@@ -144,7 +144,7 @@ git push https://${CICD_USER}:${CICD_PASS}@<url_repo_git> --delete ${TIPO}/${VER
           <passwordVariable>CICD_PASS</passwordVariable>
         </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
         <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-          <credentialsId>#cicd.sysops#</credentialsId>
+          <credentialsId>#jenkins.credentials.id#</credentialsId>
           <usernameVariable>CICD_USER</usernameVariable>
           <passwordVariable>CICD_PASS</passwordVariable>
         </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>

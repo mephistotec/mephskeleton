@@ -92,7 +92,7 @@ A nivel de ejecución de Pipeline, necesitaremos que se definan las variables:
 
 como exportación de credenciales jenkins que se coresponderán con un usuario de LDPA (con permisos en : Jenkins, Git (bitbucket), registry de docker de PRE y PRO ) para poder llevar a cabo las interacciones con otras herramientas.
 
-Por otra parte, a nivel de PIPELINE, se necesita setear estas variables a partir de un usuario valido de Jenkins, por defecto toma valor #cicd.sysops#, pero en el momento de la creación del proyecto se puede modificar.
+Por otra parte, a nivel de PIPELINE, se necesita setear estas variables a partir de un usuario valido de Jenkins, por defecto toma valor #jenkins.credentials.id#, pero en el momento de la creación del proyecto se puede modificar.
 
 ## En jenkins
 Notas: 
@@ -103,7 +103,7 @@ https://groups.google.com/forum/#!topic/jenkinsci-users/rXQAlUDltlo4228/export-i
 
 Recuperar xml de carpet:
 
-Java -jar jenkins-cli_mng.jar -s https://#cicd.sysops#:CZrV1STdGY@#cicd.sysops#.mangodev.net/jenkins -noCertificateCheck -remoting list-jobs softbase/Mailgateway | grep mailgateway | while read job; do echo "tratando $job"; java -jar jenkins-cli_mng.jar -s https://#cicd.sysops#:CZrV1STdGY@#cicd.sysops#.mangodev.net/jenkins -noCertificateCheck -remoting get-job softbase/Mailgateway/$job > $job.xml; done
+Java -jar jenkins-cli_mng.jar -s https://#jenkins.credentials.id#:CZrV1STdGY@#jenkins.credentials.id#.mangodev.net/jenkins -noCertificateCheck -remoting list-jobs softbase/Mailgateway | grep mailgateway | while read job; do echo "tratando $job"; java -jar jenkins-cli_mng.jar -s https://#jenkins.credentials.id#:CZrV1STdGY@#jenkins.credentials.id#.mangodev.net/jenkins -noCertificateCheck -remoting get-job softbase/Mailgateway/$job > $job.xml; done
 ## Esqueleto de aplicacion
 
 ### Estructura de aplicación
@@ -162,8 +162,8 @@ artefacto a crear : **demodocker**
 
 - Crear proyecto
 
-  https://#cicd.sysops#.mangodev.net/jenkins<BR>
-  https://#cicd.sysops#.mangodev.net/jenkins/job/softbase/job/create_softbase_project/
+  https://#jenkins.credentials.id#.mangodev.net/jenkins<BR>
+  https://#jenkins.credentials.id#.mangodev.net/jenkins/job/softbase/job/create_softbase_project/
 
   Datos proyecto
     

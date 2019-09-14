@@ -1,8 +1,8 @@
 #!/bin/bash
-ls proyecto_generado | while read fichero;
+ls built_project | while read fichero;
 do
     echo "----------- PROCESAMOS $fichero ---------------";
-    pushd proyecto_generado/$fichero/build_pipeline;
+    pushd built_project/$fichero/build_pipeline;
     ./exec_pipeline.sh;
     popd;
 done

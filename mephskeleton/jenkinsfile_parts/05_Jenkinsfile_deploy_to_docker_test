@@ -1,7 +1,7 @@
        stage('Deploy docker') {
             steps
             {
-              withCredentials([usernamePassword(credentialsId: '#cicd.sysops#', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
+              withCredentials([usernamePassword(credentialsId: '#jenkins.credentials.id#', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
               {
                 //milestone(6)
                   echo 'Desplegamos en PRE'

@@ -37,28 +37,12 @@ function generateJenkinsFiles
 
             echo "check \"$tipo_despliegue\" != *\"WDPRE\"*"
 
-            if [[ $tipo_despliegue = *"WDPRE"* ]]; then
-                echo "-- Incorporamos WDPRE"
-                echo "" >> Jenkinsfile
-                cat $prefixPipeFiles/05_Jenkinsfile_deploy_to_wdpre_pre >> Jenkinsfile
-                echo "" >> Jenkinsfile-test
-                cat $prefixPipeFiles/05_Jenkinsfile_deploy_to_wdpre_test >> Jenkinsfile-test
-            fi
-
             if [[ $tipo_despliegue = *"DOCKER"* ]]; then
                 echo "-- Incorporamos docker"
                 echo "" >> Jenkinsfile
                 cat $prefixPipeFiles/05_Jenkinsfile_deploy_to_docker_pre >> Jenkinsfile
                 echo "" >> Jenkinsfile-test
                 cat $prefixPipeFiles/05_Jenkinsfile_deploy_to_docker_test >> Jenkinsfile-test
-            fi
-
-            if [[ $tipo_despliegue = *"LSDOMAINS"* ]]; then
-                echo "-- Incorporamos lsdomains"
-                echo "" >> Jenkinsfile
-                cat $prefixPipeFiles/05_Jenkinsfile_deploy_to_lsdomains_pre >> Jenkinsfile
-                echo "" >> Jenkinsfile-test
-                cat $prefixPipeFiles/05_Jenkinsfile_deploy_to_lsdomains_test >> Jenkinsfile-test
             fi
 
             echo "-- Incorporamos smoke test"
@@ -84,6 +68,6 @@ function generateJenkinsFiles
 }
 
 echo "-------- Jenkinsfiles generation (init) -------------------"
-pushd proyecto_generado
+pushd built_project
     generateJenkinsFiles $1 $2
 popd

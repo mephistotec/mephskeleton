@@ -5,7 +5,7 @@
 ## ---------------------------------------------------------
 
 #Collection de destino
-export  DOCKER_REGISTRY_REPO=#MANGODOMAIN#
+export  DOCKER_REGISTRY_REPO=#REGISTRY_DOMAIN_NAME#
 
 ## ---------------------------------------------------------
 ##  CONFIGURACIONES GLOBALES

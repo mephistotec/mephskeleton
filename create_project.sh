@@ -9,7 +9,7 @@ if [ "$#" -lt 10 ]; then
   echo " MICROSERVICE : Despliega restApiApp"
   echo " ENGINE : despliega solo engine"
   echo " --"
-  echo " \$5 domain : Collection docker donde desplegar (UCP)(p.e. #MANGODOMAIN#)"
+  echo " \$5 domain : Collection docker donde desplegar (UCP)(p.e. #REGISTRY_DOMAIN_NAME#)"
 #  echo " registryrepo : Repository for registry images"
   echo " \$6 jenkins_credentials : ID de credenciales Jenkins a usar en Jenkinsfile"
   echo " \$7 s3_credentials : ID de credenciales Jenkins a usar en Jenkinsfile para acceso a S3 (si aplica)"
@@ -69,37 +69,19 @@ function reemplazaJenkinsCredentials
 
        Darwin)
          echo 'Replaces macos'
-         fgrep -Rl "#cicd.sysops#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
+         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
        *)
          echo 'Replaces linux'
-         fgrep -Rl "#cicd.sysops#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/#cicd\.sysops#/$patternCollection/g" $file; done
-         ;;
-    esac
-}
-
-function reemplazaS3Credentials
-{
-    echo "reemplazamos credentials $1"
-    echo "-------------------"
-    export patternCollection=$1
-    case "$(uname -s)" in
-
-       Darwin)
-         echo 'Replaces macos'
-         fgrep -Rl "#cicd.sysops.s3.deploy#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops\.s3\.deploy#/$patternCollection/g" $file; done
-         ;;
-       *)
-         echo 'Replaces linux'
-         fgrep -Rl "#cicd.sysops.s3.deploy#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/#cicd\.sysops\.s3\.deploy#/$patternCollection/g" $file; done
+         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
     esac
 }
 
 function reemplazaDomain
 {
-    echo "reemplazamos $1"
-    echo "-------------------"
+    echo "Applying registry [$1]"
+    echo "----------------------"
     patternCollection=$1
     patternCollection=$(echo $patternCollection | sed 's/\//\\\//g')
     patternRegistry=$2
@@ -111,11 +93,11 @@ function reemplazaDomain
 
        Darwin)
          echo 'Replaces macos'
-         fgrep -Rl "=#MANGODOMAIN#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/=#MANGODOMAIN#/=$patternCollection/g" $file; done
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
        *)
          echo 'Replaces linux'
-         fgrep -Rl "=#MANGODOMAIN#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/=#MANGODOMAIN#/=$patternCollection/g" $file; done
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
     esac
 }
@@ -161,75 +143,61 @@ function reemplazaRepoGit
 function buildKubernetesTemplates
 {
     export k8sfolder="./$1/infrastructure/k8s";
-    echo "buildKubernetesTemplates $k8sfolder";
+    echo "   Building kubernetes templates in [$k8sfolder]";
     mkdir -p $k8sfolder
-    echo "buildKubernetesTemplates $3";
-    if [[ $3 = *"DOCKER"* ]]; then
-        echo "buildKubernetesTemplates aplicamos";
-        aplicaciones="restapi engine full";
-        echo "procesnando aplicaciones kubernetes";
-        ls ../k8s_templates | while read fichero;
-        do
-            echo "------- PROCESANDO FICHERO $fichero --------------"
-            for aplicacion in $aplicaciones; do
-                echo "------- PROCESANDO aplicacion $aplicacion --------------"
-                echo "procesnando aplicaciones $aplicacion";
-                echo "Procesando template kubernetes $fichero para $k8sfolder/$aplicacion_$fichero";
-                name="$1-$aplicacion"
-                repo="mango\/$2\/$1-$aplicacion"
-                request_cpu_value=1
-                limit_cpu_value=1
-                requests_memory_value=256m
-                limit_memory_value=384m
-                if [[ "$aplicacion" = "full" ]]; then
-                    name=$1
-                    repo="mango\/$2\/$1"
-                    requests_memory_value=512m
-                    limit_memory_value=640m
-                elif [[ "$aplicacion" = "engine" ]]; then
-                    requests_memory_value=512m
-                    limit_memory_value=640m
-                elif [[ "$aplicacion" = "restapi" ]]; then
-                    requests_memory_value=384m
-                    limit_memory_value=512m
-                fi
-                echo "Aplicamos $name $repo en $(pwd)  y  $k8sfolder/$aplicacion_$fichero"
-                cat "../k8s_templates/$fichero" |
-                        sed "s/<limit_cpu_value>/<limit_cpu_value_$aplicacion>/g" |
-                        sed "s/<limit_memory_value>/<limit_memory_value_$aplicacion>/g" |
-                        sed "s/<request_cpu_value>/<request_cpu_value_$aplicacion>/g" |
-                        sed "s/<env_java_opts>/<env_java_opts_$aplicacion>/g" |
-                        sed "s/<request_memory_value>/<request_memory_value_$aplicacion>/g" |
-                        sed "s/<name>/$name/g" |
-                        sed "s/<repo-name>/$repo/g" > $k8sfolder/$aplicacion\_$fichero;
-            done
+    echo "   Building applications template ...";
+    aplicaciones="restapi engine";
+    echo "   Iterating throug pods ...";
+    ls ../k8s_templates | while read fichero;
+    do
+        echo "   Processing descriptor $fichero"
+        for aplicacion in $aplicaciones; do
+            echo "   Building descriptor $fichero for $aplicacion ..."
+            echo "   Writing kubernetes $fichero in $k8sfolder/$aplicacion_$fichero";
+            name="$1-$aplicacion"
+            repo="$1-$aplicacion"
+            registryDomain="$2"
+            namespace="$3"
+            dnsbasename="$4"
+            echo "   Applying  $name $repo in $(pwd)  and $k8sfolder/$aplicacion_$fichero"
+            cat "../k8s_templates/$fichero" |
+                    sed "s/<limit_cpu_value>/<limit_cpu_value_$aplicacion>/g" |
+                    sed "s/<limit_memory_value>/<limit_memory_value_$aplicacion>/g" |
+                    sed "s/<request_cpu_value>/<request_cpu_value_$aplicacion>/g" |
+                    sed "s/<env_java_opts>/<env_java_opts_$aplicacion>/g" |
+                    sed "s/<request_memory_value>/<request_memory_value_$aplicacion>/g" |
+                    sed "s/<name>/$name/g" |
+                    sed "s/<namespace>/$namespace/g" |
+                    sed "s/<docker-registry-domain-name>/$registryDomain/g" |
+                    sed "s/<dnsbasename>/$dnsbasename/g" |
+                    sed "s/<aplication-repo-name>/$repo/g" > $k8sfolder/$aplicacion\_$fichero;
         done
-    fi
+    done
+    echo "   ---------------------------------------------------------------------"
+    echo "   IMPORTANT "
+    echo "   Customized k8s templates. You cant manage your request and limit "
+    echo "   resources editing your configuration script. Default values have been set."
+    echo "   ---------------------------------------------------------------------"
 }
 
 function calculaFicherosKubernetesFinales
 {
-    echo "Unificando descriptores $(pwd) ..... "
+    echo "   Unifying descriptors int $(pwd) ..... "
     export k8sfolder="./$1/infrastructure/k8s";
     ls ../k8s_templates | while read fichero;
     do
-        echo "Unificando descriptores - $k8sfolder/*_$fichero en $k8sfolder/$fichero - "
+        echo "   Unifying - $k8sfolder/*_$fichero in $k8sfolder/$fichero - "
         ls $k8sfolder/*_$fichero | while read fichero_objeto;
         do
-            echo "Unificando descriptores - $fichero_objeto en $k8sfolder/$fichero - "
+            echo "      Unifying - $fichero_objeto en $k8sfolder/$fichero - "
             cat $fichero_objeto >> $k8sfolder/$fichero
             echo "---" >> $k8sfolder/$fichero
         done
-        echo "Unificando descriptores limpiamos - $k8sfolder/*_$fichero - "
+        echo "   Unified, cleaning $k8sfolder/*_$fichero - "
         rm $k8sfolder/*_$fichero
     done
 }
 
-
-#
-# Aceptamos -f / --flags para inicializar opciones de generacion definidas en fichero environment_scripts/opt_<opcion>.sh
-# Aceptamos -e / --env para inicializar variables en fichero environment_scripts/env_<opcion>.sh
-# Aceptamos -v / --verison para seleccionar la versiónque queremos generar
 echoerr "PARAMETROS ENV $@"
 
 OPTS=$(getopt "-o f:e: -l flags:env:" -- $@)
@@ -242,12 +210,31 @@ echoerr "--- Inicializamos opciones y entornos con params $OPTS"
 
 GROUPID=com.meph
 ARTIFACTID=$1
+NAMESPACE=mephapps
+BASEDNSDOMAIN=k8s.meph.local
+JENKINS_CREDENTIALS=jenkins.cicd.user
 
 while true; do
   case "$1" in
     -g | --groupid )
         echo "Setting groupid $2"
         GROUP_ID=$2
+        shift;shift ;;
+    -r | --docker_registry )
+        echo "Setting registry $2"
+        DOCKERREGISTRYDOMAINNAME=$2
+        shift;shift ;;
+    -ns | --namespace )
+        echo "Setting namespace $2"
+        NAMESPACE=$2
+        shift;shift ;;
+    -dns | --dnsbasename )
+        echo "Setting base dns domain $2"
+        BASEDNSDOMAIN=$2
+        shift;shift ;;
+    -jc | --jenkins_credentials )
+        echo "Setting jenkins credentials to $2"
+        JENKINS_CREDENTIALS=$2
         shift;shift ;;
     -- ) shift ;;
     * ) break ;;
@@ -257,24 +244,23 @@ done
 
 # We could change maven settings but we don't
 #export MAVEN_SETTINGS="--settings $(pwd)/settings.xml"
-echo "--------- SETTINGS MAVEN ------------"
-echo $MAVEN_SETTINGS
-echo "------------------------------"
+echo "Applying maven settings [$MAVEN_SETTINGS]"
  pushd mephskeleton
    pwd
-   echo "---------------- LIMPIANDO CONTEXTO -------------------"
+   echo "Cleaning maven context ..."
    mvn $MAVEN_SETTINGS clean install
-   echo "---------------- CREANDO ARCHETYPE --------------------"
+   echo "Creating archetype ..."
    mvn $MAVEN_SETTINGS  archetype:create-from-project
-   echo "---------------- INSTALANDO ARCHETYPE -----------------"
+   echo "Installing archetype ..."
    pushd target/generated-sources/archetype
      mvn $MAVEN_SETTINGS  install
    popd
  popd
- rm -fR ./proyecto_generado
- mkdir proyecto_generado
-pushd proyecto_generado
-  echo "---------------- CREANDO PROYECTO -------------"
+ echo "Cleaing project folder ..."
+ rm -fR ./built_project
+ mkdir built_project
+ pushd built_project
+  echo "Building project from archetype ..."
   rm *.zip
    mvn archetype:generate \
        -DarchetypeGroupId=com.meph.mephskeleton \
@@ -283,27 +269,29 @@ pushd proyecto_generado
        -DgroupId=$GROUPID -DartifactId=$ARTIFACTID -Dversion=RELEASE-INT-SNAPSHOT\
        -DarchetypeRepository=../mephskeleton/target/generated-sources/archetype/ \
        -DinteractiveMode=false
-  echo "---------------- Ultimos retoques -------------"
+  echo "Now, what archetype does not do :) ..."
+  echo "Copying pipeline ..."
   cp -R ../mephskeleton/build_pipeline/* $ARTIFACTID/build_pipeline/
   mkdir -p $ARTIFACTID/jenkinsfile_parts
   cp -R ../mephskeleton/jenkinsfile_parts/* $ARTIFACTID/jenkinsfile_parts
 
-  echo "---------------- Incorporamos kubernetes si toca ---------------"
-  buildKubernetesTemplates $ARTIFACTID $5 $8
-  echo "---------------- y el .gitignore -------------"
+  echo "Preparing kubernetes descriptors ..."
+  buildKubernetesTemplates $ARTIFACTID $DOCKERREGISTRYDOMAINNAME $NAMESPACE $BASEDNSDOMAIN
+  echo "Adding .gitignore ( guessing you're using git, if not, you can clean it..."
   cp ../mephskeleton/.gitignore $ARTIFACTID/
 
-  echo "---------------- REEMPLAZAMOS NOMBRE PROYECTO [$ARTIFACTID] -------------"
+  echo "Replacing artifactid where needed ..."
   reemplazaNombres $ARTIFACTID
 
-  echo "---------------- REEMPLAZAMOS COLLECTION / REGISTRY [$5] -------------"
-  reemplazaDomain $5
+  echo "Applying gesistry [$DOCKERREGISTRYDOMAINNAME] ..."
+  if [ "$DOCKERREGISTRYDOMAINNAME" == "" ]; then
+    echoerr "WARN : Docker repository not defined, you'll have to edit build_pipelin/00_env_pipeline.sh to set it!!!"
+  else
+    reemplazaDomain $DOCKERREGISTRYDOMAINNAME
+  fi
 
-  echo "---------------- REEMPLAZAMOS USER JENKINS [$6] -------------"
-  reemplazaJenkinsCredentials $6
-
-  echo "---------------- REEMPLAZAMOS USER S3 [$7] -------------"
-  reemplazaS3Credentials $7
+  echo "Setting jenkins credentials to [$JENKINS_CREDENTIALS]"
+  reemplazaJenkinsCredentials $JENKINS_CREDENTIALS
 
   echo "---------------- REEMPLAZAMOS REPOS GIT [$9] [$10]----------------"
   reemplazaRepoGit $9 $10
@@ -393,7 +381,7 @@ echo "Jenkins files generation [$(pwd)][$ARTIFACTID][$8]"
 echo "Jenkins files generated [$(pwd)][$ARTIFACTID][$8]"
 
 
- pushd proyecto_generado
+ pushd built_project
        zip -r $ARTIFACTID.zip ./$ARTIFACTID
        #rm -R $ARTIFACTID
  popd

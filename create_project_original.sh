@@ -9,7 +9,7 @@ if [ "$#" -lt 10 ]; then
   echo " MICROSERVICE : Despliega restApiApp"
   echo " ENGINE : despliega solo engine"
   echo " --"
-  echo " \$5 domain : Collection docker donde desplegar (UCP)(p.e. #MANGODOMAIN#)"
+  echo " \$5 domain : Collection docker donde desplegar (UCP)(p.e. #REGISTRY_DOMAIN_NAME#)"
 #  echo " registryrepo : Repository for registry images"
   echo " \$6 jenkins_credentials : ID de credenciales Jenkins a usar en Jenkinsfile"
   echo " \$7 s3_credentials : ID de credenciales Jenkins a usar en Jenkinsfile para acceso a S3 (si aplica)"
@@ -69,11 +69,11 @@ function reemplazaJenkinsCredentials
 
        Darwin)
          echo 'Replaces macos'
-         fgrep -Rl "#cicd.sysops#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
+         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
        *)
          echo 'Replaces linux'
-         fgrep -Rl "#cicd.sysops#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/#cicd\.sysops#/$patternCollection/g" $file; done
+         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
     esac
 }
@@ -111,11 +111,11 @@ function reemplazaDomain
 
        Darwin)
          echo 'Replaces macos'
-         fgrep -Rl "=#MANGODOMAIN#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/=#MANGODOMAIN#/=$patternCollection/g" $file; done
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
        *)
          echo 'Replaces linux'
-         fgrep -Rl "=#MANGODOMAIN#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/=#MANGODOMAIN#/=$patternCollection/g" $file; done
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
     esac
 }
@@ -283,9 +283,9 @@ echo "------------------------------"
      mvn $MAVEN_SETTINGS  install
    popd
  popd
- rm -fR ./proyecto_generado
- mkdir proyecto_generado
-pushd proyecto_generado
+ rm -fR ./built_project
+ mkdir built_project
+pushd built_project
   echo "---------------- CREANDO PROYECTO -------------"
   rm *.zip
    mvn archetype:generate \
@@ -404,7 +404,7 @@ echo "Jenkins files generation [$(pwd)][$2][$8]"
 echo "Jenkins files generated [$(pwd)][$2][$8]"
 
 
- pushd proyecto_generado
+ pushd built_project
        zip -r $2.zip ./$2
        #rm -R $2
  popd

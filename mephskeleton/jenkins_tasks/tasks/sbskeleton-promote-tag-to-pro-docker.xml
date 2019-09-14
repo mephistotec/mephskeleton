@@ -84,7 +84,7 @@ export PATH=$PATH:$M3_HOME/bin
     <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.14">
       <bindings>
         <org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
-          <credentialsId>#cicd.sysops#</credentialsId>
+          <credentialsId>#jenkins.credentials.id#</credentialsId>
           <usernameVariable>CICD_USER</usernameVariable>
           <passwordVariable>CICD_PASS</passwordVariable>
         </org.jenkinsci.plugins.credentialsbinding.impl.UsernamePasswordMultiBinding>
