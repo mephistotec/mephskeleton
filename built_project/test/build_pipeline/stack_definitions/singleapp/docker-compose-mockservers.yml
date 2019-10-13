@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  test_singleapp:
+    depends_on:
+      - test_bbddtest
+      - test_mockserver
+    networks:
+      test_integ_network:
+        aliases:
+          - test_singleapp_external
+      test_bakcend:
+        aliases:
+          - ${DOCKER_SINGLEAPP_IMAGE_NAME}
+    secrets:                    # secrets block only for 'web' service
+      - test_bbdd_PASSWORD_SECRET

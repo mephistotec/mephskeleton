@@ -5,11 +5,11 @@
     <name>mephskeleton-service</name>
     <packaging>jar</packaging>
     <description>mephskeleton service</description>
-    <version>RELEASE-INT-SNAPSHOT</version>
+    <version>DEVELOP-SNAPSHOT</version>
     <parent>
         <groupId>com.meph.mephskeleton</groupId>
         <artifactId>mephskeleton</artifactId>
-        <version>RELEASE-INT-SNAPSHOT</version>
+        <version>DEVELOP-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.meph.mephskeleton</groupId>
             <artifactId>mephskeleton-dataApi</artifactId>
-            <version>RELEASE-INT-SNAPSHOT</version>
+            <version>DEVELOP-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

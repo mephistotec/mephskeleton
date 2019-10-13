@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+    test_engine:
+      depends_on:
+        - test_bbddtest
+        - test_mockserver
+      ports:
+        - "8888:8080"
+      networks:
+        test_integ_network:
+          aliases:
+            - test_engine_external
+        test_bakcend:
+          aliases:
+            - ${DOCKER_ENGINE_IMAGE_NAME}
+      secrets:                    # secrets block only for 'web' service
+        - test_bbdd_PASSWORD_SECRET

@@ -26,8 +26,8 @@ function generateJenkinsFiles
             cat $prefixPipeFiles/02_Jenkinsfile_sonar >> Jenkinsfile
             cat $prefixPipeFiles/00_Jenkinsfile_init > Jenkinsfile-test
             # Tenemos test de integraicon, genermaos imahenes
-            echo "Check 1.0 [$(pwd)][./$nombre_artefacto-restapiApp] [./$nombre_artefacto-engineApp] [./$nombre_artefacto-singleApp]"
-            if [ -d "./$nombre_artefacto-restapiApp" ] || [ -d "./$nombre_artefacto-engineApp" ] || [ -d "./$nombre_artefacto-singleApp" ]; then
+            echo "Check 1.0 [$(pwd)][./$nombre_artefacto-restapiApp] [./$nombre_artefacto-engineApp]"
+            if [ -d "./$nombre_artefacto-restapiApp" ] || [ -d "./$nombre_artefacto-engineApp" ]; then
                 echo "-- Incorporamos imagenes y tests de integracion"
                 echo "" >> Jenkinsfile
                 cat $prefixPipeFiles/03_Jenkinsfile_docker_image_build >> Jenkinsfile

@@ -41,7 +41,7 @@ function build_image_for_java
 
     pwd
     ls ./tmp_for_jars/*
-    docker build --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT.jar --build-arg DESTINATION_JAR=$ARTIFACT.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_VERSION  --tag $2:latest  .
+    docker build --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT.jar --build-arg DESTINATION_JAR=$ARTIFACT.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest  .
 
     rc=$?
 
@@ -86,7 +86,7 @@ function build_image_for_tomcat
 
     pwd
     ls ./tmp_for_jars/*
-    docker build --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_VERSION --tag $2:latest  .
+    docker build --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION --tag $2:latest  .
 
     rc=$?
 
@@ -101,7 +101,7 @@ function build_image_for_tomcat
 }
 
 echo $(date +%s) > ./stack_definitions/last_build_version.txt
-export DOCKER_STACK_IMAGE_VERSION=$DOCKER_STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)
+export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)
 
 echo "Building restapi image?"
 # Construimos los javas

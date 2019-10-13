@@ -1,31 +1,33 @@
 #!/bin/bash
-if [ "$#" -lt 10 ]; then
-  echo "Only  $# params. Use: create_full_project.sh <groupid> <artifcatid> <package> <FULL|MICROSERVICE|SINGLEWAR|ENGINE> <domain> <jenkins_credentials> <s3_credentials> [<DOCKER|LSDOMAINS|DOCKER_WDPRE|LSDOMAINS_WDPRE>] "
-  echo " \$1 - groupid - group id para el artefacto"
-  echo " \$2 - artifcatid - artifcat id para el artefacto"
-  echo " \$3 package - package para las clases del artefacto"
-  echo " -- \$4 (type of application) --"
-  echo " FULL : Despliega restApiApp y engineApp"
-  echo " MICROSERVICE : Despliega restApiApp"
-  echo " ENGINE : despliega solo engine"
-  echo " --"
-  echo " \$5 domain : Collection docker donde desplegar (UCP)(p.e. #REGISTRY_DOMAIN_NAME#)"
-#  echo " registryrepo : Repository for registry images"
-  echo " \$6 jenkins_credentials : ID de credenciales Jenkins a usar en Jenkinsfile"
-  echo " \$7 s3_credentials : ID de credenciales Jenkins a usar en Jenkinsfile para acceso a S3 (si aplica)"
-  echo " -- \$8 (enviroment for application) --"
-  echo "DOCKER_WDPRE entorno de deploy docker + wdpre"
-  echo " -- \$9 (repogit en formato jira.mangodev.net/stash/scm/sb/mephskeleton.git sin https) --"
-  echo " -- \$10 (repogit bitbucket web url en formato jira.mangodev.net/stash/projects/SB/repos/mephskeleton sin https) --"
+
+GROUPID=com.meph
+NAMESPACE=mephapps
+BASEDNSDOMAIN=k8s.meph.local
+JENKINS_CREDENTIALS=jenkins.cicd.user
+APPLICATION_TYPE=micro
+PACKAGE=com.meph
+
+if [ "$#" -lt 2 ]; then
+  echo "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes>"
+  echo "   -g | --groupid sets the group id of your maven project , default: $GROUPID"
+  echo "   -r | --docker_registry registry domain name to push images,"
+  echo "                          you can manage it in build_pipeline/00_env_pipeline.sh when artifact is generated "
+  echo "   -ns | --namespace Namespace for your kubernetes elements, default: $NAMESPACE"
+  echo "   -dns | --dnsbasename dns base name for your applications, default: $BASEDNSDOMAIN"
+  echo "   -jc | --jenkins_credentials jenkins credentials ID to use in your jenkins tasks, default $JENKINS_CREDENTIALS"
+  echo "   -app | --application_type appliction type micro | worker | full (worker + micro), default : $APPLICATION_TYPE"
   exit -1
 fi
 
-function limpia
+ARTIFACTID=$1
+
+
+function cleanModules
 {
 
-  echo "limpiamos $1 en $(pwd)"
-  echo "limpiamos $2 en pom"
-  echo "limpiamos $3_* en $(pwd)"
+  echo "Cleaning $1 in $(pwd)"
+  echo "Cleaning $2 in pom"
+  echo "Cleaning $3_* en $(pwd)"
   echo "-------------------"
   if [ "$3" != "" ]; then
     pwd
@@ -42,46 +44,42 @@ function limpia
   echo "-------------------"
 }
 
-function reemplazaNombres
+function replaceNames
 {
-      echo "reemplazamos $1"
-      echo "-------------------"
-    export patternCollection=$(echo "$1" | sed 's/\./\\\./g')
-    case "$(uname -s)" in
-
-       Darwin)
-         echo 'Replaces macos'
-         fgrep -Rl mephskeleton . | while read file; do echo "Actualizando $file....."; sed -i '' "s/mephskeleton/$patternCollection/g" $file; done
-         ;;
-       *)
-         echo 'Replaces linux'
-         fgrep -Rl mephskeleton . | while read file; do echo "Actualizando $file....."; sed -i  "s/mephskeleton/$patternCollection/g" $file; done
-         ;;
-    esac
+      echo "Replacing names $1"
+        export patternCollection=$(echo "$1" | sed 's/\./\\\./g')
+        case "$(uname -s)" in
+    
+           Darwin)
+             echo '  MacoS replace'
+             fgrep -Rl mephskeleton . | while read file; do echo "Modifying $file....."; sed -i '' "s/mephskeleton/$patternCollection/g" $file; done
+             ;;
+           *)
+             echo '  Linuz replaces'
+             fgrep -Rl mephskeleton . | while read file; do echo "Modifying $file....."; sed -i  "s/mephskeleton/$patternCollection/g" $file; done
+             ;;
+        esac
 }
 
 function reemplazaJenkinsCredentials
 {
-    echo "reemplazamos credentials $1"
-    echo "-------------------"
+    echo "Replacing credentials $1 ..."
     export patternCollection=$1
     case "$(uname -s)" in
-
        Darwin)
-         echo 'Replaces macos'
-         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
+         echo 'MacoS replace'
+         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Modifying $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
        *)
-         echo 'Replaces linux'
-         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/#cicd\.sysops#/$patternCollection/g" $file; done
+         echo 'Linuz replaces'
+         fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Modifying $file....."; sed -i  "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
     esac
 }
 
-function reemplazaDomain
+function replaceDomain
 {
-    echo "Applying registry [$1]"
-    echo "----------------------"
+    echo "Applying registry [$1] ..."
     patternCollection=$1
     patternCollection=$(echo $patternCollection | sed 's/\//\\\//g')
     patternRegistry=$2
@@ -92,53 +90,16 @@ function reemplazaDomain
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
-         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
+         echo '   MacoS replace'
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Modifying $file....."; sed -i '' "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
        *)
-         echo 'Replaces linux'
-         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i  "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
+         echo '   Linuz replaces'
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Modifying $file....."; sed -i  "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
     esac
 }
 
-
-function reemplazaRepoGit
-{
-    echo "reemplazamos $1"
-    echo "-------------------"
-    repoGit=$1
-    repoGit=$(echo $repoGit | sed 's/\//\\\//g'| sed 's/\./\\./g')
-    repoGitBitbucketUrl=$2
-    repoGitBitbucketUrl=$(echo $repoGitBitbucketUrl | sed 's/\//\\\//g' | sed 's/\./\\./g')
-
-    echo "------queda $patternCollection -------------"
-
-    case "$(uname -s)" in
-
-       Darwin)
-         echo 'Replaces macos'
-         fgrep -Rl "<url_repo_git>" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/<url_repo_git>/=$repoGit/g" $file; done
-         ;;
-       *)
-         echo 'Replaces linux'
-         fgrep -Rl "<url_repo_git>" . | while read file; do echo "Actualizando $file....."; sed -i  "s/<url_repo_git>/=$repoGit/g" $file; done
-         ;;
-    esac
-
-    case "$(uname -s)" in
-
-       Darwin)
-         echo 'Replaces macos'
-         fgrep -Rl "<url_web_repo_git>" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/<url_web_repo_git>/=$repoGitBitbucketUrl/g" $file; done
-         ;;
-       *)
-         echo 'Replaces linux'
-         fgrep -Rl "<url_web_repo_git>" . | while read file; do echo "Actualizando $file....."; sed -i  "s/<url_web_repo_git>/=$repoGitBitbucketUrl/g" $file; done
-         ;;
-    esac
-
-}
 
 function buildKubernetesTemplates
 {
@@ -180,6 +141,28 @@ function buildKubernetesTemplates
     echo "   ---------------------------------------------------------------------"
 }
 
+function moveClassesToPackage
+{
+    PACKAGECLASS=$1
+    ARTIFACTID=$2
+    declare -a classesToMove=("./$ARTIFACTID-engineApp/src/main/java/EngineApp.java" "./$ARTIFACTID-restapiApp/src/main/java/RESTApp.java" )
+    for pathOrigen in ${classesToMove[@]}; do
+        echo "   processing $pathOrigen"
+        if [ -f "$pathOrigen" ]; then
+            echo -e "package $PACKAGECLASS;"  > "$pathOrigen\_v2"
+            cat $pathOrigen  >> "$pathOrigen\_v2"
+            mv "$pathOrigen\_v2" $pathOrigen
+            echo "   added package $pathOrigen"
+            packagepath=$(echo $PACKAGECLASS | sed "s/\./\//g")
+            pathDestino="$(dirname $pathOrigen)/$packagepath";
+            echo "   creating $pathDestino"
+            mkdir -p $pathDestino
+            echo "   moving to $pathDestino"
+            mv $pathOrigen $pathDestino
+        fi
+    done
+}
+
 function calculaFicherosKubernetesFinales
 {
     echo "   Unifying descriptors int $(pwd) ..... "
@@ -198,7 +181,7 @@ function calculaFicherosKubernetesFinales
     done
 }
 
-echoerr "PARAMETROS ENV $@"
+echo "Environment $@"
 
 OPTS=$(getopt "-o f:e: -l flags:env:" -- $@)
 
@@ -206,19 +189,19 @@ if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
 
 eval set -- "$OPTS"
 
-echoerr "--- Inicializamos opciones y entornos con params $OPTS"
+echo "Configuring selected options $OPTS"
 
-GROUPID=com.meph
-ARTIFACTID=$1
-NAMESPACE=mephapps
-BASEDNSDOMAIN=k8s.meph.local
-JENKINS_CREDENTIALS=jenkins.cicd.user
+
 
 while true; do
   case "$1" in
     -g | --groupid )
         echo "Setting groupid $2"
         GROUP_ID=$2
+        shift;shift ;;
+    -p | --package )
+        echo "Setting package $2"
+        PACKAGE=$2
         shift;shift ;;
     -r | --docker_registry )
         echo "Setting registry $2"
@@ -236,11 +219,22 @@ while true; do
         echo "Setting jenkins credentials to $2"
         JENKINS_CREDENTIALS=$2
         shift;shift ;;
+    -app | --application_type )
+        if [ "$2" = "full" ] || [ "$" = "micro" ] || [ "$" = "worker" ] ; then
+            echo "Setting application type to $2"
+        else
+            echo "Wron application type, it should be full|micro|worker";
+            exit -1;
+        fi
+        APPLICATION_TYPE=$2
+        shift;shift ;;
     -- ) shift ;;
     * ) break ;;
   esac
 done
 
+if [ "" == "" ]
+then
 
 # We could change maven settings but we don't
 #export MAVEN_SETTINGS="--settings $(pwd)/settings.xml"
@@ -265,11 +259,11 @@ echo "Applying maven settings [$MAVEN_SETTINGS]"
    mvn archetype:generate \
        -DarchetypeGroupId=com.meph.mephskeleton \
        -DarchetypeArtifactId=mephskeleton-archetype \
-       -DarchetypeVersion=RELEASE-INT-SNAPSHOT \
-       -DgroupId=$GROUPID -DartifactId=$ARTIFACTID -Dversion=RELEASE-INT-SNAPSHOT\
+       -DarchetypeVersion=DEVELOP-SNAPSHOT \
+       -DgroupId=$GROUPID -DartifactId=$ARTIFACTID -Dversion=DEVELOP-SNAPSHOT\
        -DarchetypeRepository=../mephskeleton/target/generated-sources/archetype/ \
        -DinteractiveMode=false
-  echo "Now, what archetype does not do :) ..."
+  echo "Now, what archetype does not do :\) ..."
   echo "Copying pipeline ..."
   cp -R ../mephskeleton/build_pipeline/* $ARTIFACTID/build_pipeline/
   mkdir -p $ARTIFACTID/jenkinsfile_parts
@@ -277,111 +271,58 @@ echo "Applying maven settings [$MAVEN_SETTINGS]"
 
   echo "Preparing kubernetes descriptors ..."
   buildKubernetesTemplates $ARTIFACTID $DOCKERREGISTRYDOMAINNAME $NAMESPACE $BASEDNSDOMAIN
-  echo "Adding .gitignore ( guessing you're using git, if not, you can clean it..."
+  echo "Adding .gitignore \( guessing you're using git, if not, you can clean it..."
   cp ../mephskeleton/.gitignore $ARTIFACTID/
 
   echo "Replacing artifactid where needed ..."
-  reemplazaNombres $ARTIFACTID
+  replaceNames $ARTIFACTID
 
   echo "Applying gesistry [$DOCKERREGISTRYDOMAINNAME] ..."
   if [ "$DOCKERREGISTRYDOMAINNAME" == "" ]; then
-    echoerr "WARN : Docker repository not defined, you'll have to edit build_pipelin/00_env_pipeline.sh to set it!!!"
+    echo "WARN : Docker repository not defined, you'll have to edit build_pipeline/00_env_pipeline.sh to set it!!!"
   else
-    reemplazaDomain $DOCKERREGISTRYDOMAINNAME
+    replaceDomain $DOCKERREGISTRYDOMAINNAME
   fi
 
   echo "Setting jenkins credentials to [$JENKINS_CREDENTIALS]"
   reemplazaJenkinsCredentials $JENKINS_CREDENTIALS
 
-  echo "---------------- REEMPLAZAMOS REPOS GIT [$9] [$10]----------------"
-  reemplazaRepoGit $9 $10
-
-  echo "---------------- ACTUALIZAMOS PERMISOS -------------"
+  echo "Adding permissions for shell scripts..."
   find . -name "*.sh" | while read file; do chmod 744 $file; done
   chmod 744 ./$ARTIFACTID/build_pipeline/*.sh
   chmod 744 ./$ARTIFACTID/jenkins_tasks/*.sh
 
+  else
+   pushd built_project
+  fi;
+
   pushd $ARTIFACTID
 
-      echo "---------------- borramos temporales -------------"
+      echo "Cleaning temp files..."
       rm -Rf ./build_pipeline/tmp/*
       rm -Rf ./build_pipeline/stack_definitions/config_generada/*
 
-      echo "---------------- borramos casa -------------"
-      #rm ./build_pipeline/environment_scripts/*casa*
+      echo "Refactoring classes for package $PACKAGE..."
+      moveClassesToPackage $PACKAGE $ARTIFACTID
 
-      echo "---------------- NORMALIZAMOS PROYECT -------------"
+      echo "Removing not needed components ..."
       # Nos petamos lo que toque segun el tipo de aplicación
-      if [ "$4" = "FULL" ]; then
-        echo "-- Montando proyecto $4"
-        pwd
-        ls -la
-        echo "-------------------------------"
-        limpia singleApp singleapp full
+      if [ "$APPLICATION_TYPE" = "micro" ]; then
+        cleanModules engineApp engineapp engine
       fi
-      if [ "$4" = "MICROSERVICE" ]; then
-        echo "-- Montando proyecto $4"
-        pwd
-        ls -la
-        echo "-------------------------------"
-        limpia singleApp singleapp full
-        limpia engineApp engineapp engine
-      fi
-      if [ "$4" = "SINGLEWAR" ]; then
-        echo "-- Montando proyecto $4"
-        pwd
-        ls -la
-        echo "-------------------------------"
-        limpia engineApp engineapp engine
-        limpia restapiApp restapiapp restapi
-      fi
-      if [ "$4" = "ENGINE" ]; then
-        echo "-- Montando proyecto $4"
-        pwd
-        ls -la
-        echo "-------------------------------"
-        limpia restapiApp restapiapp restapi
-        limpia singleApp singleapp full
-      fi
-      echo "Tipo de deploy ($8)"
-      if [[ $8 = *"DOCKER"* ]]; then
-        echo "-- Montando deploy $8"
-        pwd
-        ls -la ./jenkins_tasks/tasks/*lsdomains*
-        echo "-------------------------------"
-        rm ./jenkins_tasks/tasks/*lsdomains*
-      fi
-      if [[ $8 = *"LSDOMAINS"* ]]; then
-        echo "-- Montando deploy $8"
-        pwd
-        ls -la ./jenkins_tasks/tasks/*docker*
-        echo "-------------------------------"
-        rm ./jenkins_tasks/tasks/*docker*
-      fi
-      if [[ $8 != *"WDPRE"* ]]; then
-        echo "--  Quitando cosas de WDPRE por deploy $8"
-        pwd
-        ls -la ./jenkins_tasks/tasks/*wdpre*
-        echo "-------------------------------"
-        rm ./jenkins_tasks/tasks/*wdpre*
-        echo "---------- limpiamos batch ---------------"
-        limpia batch batch
+      if [  "$APPLICATION_TYPE" = "worker" ]; then
+        cleanModules restapiApp restapiapp restapi
       fi
   popd
-
-  # No unificamos
-  #calculaFicherosKubernetesFinales $ARTIFACTID
-
 popd
 
-echo "Jenkins files generation [$(pwd)][$ARTIFACTID][$8]"
+echo "Jenkins files generation \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
 
-. ./generaJenkinsFiles.sh $ARTIFACTID $8
+#. ./generaJenkinsFiles.sh $ARTIFACTID $8
 
-echo "Jenkins files generated [$(pwd)][$ARTIFACTID][$8]"
+echo "Jenkins files generated \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
 
-
- pushd built_project
-       zip -r $ARTIFACTID.zip ./$ARTIFACTID
-       #rm -R $ARTIFACTID
- popd
+exit 0;
+pushd built_project
+   zip -r $ARTIFACTID.zip ./$ARTIFACTID
+popd

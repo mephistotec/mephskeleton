@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-restapi
+  namespace: k8s.meph.local
+  labels:
+    k8s-app: test-restapi
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 80
+  selector:
+    k8s-app: test-restapi

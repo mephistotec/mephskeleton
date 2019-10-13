@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.meph</groupId>
+    <artifactId>test-engine</artifactId>
+    <name>test-engine</name>
+    <packaging>jar</packaging>
+    <description>test engine</description>
+    <version>DEVELOP-SNAPSHOT</version>
+    <parent>
+        <groupId>com.meph</groupId>
+        <artifactId>test</artifactId>
+        <version>DEVELOP-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>com.meph</groupId>
+            <artifactId>test-service</artifactId>
+            <version>DEVELOP-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.meph</groupId>
+            <artifactId>test-model</artifactId>
+            <version>DEVELOP-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -26,7 +26,3 @@ if [ -d "../mephskeleton-engineApp" ]; then
     echo "http://${DOCKER_ENGINE_DOMAIN_NAME}.dev.k8s.mango/health" >> tmp/urls_health.txt
     echo "http://${DOCKER_ENGINE_DOMAIN_NAME}.dev.k8s.mango/info" >> tmp/urls_version.txt
 fi
-if [ -d "../mephskeleton-singleApp" ]; then
-    echo "http://${DOCKER_SINGLEAPP_DOMAIN_NAME}.dev.k8s.mango/health" >> tmp/urls_health.txt
-    echo "http://${DOCKER_SINGLEAPP_DOMAIN_NAME}.dev.k8s.mango/info" >> tmp/urls_version.txt
-fi

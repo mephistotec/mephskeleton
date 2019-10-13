@@ -13,7 +13,87 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/README_meph.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/com/meph/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/create_project.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/create_project_original.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/generaJenkinsFiles.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline_original.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/01_02_build_unit_tests.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh">
           <value>
             <set />
           </value>
@@ -23,7 +103,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro_lsdomains.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/docker_images_definitions/java/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_mockservers.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pre.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_test.sh">
           <value>
             <set />
           </value>
@@ -43,6 +143,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java/EngineApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mephskeleton/pom.xml">
           <value>
             <set />
@@ -53,7 +163,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/04_13_build_zip_lsdomains.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/utils_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/classes/META-INF/maven/archetype-metadata.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/build_pipeline/utils_pipeline.sh">
           <value>
             <set />
           </value>
@@ -64,6 +194,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/02_docker_build_images.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_02_check_entonro_mock_ok.sh">
           <value>
             <set />
           </value>

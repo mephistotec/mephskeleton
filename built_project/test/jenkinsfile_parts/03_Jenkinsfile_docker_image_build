@@ -1,0 +1,11 @@
+
+       stage('Build Images') {
+           steps
+           {
+                //milestone(4)
+                dir('./build_pipeline') {
+                    sh 'echo $(pwd)'
+                    sh './02_docker_build_images.sh'
+                }
+           }
+       }

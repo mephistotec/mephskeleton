@@ -50,7 +50,7 @@ function reemplazaNombres
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
+         echo 'MacoS replace'
          fgrep -Rl mephskeleton . | while read file; do echo "Actualizando $file....."; sed -i '' "s/mephskeleton/$patternCollection/g" $file; done
          ;;
        *)
@@ -68,7 +68,7 @@ function reemplazaJenkinsCredentials
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
+         echo 'MacoS replace'
          fgrep -Rl "#jenkins.credentials.id#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops#/$patternCollection/g" $file; done
          ;;
        *)
@@ -86,7 +86,7 @@ function reemplazaS3Credentials
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
+         echo 'MacoS replace'
          fgrep -Rl "#cicd.sysops.s3.deploy#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/#cicd\.sysops\.s3\.deploy#/$patternCollection/g" $file; done
          ;;
        *)
@@ -110,7 +110,7 @@ function reemplazaDomain
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
+         echo 'MacoS replace'
          fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
          ;;
        *)
@@ -135,7 +135,7 @@ function reemplazaRepoGit
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
+         echo 'MacoS replace'
          fgrep -Rl "<url_repo_git>" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/<url_repo_git>/=$repoGit/g" $file; done
          ;;
        *)
@@ -147,7 +147,7 @@ function reemplazaRepoGit
     case "$(uname -s)" in
 
        Darwin)
-         echo 'Replaces macos'
+         echo 'MacoS replace'
          fgrep -Rl "<url_web_repo_git>" . | while read file; do echo "Actualizando $file....."; sed -i '' "s/<url_web_repo_git>/=$repoGitBitbucketUrl/g" $file; done
          ;;
        *)
@@ -256,7 +256,7 @@ while true; do
         shift;shift ;;
 
     -v | --version )
-        export DOCKER_STACK_VERSION=$2;
+        export STACK_VERSION=$2;
         shift;shift ;;
     -e | --env )
         ENTORNO_PIPELINE=$2
@@ -291,8 +291,8 @@ pushd built_project
    mvn archetype:generate \
        -DarchetypeGroupId=com.meph.mephskeleton \
        -DarchetypeArtifactId=mephskeleton-archetype \
-       -DarchetypeVersion=RELEASE-INT-SNAPSHOT \
-       -DgroupId=$1 -DartifactId=$2 -Dversion=RELEASE-INT-SNAPSHOT\
+       -DarchetypeVersion=DEVELOP-SNAPSHOT \
+       -DgroupId=$1 -DartifactId=$2 -Dversion=DEVELOP-SNAPSHOT\
        -DarchetypeRepository=../mephskeleton/target/generated-sources/archetype/ \
        -DinteractiveMode=false
   echo "---------------- Ultimos retoques -------------"

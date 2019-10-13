@@ -29,7 +29,7 @@ services:
       - --tries=1
       - --spider
       - http://localhost:8080/health
-    image: mephskeleton-restapi:RELEASE-INT-SNAPSHOT.1558451460
+    image: mephskeleton-restapi:DEVELOP-SNAPSHOT.1558451460
     networks:
       test_bakcend:
         aliases:

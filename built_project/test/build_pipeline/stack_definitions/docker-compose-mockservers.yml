@@ -1,0 +1,27 @@
+version: '3.4'
+networks:
+  test_integ_network:
+    driver: bridge
+  test_bakcend:
+services:
+  test_bbddtest:
+    image: test_bbddtest
+    labels:
+      - "BBDDTEST"
+    networks:
+      test_bakcend:
+        aliases:
+          - test_bbddtest
+
+  test_mockserver:
+    image: mockhttp
+    labels:
+      - "MOCKSERVER"
+
+    networks:
+      test_bakcend:
+        aliases:
+          - test_mockserver
+secrets:                        # top level secrets block
+  test_bbdd_PASSWORD_SECRET:
+    file: mockserver_password.txt

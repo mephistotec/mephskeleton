@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-restapi-deployment
+  namespace: k8s.meph.local
+spec:
+  selector:
+    matchLabels:
+      k8s-app: test-restapi
+  template:
+    metadata:
+      labels:
+        k8s-app: test-restapi
+      annotations:
+    spec:
+      containers:
+        - name: app
+          envFrom:
+            - configMapRef:
+                name: configmap-test-restapi
+          image: mephapps/test-restapi:<version>
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            limits:
+              cpu: <limit_cpu_value_restapi>
+              memory: <limit_memory_value_restapi>
+            requests:
+              cpu: <request_cpu_value_restapi>
+              memory: <request_memory_value_restapi>

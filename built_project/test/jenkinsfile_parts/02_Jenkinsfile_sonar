@@ -1,0 +1,10 @@
+       stage('Add sonar') {
+           steps
+           {
+                //milestone(3)
+                dir('./build_pipeline') {
+                    sh 'echo $(pwd)'
+                    sh 'export PATH="${mvnhome}:$PATH" && ./01_03_build_sonar.sh -f jenkins'
+                }
+           }
+       }

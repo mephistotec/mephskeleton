@@ -1,8 +1,0 @@
-dummy_service:
-  send:
-    # Gestion de la cola de peticiones
-    queue:
-      url: non_valid_url
-      maxBlockSize: 1000
-      toutQueue: 20
-      #groupID:

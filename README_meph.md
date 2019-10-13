@@ -4,6 +4,8 @@
 * Como definir el dns de aplicaciones
 * Como definir los limites y requests --> Debereía sacarlo a otro fichero
 
+* Maven settings en 00_env_pipelines
+
 ## Cosas que he de hacer 
 
 * Jenkins credentials --> INDICAR USO y MARCAR DONDE REEMPLAZAS
