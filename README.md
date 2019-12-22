@@ -103,7 +103,7 @@ https://groups.google.com/forum/#!topic/jenkinsci-users/rXQAlUDltlo4228/export-i
 
 Recuperar xml de carpet:
 
-Java -jar jenkins-cli_mng.jar -s https://#jenkins.credentials.id#:CZrV1STdGY@#jenkins.credentials.id#.mangodev.net/jenkins -noCertificateCheck -remoting list-jobs softbase/Mailgateway | grep mailgateway | while read job; do echo "tratando $job"; java -jar jenkins-cli_mng.jar -s https://#jenkins.credentials.id#:CZrV1STdGY@#jenkins.credentials.id#.mangodev.net/jenkins -noCertificateCheck -remoting get-job softbase/Mailgateway/$job > $job.xml; done
+Java -jar jenkins-cli_mng.jar -s https://#jenkins.credentials.id#:@#jenkins.credentials.id#.mangodev.net/jenkins -noCertificateCheck -remoting list-jobs softbase/Mailgateway | grep mailgateway | while read job; do echo "tratando $job"; java -jar jenkins-cli_mng.jar -s https://#jenkins.credentials.id#:@#jenkins.credentials.id#.mangodev.net/jenkins -noCertificateCheck -remoting get-job softbase/Mailgateway/$job > $job.xml; done
 ## Esqueleto de aplicacion
 
 ### Estructura de aplicación
