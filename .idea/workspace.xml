@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="860f08a3-3a19-422f-812e-5a5382721987" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/README_meph.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s_templates/ingress.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_project.sh" beforeDir="false" afterPath="$PROJECT_DIR$/create_project.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_project_original.sh" beforeDir="false" afterPath="$PROJECT_DIR$/create_project_original.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generaJenkinsFiles.sh" beforeDir="false" afterPath="$PROJECT_DIR$/generaJenkinsFiles.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s_templates/config-map.yml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s_templates/config-map.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s_templates/deployment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s_templates/deployment.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s_templates/hpa.yml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s_templates/hpa.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s_templates/network-policy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s_templates/network-policy.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s_templates/pdb.yml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s_templates/pdb.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s_templates/service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s_templates/service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launch_all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/launch_all.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-promote-tag-to-pro-docker.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-promote-tag-to-pro-docker.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/04_Jenkinsfile_docker_integration_test" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/04_Jenkinsfile_docker_integration_test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_pre" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_pre" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_test" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_lsdomains_pre" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_lsdomains_test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_wdpre_pre" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/05_Jenkinsfile_deploy_to_wdpre_test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/06_Jenkinsfile_smoke_test_pre" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/jenkinsfile_parts/06_Jenkinsfile_smoke_test_pre" afterDir="false" />
-    </list>
+    <list default="true" id="860f08a3-3a19-422f-812e-5a5382721987" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +103,7 @@
       <workItem from="1566751672231" duration="6904000" />
       <workItem from="1567712310472" duration="1635000" />
       <workItem from="1567716296773" duration="6107000" />
+      <workItem from="1574547702418" duration="306000" />
     </task>
     <servers />
   </component>
