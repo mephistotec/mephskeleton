@@ -1,5 +1,0 @@
-spring:
-   datasource:
-      url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=bd.pre.mango.com)(PORT=1521))(CONNECT_DATA=(service_name=MNGPRED)))
-      username: ENC(user)
-      password: ENC(pass)

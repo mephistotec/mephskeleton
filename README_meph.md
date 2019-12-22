@@ -13,3 +13,11 @@
 * Renombrar scripts para que sean más english
 * Eliminar mango / mng
 
+
+
+# Cosas que necesitamos para poder trabajar con minikube y el script
+
+Para hacer que lops ingres acepten TCP / UDP hemos de actualizar un yml. Para ello necesito yq que en mac se instalal:
+
+
+brew install yq

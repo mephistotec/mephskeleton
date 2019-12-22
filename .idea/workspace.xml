@@ -2,317 +2,178 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="860f08a3-3a19-422f-812e-5a5382721987" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline_original.sh" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_13_build_zip_lsdomains.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_23_build_zip_wdpre.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_deploy_batch.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_deploy_lsdomains.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro_lsdomains.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro_wdpre.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-pipeline-pre-lsdomains.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-pipeline-pre-select-branch-lsdomains.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-pipeline-test-select-branch-lsdomains.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-promote-tag-to-pro-lsdomains.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-lsdomains.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/java/org/mango/mail/EngineAndRestAPIApp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/resources/application-dev.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/resources/application-devmocklocal.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/resources/application-test.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/resources/application.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/resources/banner.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/src/main/resources/logback-spring.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/Jenkinsfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/Jenkinsfile-test" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/00_env_pipeline.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/01_01_build_software.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/01_02_build_unit_tests.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/01_03_build_sonar.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/01_build.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/02_docker_build_images.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_01_start_mock_servers.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_02_check_entonro_mock_ok.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_03_stop_mock_servers.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_03_test_newman.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_test_integracion.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_01_publish_images.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_02_deploy_stack.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_13_build_zip_lsdomains.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_14_push_zip_to_s3.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_23_build_zip_wdpre.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_24_push_zip_to_s3_wdpre.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_99_first_deploy_stack.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_deploy.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_deploy_batch.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/04_deploy_lsdomains.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/05_promote_from_pre_to_pro.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/05_promote_from_pre_to_pro_lsdomains.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/05_promote_from_pre_to_pro_wdpre.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/06_smoke_test_environmet.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/99_erase_objects_from_environment.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/java/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/java/image_scripts/health.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/java/image_scripts/start_app.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/java/tmp_for_jars/dummy_data_git.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/tomcat/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/tomcat/image_scripts/health.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/tomcat/image_scripts/init_env.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/docker_images_definitions/tomcat/tmp_for_jars/dummy_data_git.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/clean_docker_env.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/env_mockservers.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/env_pre.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/env_pro.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/env_test.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_devcasa.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_devcasawin.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_devdavid.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_jenkins.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_jenkinscasa.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_minikube.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/environment_scripts/opt_onlygendescriptors.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/exec_pipeline.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/init_variables_dev_local.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/kravd.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/build_mock_servers.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_bbdd_image/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_bbdd_image/base_init.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_bbdd_image/build.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_bbdd_image/data/empty.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_bbdd_image/run_prueba_bbdd_server.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_mockapis_image/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_mockapis_image/build.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_newman_image/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_newman_image/build.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_newman_image/test_integracion_scripts/POSTMAN_TestAceptacion_restapiapp.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/mockservers_images/docker_newman_image/test_integracion_scripts/env_postman-local.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/docker-compose-base.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/docker-compose-local.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/docker-compose-mockservers.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/engine/docker-compose-base.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/engine/docker-compose-local.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/engine/docker-compose-mockservers.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/k8s/restapi_config-map.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/k8s/restapi_deployment.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/k8s/restapi_hpa.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/k8s/restapi_network-policy.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/k8s/restapi_pdb.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/k8s/restapi_service.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/last_build_version.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/mockserver_password.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/restapi/docker-compose-base.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/restapi/docker-compose-local.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/restapi/docker-compose-mockservers.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/singleapp/docker-compose-base.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/singleapp/docker-compose-local.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/stack_definitions/singleapp/docker-compose-mockservers.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/tools/aws-login/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/tools/kravd/Dockerfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/tools/kravd/binaries/kravd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/tools/kravd/binaries/kravd_shell.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/tools/kravd/kravd.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/tools/settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/utils_pipeline.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-dataApi/README.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-dataApi/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-engine/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/db_model/oracle/V1_01__create_model.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/src/main/java/com/meph/model/TestEntity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/src/test/resources/application.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/src/test/resources/db/h2/scripts/V1_01__create_model.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/src/test/resources/db/h2/scripts/init/init_tests.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-model/src/test/resources/db/scripts/V1_0_00__nada.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapi/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/java/com/meph/RESTApp.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/application-dev.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/application-devmocklocal.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/application-pre.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/application-pro.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/application-test.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/application.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/banner.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/main/resources/logback-spring.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-restapiApp/src/test/resources/application-jenkins.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/dummy_service-service/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/infrastructure/k8s/restapi_config-map.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/infrastructure/k8s/restapi_deployment.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/infrastructure/k8s/restapi_hpa.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/infrastructure/k8s/restapi_network-policy.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/infrastructure/k8s/restapi_pdb.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/infrastructure/k8s/restapi_service.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/folder/sbskeleton.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/install_jenkins.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-pipeline-pre-docker.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-pipeline-pre-select-branch-docker.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-pipeline.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-promote-tag-to-pro-docker.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-release-finish.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/jenkins_tasks/tasks/sbskeleton-release-start.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/proyecto_generado/dummy_service/pom.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java/org/mango/mail/EngineApp.java" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java/EngineApp.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java/org/mango/mail/RESTApp.java" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java/RESTApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Notas kubernetes.txt" afterPath="$PROJECT_DIR$/Notas kubernetes.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README_meph.md" afterPath="$PROJECT_DIR$/README_meph.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_project.sh" afterPath="$PROJECT_DIR$/create_project.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_project_original.sh" afterPath="$PROJECT_DIR$/create_project_original.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generaJenkinsFiles.sh" afterPath="$PROJECT_DIR$/generaJenkinsFiles.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/01_02_build_unit_tests.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/01_02_build_unit_tests.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/02_docker_build_images.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/02_docker_build_images.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/03_01_start_mock_servers.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/03_01_start_mock_servers.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/03_03_stop_mock_servers.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/03_03_stop_mock_servers.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_01_publish_images.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_01_publish_images.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_02_deploy_stack.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_02_deploy_stack.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_99_first_deploy_stack.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_99_first_deploy_stack.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_deploy.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/04_deploy.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/06_smoke_test_environmet.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/06_smoke_test_environmet.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_mockservers.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_mockservers.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pre.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pre.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_test.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_test.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/stack_definitions/config_generada/last_docker_compose_mock_test_integracion.yml" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/stack_definitions/config_generada/last_docker_compose_mock_test_integracion.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/utils_pipeline.sh" afterPath="$PROJECT_DIR$/mephskeleton/build_pipeline/utils_pipeline.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" afterPath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish.xml" afterPath="$PROJECT_DIR$/mephskeleton/jenkins_tasks/tasks/sbskeleton-release-finish.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-dataApi/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-dataApi/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engine/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engine/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-model/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-model/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-service/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-service/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mephskeleton/pom.xml" afterPath="$PROJECT_DIR$/mephskeleton/pom.xml" />
+      <change afterPath="$PROJECT_DIR$/create_simple_service.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_meph.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_meph.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline_original.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/02_docker_build_images.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_01_start_mock_servers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_02_check_entonro_mock_ok.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_03_stop_mock_servers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_03_test_newman.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_test_integracion.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_01_publish_images.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_02_deploy_stack.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_14_push_zip_to_s3.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_24_push_zip_to_s3_wdpre.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_99_first_deploy_stack.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_deploy.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/05_promote_from_pre_to_pro.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/06_smoke_test_environmet.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/99_erase_objects_from_environment.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/image_scripts/health.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/image_scripts/start_app.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/tmp_for_jars/dummy_data_git.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/clean_docker_env.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_mockservers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_pre.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_pro.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_test.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_devcasa.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_devcasawin.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_devdavid.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_jenkins.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_jenkinscasa.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_minikube.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_onlygendescriptors.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/exec_pipeline.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/init_variables_dev_local.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/kravd.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/build_mock_servers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/base_init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/data/empty.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/run_prueba_bbdd_server.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_mockapis_image/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_mockapis_image/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/test_integracion_scripts/POSTMAN_TestAceptacion_restapiapp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/test_integracion_scripts/env_postman-local.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/engine/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/engine/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/engine/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_config-map.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_hpa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_network-policy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_pdb.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/last_build_version.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/mockserver_password.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/restapi/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/restapi/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/restapi/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/singleapp/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/singleapp/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/singleapp/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/aws-login/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/binaries/kravd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/binaries/kravd_shell.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/kravd.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/utils_pipeline.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_config-map.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_hpa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_ingress.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_network-policy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_pdb.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/folder/sbskeleton.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/install_jenkins.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-pipeline-pre-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-pipeline-pre-select-branch-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-pipeline.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-promote-tag-to-pro-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-start.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/00_Jenkinsfile_init" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/02_Jenkinsfile_sonar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/03_Jenkinsfile_docker_image_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/04_Jenkinsfile_docker_integration_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_pre" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/06_Jenkinsfile_smoke_test_pre" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/06_Jenkinsfile_smoke_test_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/99_Jenkinsfile_end" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-dataApi/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-dataApi/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-engine/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/db_model/oracle/V1_01__create_model.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/main/java/org/mango/mail/model/TestEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/db/h2/scripts/V1_01__create_model.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/db/h2/scripts/init/init_tests.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/db/scripts/V1_0_00__nada.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapi/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/com/meph/RESTApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-dev.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-devmocklocal.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-pre.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-pro.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-test.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/test/resources/application-jenkins.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/opt_devcasa.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/opt_devcasawin.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/opt_devdavid.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/aws-login/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/binaries/kravd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/binaries/kravd_shell.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/kravd.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-devmocklocal.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pre.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pre.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pro.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pro.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="00_env_pipeline.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="00_env_pipeline.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="01_01_build_software.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="2" lean-forward="false" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="01_03_build_sonar.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="01_03_build_sonar.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="01_02_build_unit_tests.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="01_build.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_build.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="01_01_build_software.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utils_pipeline.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/utils_pipeline.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="7" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/built_project/test/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>reemplazaRepoGit</find>
-      <find>url_web_repo_git</find>
-      <find>limpia</find>
-      <find>proyecto_generado</find>
-      <find>singleApp</find>
-      <find>lsdom</find>
-      <find>$5</find>
-      <find>if</find>
-      <find>$3</find>
       <find>com.</find>
       <find>org.mango</find>
       <find>package</find>
@@ -334,6 +195,15 @@
       <find>echoerr</find>
       <find>CODIGO_SALIDA</find>
       <find>SONAR_PARAMS</find>
+      <find>get_regis</find>
+      <find>DOCKER_RESTAPI_IMAGE_NAME</find>
+      <find>DOCKER_STACK_NAME</find>
+      <find>junit</find>
+      <find>DOCKER_REGISTRY_MNG_REPOSITORY</find>
+      <find>last_build_version</find>
+      <find>DOCKER_STACK_IMAGE_VERSION</find>
+      <find>env_java_opts</find>
+      <find>maxram</find>
     </findStrings>
     <replaceStrings>
       <replace>mephskeleton</replace>
@@ -351,48 +221,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
     </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/generaJenkinsFiles.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/00_env_pipeline.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_mockservers.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/build_pipeline/utils_pipeline.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/utils_pipeline.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_test.sh" />
-        <option value="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_02_check_entonro_mock_ok.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/04_13_build_zip_lsdomains.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/pom.xml" />
-        <option value="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/classes/META-INF/maven/archetype-metadata.xml" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pre.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro_lsdomains.sh" />
-        <option value="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/utils_pipeline.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java/RESTApp.java" />
-        <option value="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java/EngineApp.java" />
-        <option value="$PROJECT_DIR$/README_meph.md" />
-        <option value="$PROJECT_DIR$/Notas kubernetes.txt" />
-        <option value="$PROJECT_DIR$/create_project.sh" />
-        <option value="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh" />
-        <option value="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh" />
-        <option value="$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh" />
-        <option value="$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh" />
-        <option value="$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh" />
-        <option value="$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -401,125 +235,18 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
-  </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="791" />
     <option name="y" value="23" />
-    <option name="width" value="2560" />
+    <option name="width" value="1769" />
     <option name="height" value="1417" />
   </component>
   <component name="ProjectId" id="1QQoi0dmLCIP11TcqeYR6tlkpAg" />
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="built_project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="built_project" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="built_project" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="build_pipeline" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="build_pipeline" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="build_pipeline" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton-restapiApp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton-restapiApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton-restapiApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton-restapiApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mephskeleton" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton" type="462c0819:PsiDirectoryNode" />
-              <item name="mephskeleton-restapiApp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -530,6 +257,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -547,18 +275,6 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -568,82 +284,48 @@
       <module />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
@@ -663,481 +345,21 @@
       <workItem from="1565944484914" duration="13000" />
       <workItem from="1566751672231" duration="7640000" />
       <workItem from="1569069462855" duration="17697000" />
+      <workItem from="1570953351614" duration="3692000" />
+      <workItem from="1573405310631" duration="2824000" />
+      <workItem from="1574588801546" duration="5798000" />
+      <workItem from="1576874508664" duration="344000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18259000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1417" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info id="GfmBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12867355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Tail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="SonarQube" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20691025" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="SonarLint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/docker_images_definitions/java/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/docker_images_definitions/java/tmp_for_jars/dummy_data_git.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/docker_images_definitions/java/image_scripts/start_app.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/docker_images_definitions/java/image_scripts/health.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pro.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/01_02_build_unit_tests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pruebas_script.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/mephskeleton-singleApp/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/00_env_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_mockservers.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/build_pipeline/utils_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/utils_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_test.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="2" lean-forward="false" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_02_check_entonro_mock_ok.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/04_13_build_zip_lsdomains.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1138">
-          <caret line="437" column="0" lean-forward="false" selection-start-line="437" selection-start-column="0" selection-end-line="437" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/classes/META-INF/maven/archetype-metadata.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="786">
-          <caret line="258" column="0" lean-forward="false" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro_lsdomains.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="62" lean-forward="true" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/04_deploy_batch.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pre.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="2" lean-forward="false" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/utils_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generaJenkinsFiles.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="25" lean-forward="false" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java/RESTApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java/EngineApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/packagepath">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/RESTApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_all.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/RESTApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/com/meph/RESTApp2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_project_original.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="253" column="15" lean-forward="false" selection-start-line="253" selection-start-column="8" selection-end-line="253" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/com/meph/RESTApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/RESTApp.java">
-      <provider editor-type-id="LargeFileEditor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/com/meph/RESTApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="Gfm">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README_meph.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="90">
-            <caret line="6" column="36" lean-forward="false" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Notas kubernetes.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline_original.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_project.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="235" column="12" lean-forward="false" selection-start-line="235" selection-start-column="12" selection-end-line="235" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="109" column="46" lean-forward="false" selection-start-line="109" selection-start-column="46" selection-end-line="109" selection-end-column="46" />
-          <folding>
-            <element signature="e#5329#5335#0" expanded="true" />
-            <element signature="e#5397#5403#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/utils_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="7" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="2" lean-forward="false" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_build.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state x="957" y="552" key="com.intellij.ide.util.TipDialog" timestamp="1576874959839">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="957" y="552" key="com.intellij.ide.util.TipDialog/2560.413.1680.1027/0.23.2560.1417@0.23.2560.1417" timestamp="1576874959839" />
   </component>
   <component name="masterDetails">
     <states>
