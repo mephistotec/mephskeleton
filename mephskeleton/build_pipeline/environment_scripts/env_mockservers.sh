@@ -30,10 +30,3 @@ fi;
 if [ -d "../mephskeleton-engineApp" ]; then
     export ADDITIONAL_COMPOSES="$ADDITIONAL_COMPOSES engine/docker-compose-mockservers.yml"
 fi
-
-if [ -d "../mephskeleton-singleApp" ]; then
-    export ADDITIONAL_COMPOSES="$ADDITIONAL_COMPOSES singleapp/docker-compose-mockservers.yml"
-fi
-
-#cifrado de pass / users
-#export APP_ENC_CLASS="1234567890"

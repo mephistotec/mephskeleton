@@ -3,7 +3,7 @@
 #
 # En el script de entonro 00_env_pipeline se definen las variables
 #
-# DOCKER_STACK_VERSION  -- Se actualiza con la version del POM a no ser que se defina flag -v
+# STACK_VERSION  -- Se actualiza con la version del POM a no ser que se defina flag -v
 # ADDITIONAL_COMPOSES  -- Composes a usar para la generacion del STACK, varia en funcion del entorno mock, pre, pro
 # compose_salida_integracion -- Determina el compose a usar para parar el stak. Se define al aplicar el entorno
 

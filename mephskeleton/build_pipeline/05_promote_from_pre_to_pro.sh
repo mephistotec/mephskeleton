@@ -2,7 +2,7 @@
 #--------------------------------------------------------------------------
 # Requiere que se definan las variables : paral el pull - push
 #
-# DOCKER_STACK_VERSION - Version a desplegar
+# STACK_VERSION - Version a desplegar
 # DOCKER_REGISTRY_MNG_BASE_URL - URL de registry de PRE (base)
 # DOCKER_REGISTRY_MNG_BASE_URL - URL de registry de PRO (base)
 # DOCKER_REGISTRY_MNG_USER - Usuario de acceso al registry

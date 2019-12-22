@@ -3,7 +3,7 @@
 #
 # En el script de entonro 00_env_pipeline se definen las variables
 #
-# DOCKER_STACK_VERSION  -- Se actualiza con la version del POM a no ser que se defina flag -v
+# STACK_VERSION  -- Se actualiza con la version del POM a no ser que se defina flag -v
 # ADDITIONAL_COMPOSES  -- Composes a usar para la generacion del STACK, varia en funcion del entorno mock, pre, pro
 #
 
@@ -82,7 +82,7 @@ if [[ $rc -eq 0 ]] ; then
 
     pushd ./stack_definitions/
         rm "./config_generada/$compose_salida_integracion"
-        echo "-- Concatenamos composes para ($DOCKER_STACK_VERSION) $ADDITIONAL_COMPOSES"
+        echo "-- Concatenamos composes para ($STACK_VERSION) $ADDITIONAL_COMPOSES"
         command_config=$(calculate_compose_components . "$ADDITIONAL_COMPOSES" "$compose_salida_integracion")
         echo "---      Creamos config con $command_config"
         eval $command_config

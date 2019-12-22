@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------
 # Requiere que se definan las variables : paral el pull - push
 #
-# DOCKER_STACK_VERSION - Version a desplegar - si no se define -v <version> , la del POM
+# STACK_VERSION - Version a desplegar - si no se define -v <version> , la del POM
 # DOCKER_REGISTRY_MNG_REPOSITORY - Repositorio al que subir las imagenes, se define con el -f <registrymng_pre> por ejemplo
 # DOCKER_REGISTRY_MNG_USER - Usuario de acceso al registry
 # DOCKER_REGISTRY_MNG_PASSWORD - password de acceso al registry

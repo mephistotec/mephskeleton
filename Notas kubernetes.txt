@@ -18,7 +18,7 @@ https://jira.mangodev.net/stash/projects/CPDE/repos/login-utils/browse
 - Hemos de inyectar el nombre (<name>)
 - Hemos de inyectar reponname y version <mango/softbase/aplicacion> : version --> tiempo de ejecucion
 - Hemos de inyectar la DOCKER_IMAGE_NAME
-- Hemos de inyectar DOCKER_STACK_VERSION
+- Hemos de inyectar STACK_VERSION
 
 {
     "repository": {

@@ -1,19 +1,4 @@
-jasypt:
-  encryptor:
-    password: ${APP_ENC_CLASS:}
 spring:
-   datasource:
-      url: ${MODEL_DATASOURCE_URL}
-      username: ${MODEL_DATASOURCE_USER}
-      password: ${MODEL_DATASOURCE_PASSWORD}
-      driver-class-name: oracle.jdbc.driver.OracleDriver
-      driver-name: oracle.jdbc.OracleDriver
-      tomcat:
-        initialSize: 10
-        maxActive: 10
-        testWhileIdle: true
-        timeBetweenEvictionRunsMillis: 360000
-        validationQuery: SELECT 'mephskeleton' FROM DUAL
    jpa:
       databasePlatform: org.hibernate.dialect.Oracle10gDialect
       show-sql: false
@@ -25,7 +10,6 @@ spring:
       name: mephskeleton_engine
 flyway:
   enabled: false
-
 hibernate:
   jdbc:
     batch_size: 1000

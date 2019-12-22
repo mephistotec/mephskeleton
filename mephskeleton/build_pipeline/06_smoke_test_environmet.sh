@@ -75,14 +75,14 @@ function checkHealthAndVersion
 
         cat tmp/urls_version.txt  | tr ',' '\n' | while read urlVersion;
         do
-            echo "Validando $urlVersion $DOCKER_STACK_VERSION"
-            testVersion $urlVersion $DOCKER_STACK_VERSION;
+            echo "Validando $urlVersion $STACK_VERSION"
+            testVersion $urlVersion $STACK_VERSION;
             rc=$?
             if [[ $rc -ne 0 ]] ; then
-              echo '--- Error en check version $urlVersion $DOCKER_STACK_VERSION'; return $rc
+              echo '--- Error en check version $urlVersion $STACK_VERSION'; return $rc
             fi
 
-            echo "Version OK para $DOCKER_STACK_VERSION $urlVersion"
+            echo "Version OK para $STACK_VERSION $urlVersion"
         done;
 
     fi

@@ -13,7 +13,97 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/README_meph.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/com/meph/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/create_project.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/create_project_original.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/create_simple_service.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/generaJenkinsFiles.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/k8s_templates/hpa.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/00_env_pipeline_original.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/01_01_build_software.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/01_02_build_unit_tests.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/01_03_build_sonar.sh">
           <value>
             <set />
           </value>
@@ -23,7 +113,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/05_promote_from_pre_to_pro_lsdomains.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/docker_images_definitions/java/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_mockservers.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_pre.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/env_test.sh">
           <value>
             <set />
           </value>
@@ -43,6 +153,51 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java/EngineApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-dev.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-devmocklocal.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pre.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pro.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-test.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mephskeleton/pom.xml">
           <value>
             <set />
@@ -53,7 +208,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/04_13_build_zip_lsdomains.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/src/main/resources/archetype-resources/build_pipeline/utils_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/classes/META-INF/maven/archetype-metadata.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mephskeleton/target/generated-sources/archetype/target/test-classes/projects/basic/project/basic/build_pipeline/utils_pipeline.sh">
           <value>
             <set />
           </value>
@@ -64,6 +239,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/02_docker_build_images.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/proyecto_generado/dummy_service/build_pipeline/03_02_check_entonro_mock_ok.sh">
           <value>
             <set />
           </value>
@@ -94,6 +274,161 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/pruebas_script.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/00_env_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/00_env_pipeline_original.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/02_docker_build_images.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/04_01_publish_images.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/04_02_deploy_stack.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/04_99_first_deploy_stack.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/04_deploy.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/05_promote_from_pre_to_pro.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/docker_images_definitions/java/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/docker_images_definitions/java/image_scripts/start_app.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/environment_scripts/opt_minikube.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_config-map.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_deployment.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_hpa.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_ingress.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_network-policy.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_pdb.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/stack_definitions/k8s/restapi_service.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/build_pipeline/utils_pipeline.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapi/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapi/src/main/java/com/meph/api/mephapi.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/java/com/meph/RESTApp.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/application-dev.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/application-devmocklocal.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/application-pre.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/application-pro.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/application-test.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/microtest-restapiApp/src/main/resources/logback-spring.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../test/microtest/pom.xml">
           <value>
             <set />
           </value>

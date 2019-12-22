@@ -109,10 +109,10 @@ git checkout develop
 echo &quot;Hacemos el merge de la release a develop&quot;
 git -c diff.mnemonicprefix=false -c core.quotepath=false merge --no-ff origin/${TIPO}/${VERSION}
 #git -c diff.mnemonicprefix=false -c core.quotepath=false merge --no-ff origin/master
-echo &quot;Volvemos a hacer mvn setversion de RELEASE-INT-SNAPSHOT en develop&quot;</command>
+echo &quot;Volvemos a hacer mvn setversion de DEVELOP-SNAPSHOT en develop&quot;</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
-      <targets>versions:set -DnewVersion=RELEASE-INT-SNAPSHOT -DgenerateBackupPoms=false</targets>
+      <targets>versions:set -DnewVersion=DEVELOP-SNAPSHOT -DgenerateBackupPoms=false</targets>
       <mavenName>M3</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>

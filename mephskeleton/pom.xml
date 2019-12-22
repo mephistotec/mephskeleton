@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.meph.mephskeleton</groupId>
     <artifactId>mephskeleton</artifactId>
-    <version>RELEASE-INT-SNAPSHOT</version>
+    <version>DEVELOP-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>mephskeleton</name>
     <description>Proyecto padre. Gestiona dependency management y versiones como properties</description>
@@ -13,7 +13,7 @@
     <!--    <parent>
             <groupId>com.meph.ebusiness</groupId>
             <artifactId>com.meph.ebusiness.parent</artifactId>
-            <version>RELEASE-INT-SNAPSHOT</version>
+            <version>DEVELOP-SNAPSHOT</version>
         </parent>
     -->
     <properties>
@@ -435,6 +435,5 @@
         <module>mephskeleton-restapiApp</module>
         <module>mephskeleton-engine</module>
         <module>mephskeleton-engineApp</module>
-        <module>mephskeleton-singleApp</module>
     </modules>
 </project>

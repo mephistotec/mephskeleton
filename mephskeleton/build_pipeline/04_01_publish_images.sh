@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------
 # Requiere que se definan las variables : paral el pull - push
 #
-# DOCKER_STACK_VERSION - Version a desplegar - si no se define -v <version> , la del POM
+# STACK_VERSION - Version a desplegar - si no se define -v <version> , la del POM
 # DOCKER_REGISTRY_MNG_REPOSITORY - Repositorio al que subir las imagenes, se define con el -f <registrymng_pre> por ejemplo
 # DOCKER_REGISTRY_MNG_USER - Usuario de acceso al registry
 # DOCKER_REGISTRY_MNG_PASSWORD - password de acceso al registry
@@ -85,8 +85,8 @@ if [ -d "../mephskeleton-restapiApp" ]; then
     #Publicamos las imagenes de los dos artefactos
     publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_STACK_IMAGE_VERSION
     if [ "$ENTORNO_PIPELINE" == "pre" -o  "$ENTORNO_PIPELINE" == "pro" ]; then
-        echo "Push de imagen sin buildnumber $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_STACK_VERSION"
-        publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_STACK_VERSION
+        echo "Push de imagen sin buildnumber $DOCKER_RESTAPI_IMAGE_NAME $STACK_VERSION"
+        publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_RESTAPI_IMAGE_NAME $STACK_VERSION
     fi
 
     rc=$?
@@ -97,8 +97,8 @@ fi;
 if [ -d "../mephskeleton-engineApp" ]; then
     publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_ENGINE_IMAGE_NAME $DOCKER_STACK_IMAGE_VERSION
     if [ "$ENTORNO_PIPELINE" == "pre" -o  "$ENTORNO_PIPELINE" == "pro" ]; then
-        echo "Push de imagen sin buildnumber $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_STACK_VERSION"
-        publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_ENGINE_IMAGE_NAME $DOCKER_STACK_VERSION
+        echo "Push de imagen sin buildnumber $DOCKER_RESTAPI_IMAGE_NAME $STACK_VERSION"
+        publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_ENGINE_IMAGE_NAME $STACK_VERSION
     fi
     rc=$?
     . ./environment_scripts/clean_docker_env.sh
@@ -109,8 +109,8 @@ fi
 if [ -d "../mephskeleton-singleApp" ]; then
     publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_SINGLEAPP_IMAGE_NAME $DOCKER_STACK_IMAGE_VERSION
     if [ "$ENTORNO_PIPELINE" == "pre" -o  "$ENTORNO_PIPELINE" == "pro" ]; then
-        echo "Push de imagen sin buildnumber $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_STACK_VERSION"
-        publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_SINGLEAPP_IMAGE_NAME $DOCKER_S$DOCKER_STACK_VERSION
+        echo "Push de imagen sin buildnumber $DOCKER_RESTAPI_IMAGE_NAME $STACK_VERSION"
+        publishImage $DOCKER_REGISTRY_MNG_REPOSITORY $DOCKER_SINGLEAPP_IMAGE_NAME $DOCKER_S$STACK_VERSION
     fi
     rc=$?
     . ./environment_scripts/clean_docker_env.sh

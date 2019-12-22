@@ -5,11 +5,11 @@
     <name>mephskeleton-restApi</name>
     <packaging>jar</packaging>
     <description>API Rest</description>
-    <version>RELEASE-INT-SNAPSHOT</version>
+    <version>DEVELOP-SNAPSHOT</version>
     <parent>
         <groupId>com.meph.mephskeleton</groupId>
         <artifactId>mephskeleton</artifactId>
-        <version>RELEASE-INT-SNAPSHOT</version>
+        <version>DEVELOP-SNAPSHOT</version>
     </parent>
     <dependencies>
         <dependency>
@@ -50,11 +50,6 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -5,11 +5,11 @@
     <name>mephskeleton-engine</name>
     <packaging>jar</packaging>
     <description>mephskeleton engine</description>
-    <version>RELEASE-INT-SNAPSHOT</version>
+    <version>DEVELOP-SNAPSHOT</version>
     <parent>
         <groupId>com.meph.mephskeleton</groupId>
         <artifactId>mephskeleton</artifactId>
-        <version>RELEASE-INT-SNAPSHOT</version>
+        <version>DEVELOP-SNAPSHOT</version>
     </parent>
     <dependencies>
         <dependency>

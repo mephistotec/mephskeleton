@@ -1,18 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="860f08a3-3a19-422f-812e-5a5382721987" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+    <list default="true" id="860f08a3-3a19-422f-812e-5a5382721987" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/create_simple_service.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_meph.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_meph.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/00_env_pipeline_original.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_01_build_software.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_02_build_unit_tests.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_03_build_sonar.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/01_build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/02_docker_build_images.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_01_start_mock_servers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_02_check_entonro_mock_ok.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_03_stop_mock_servers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_03_test_newman.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/03_test_integracion.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_01_publish_images.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_02_deploy_stack.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_14_push_zip_to_s3.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_24_push_zip_to_s3_wdpre.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_99_first_deploy_stack.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/04_deploy.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/05_promote_from_pre_to_pro.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/06_smoke_test_environmet.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/99_erase_objects_from_environment.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/image_scripts/health.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/image_scripts/start_app.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/docker_images_definitions/java/tmp_for_jars/dummy_data_git.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/clean_docker_env.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_mockservers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_pre.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_pro.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/env_test.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_devcasa.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_devcasawin.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_devdavid.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_jenkins.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_jenkinscasa.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_minikube.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/environment_scripts/opt_onlygendescriptors.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/exec_pipeline.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/init_variables_dev_local.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/kravd.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/build_mock_servers.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/base_init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/data/empty.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_bbdd_image/run_prueba_bbdd_server.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_mockapis_image/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_mockapis_image/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/test_integracion_scripts/POSTMAN_TestAceptacion_restapiapp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/mockservers_images/docker_newman_image/test_integracion_scripts/env_postman-local.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/engine/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/engine/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/engine/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_config-map.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_hpa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_network-policy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_pdb.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/k8s/restapi_service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/last_build_version.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/mockserver_password.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/restapi/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/restapi/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/restapi/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/singleapp/docker-compose-base.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/singleapp/docker-compose-local.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/stack_definitions/singleapp/docker-compose-mockservers.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/aws-login/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/binaries/kravd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/binaries/kravd_shell.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/kravd/kravd.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/tools/settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/build_pipeline/utils_pipeline.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_config-map.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_deployment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_hpa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_ingress.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_network-policy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_pdb.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/infrastructure/k8s/restapi_service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/folder/sbskeleton.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/install_jenkins.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-pipeline-pre-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-pipeline-pre-select-branch-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-pipeline.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-promote-tag-to-pro-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish-and-deploy-docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-finish.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkins_tasks/tasks/sbskeleton-release-start.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/00_Jenkinsfile_init" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/02_Jenkinsfile_sonar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/03_Jenkinsfile_docker_image_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/04_Jenkinsfile_docker_integration_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_pre" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/05_Jenkinsfile_deploy_to_docker_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/06_Jenkinsfile_smoke_test_pre" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/06_Jenkinsfile_smoke_test_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/jenkinsfile_parts/99_Jenkinsfile_end" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-dataApi/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-dataApi/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-engine/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/db_model/oracle/V1_01__create_model.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/main/java/org/mango/mail/model/TestEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/db/h2/scripts/V1_01__create_model.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/db/h2/scripts/init/init_tests.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-model/src/test/resources/db/scripts/V1_0_00__nada.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapi/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java/com/meph/RESTApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-dev.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-devmocklocal.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-pre.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-pro.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application-test.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/resources/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-restapiApp/src/test/resources/application-jenkins.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/built_project/test/test-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/opt_devcasa.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/opt_devcasawin.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts/opt_devdavid.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/aws-login/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/binaries/kravd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/binaries/kravd_shell.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/build_pipeline/tools/kravd/kravd.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-devmocklocal.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pre.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pre.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pro.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-pro.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mephskeleton/mephskeleton-restapi/pom.xml" afterDir="false" />
+    </list>
+>>>>>>> 8f9140039700719fc00c04c3108970bca0a71bd4
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>com.</find>
+      <find>org.mango</find>
+      <find>package</find>
+      <find>registr</find>
+      <find>DOCKERREGISTRYDOMAINNAME</find>
+      <find>reemplazaDomain</find>
+      <find>reemplazaNombres</find>
+      <find>Replaces macos</find>
+      <find>Replaces linux</find>
+      <find>Incorporam</find>
+      <find>incorpor</find>
+      <find>moveClassesToPackage</find>
+      <find>echoerrecho</find>
+      <find>e</find>
+      <find>DOCKER_STACK_VERSION</find>
+      <find>ARTIFACTID</find>
+      <find>DOCKER_REGISTRY_MNG_BASE_URL</find>
+      <find>RELEASE-INT-SNAPSHOT</find>
+      <find>echoerr</find>
+      <find>CODIGO_SALIDA</find>
+      <find>SONAR_PARAMS</find>
+      <find>get_regis</find>
+      <find>DOCKER_RESTAPI_IMAGE_NAME</find>
+      <find>DOCKER_STACK_NAME</find>
+      <find>junit</find>
+      <find>DOCKER_REGISTRY_MNG_REPOSITORY</find>
+      <find>last_build_version</find>
+      <find>DOCKER_STACK_IMAGE_VERSION</find>
+      <find>env_java_opts</find>
+      <find>maxram</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>mephskeleton</replace>
+      <replace>com.meph</replace>
+      <replace>MacoS replace</replace>
+      <replace>STACK_VERSION</replace>
+      <replace>DEVELOP-SNAPSHOT</replace>
+      <replace>replaceNames</replace>
+      <replace>RESCODE</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="workOffline" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="791" />
+    <option name="y" value="23" />
+    <option name="width" value="1769" />
+    <option name="height" value="1417" />
+  </component>
   <component name="ProjectId" id="1QQoi0dmLCIP11TcqeYR6tlkpAg" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -21,36 +261,32 @@
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mephskeleton/build_pipeline/tools" />
+      <recent name="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/k8s_templates" />
       <recent name="$PROJECT_DIR$/mephskeleton/build_pipeline/environment_scripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mephskeleton/build_pipeline" />
+      <recent name="$PROJECT_DIR$/built_project/test/test-restapiApp/src/main/java" />
+      <recent name="$PROJECT_DIR$/mephskeleton/mephskeleton-engineApp/src/main/java" />
+      <recent name="$PROJECT_DIR$/mephskeleton/mephskeleton-restapiApp/src/main/java" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
-    <configuration default="true" type="Applet">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <module />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -84,6 +320,18 @@
       </method>
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
     <supportedVersion>125</supportedVersion>
@@ -100,28 +348,30 @@
       <workItem from="1563122818716" duration="191000" />
       <workItem from="1565562469685" duration="384000" />
       <workItem from="1565944484914" duration="13000" />
+<<<<<<< HEAD
       <workItem from="1566751672231" duration="6904000" />
       <workItem from="1567712310472" duration="1635000" />
       <workItem from="1567716296773" duration="6107000" />
       <workItem from="1574547702418" duration="306000" />
+=======
+      <workItem from="1566751672231" duration="7640000" />
+      <workItem from="1569069462855" duration="17697000" />
+      <workItem from="1570953351614" duration="3692000" />
+      <workItem from="1573405310631" duration="2824000" />
+      <workItem from="1574588801546" duration="5798000" />
+      <workItem from="1576874508664" duration="344000" />
+>>>>>>> 8f9140039700719fc00c04c3108970bca0a71bd4
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="WindowStateProjectService">
+    <state x="957" y="552" key="com.intellij.ide.util.TipDialog" timestamp="1576874959839">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="957" y="552" key="com.intellij.ide.util.TipDialog/2560.413.1680.1027/0.23.2560.1417@0.23.2560.1417" timestamp="1576874959839" />
   </component>
   <component name="masterDetails">
     <states>

@@ -6,11 +6,11 @@
 	<name>mephskeleton-restapiapp</name>
 	<packaging>jar</packaging>
 	<description>API Rest Deploy Docker</description>
-	<version>RELEASE-INT-SNAPSHOT</version>
+	<version>DEVELOP-SNAPSHOT</version>
 	<parent>
 		<groupId>com.meph.mephskeleton</groupId>
 		<artifactId>mephskeleton</artifactId>
-		<version>RELEASE-INT-SNAPSHOT</version>
+		<version>DEVELOP-SNAPSHOT</version>
 	</parent>
 	<dependencies>
 		<dependency>

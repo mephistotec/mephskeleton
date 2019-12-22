@@ -19,11 +19,6 @@ function calculate_compose_components
         ccc_COMMAND_COMPOSE_CONFIG="$ccc_COMMAND_COMPOSE_CONFIG -f $ccc_basePath/engine/docker-compose-base.yml ";
     fi
 
-    if [ -d "../../mephskeleton-singleApp" ]; then
-        echoerr "        - Añadimos compose de tomcat";
-        ccc_COMMAND_COMPOSE_CONFIG="$ccc_COMMAND_COMPOSE_CONFIG -f $ccc_basePath/singleapp/docker-compose-base.yml ";
-    fi
-
     echoerr "Compose basico : $ccc_COMMAND_COMPOSE_CONFIG"
 
 
