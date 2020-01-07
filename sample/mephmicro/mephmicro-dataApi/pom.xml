@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mephmicro-dataApi</artifactId>
+    <name>mephmicro-dataApi</name>
+    <packaging>jar</packaging>
+    <description>mephmicro dataApi. Ofrece API de acceso a modelo y dtos para poder mockerar los tes te integracion con esta capa.</description>
+    <version>DEVELOP-SNAPSHOT</version>
+    <parent>
+        <groupId>com.meph</groupId>
+        <artifactId>mephmicro</artifactId>
+        <version>DEVELOP-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

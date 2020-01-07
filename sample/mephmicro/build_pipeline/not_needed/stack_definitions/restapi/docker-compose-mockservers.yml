@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+    mephmicro_restapi:
+      depends_on:
+        - mephmicro_bbddtest
+        - mephmicro_mockserver
+      networks:
+        test_integ_network:
+          aliases:
+            - mephmicro_restapi_external
+        test_bakcend:
+          aliases:
+            - ${DOCKER_RESTAPI_IMAGE_NAME}
+      secrets:                    # secrets block only for 'web' service
+        - mephmicro_bbdd_PASSWORD_SECRET

@@ -33,6 +33,10 @@ function cleanModules
     pwd
     ls -R ./infrastructure/k8s/$3*
     rm -fR ./infrastructure/k8s/$3*
+    rm -fR *$1
+    cat pom.xml | grep -vi $2 > pom2.xml
+    rm pom.xml
+    mv pom2.xml pom.xml
   fi
   if [ "$1" != "" ]; then
     rm -fR *$1
@@ -223,7 +227,7 @@ while true; do
         if [ "$2" = "full" ] || [ "$" = "micro" ] || [ "$" = "worker" ] ; then
             echo "Setting application type to $2"
         else
-            echo "Wron application type, it should be full|micro|worker";
+            echo "Wrong application type, it should be full|micro|worker";
             exit -1;
         fi
         APPLICATION_TYPE=$2

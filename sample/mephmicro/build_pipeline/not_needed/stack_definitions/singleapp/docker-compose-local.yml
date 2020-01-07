@@ -1,0 +1,5 @@
+version: '3.4'
+services:
+  mephmicro_singleapp:
+    volumes:
+      - ${PATH_CREDENTIALS_AWS_LOCAL}:/root/.aws

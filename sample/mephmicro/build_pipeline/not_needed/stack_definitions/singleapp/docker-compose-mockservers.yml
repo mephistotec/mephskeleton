@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  mephmicro_singleapp:
+    depends_on:
+      - mephmicro_bbddtest
+      - mephmicro_mockserver
+    networks:
+      test_integ_network:
+        aliases:
+          - mephmicro_singleapp_external
+      test_bakcend:
+        aliases:
+          - ${DOCKER_SINGLEAPP_IMAGE_NAME}
+    secrets:                    # secrets block only for 'web' service
+      - mephmicro_bbdd_PASSWORD_SECRET
