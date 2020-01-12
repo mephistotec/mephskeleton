@@ -1,0 +1,19 @@
+spring:
+   jmx:
+      default-domain: mephmicro_restapi
+   application:
+      name: mephmicro_restapi
+info:
+  app:
+    name: mephmicroapp
+    description: API Rest Deploy Docker
+    version: DEVELOP-SNAPSHOT
+endpoints:
+  enabled: false
+  health.enabled: true
+  info.enabled: true
+  metrics.enabled: true
+management:
+  endpoints:
+    web:
+      base-path: /
