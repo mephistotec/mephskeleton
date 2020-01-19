@@ -3,14 +3,11 @@
 
 basePath=$(pwd)
 
-
 function splitJarIntoFrameworkAndCode
 {
     ARTIFACT=$1
     WRKDIR=$2
     ORIGIN=$3
-    FRAMEWORK_JAR_NAME=$ARTIFACT"_framework"
-    ARTIFACT_JAR=$ARTIFACT"_code"
 
     echo "Building image, decompressing $ARTIFACT.jar with $WRKDIR and $ORIGIN"
     mkdir -p $WRKDIR/decomp
@@ -30,86 +27,53 @@ function splitJarIntoFrameworkAndCode
       find . -type f | grep "org/springframework/boot/loader" > ../framework_content.txt; find . -type f | grep lib | grep -v mephmicro >> ../framework_content.txt
       echo "Building image, zipping service code into $(pwd)/../$ARTIFACT_JAR.jar"
       zip ../$ARTIFACT_JAR.jar -m -n .jar -@ < ../micro_content.txt
-      #cat ../micro_content.txt | while read fichero; do echo $fichero;zip -m ../$ARTIFACT_JAR.jar $fichero;done;
       echo "Building image, zipping service code into $(pwd)/$FRAMEWORK_JAR_NAME.jar"
       zip ../$FRAMEWORK_JAR_NAME.jar -m -n .jar -@ < ../framework_content.txt
-      #cat ../framework_content.txt | while read fichero; do echo $fichero; zip -m ../$FRAMEWORK_JAR_NAME.jar $fichero;done;
     popd
     rm -R $WRKDIR/decomp/*
-}
-
-function joinJars 
-{
-    SERVICE_JAR=$1
-    FRAMEWORK_JAR=$2
-    RESULT_JAR=$3
-    WRKDIR=$4
-
-    echo "Building fina imaje: joining jars $SERVICE_JAR $FRAMEWORK_JAR into $RESULT_JAR in $WRKDIR"
-    mkdir -p $WRKDIR/decomp
-    rm -R $WRKDIR/decomp/*
-    cp $1 $WRKDIR/decomp
-    cp $2 $WRKDIR/decomp
-  
-    pushd $WRKDIR/decomp
-      echo "------- Files to process ------"
-      ls
-      echo "------- decompressiong ------"
-      ls | while read fichero; do unzip $fichero; done;
-      unzip *.jar
-      rm *.jar
-      zip  $RESULT_JAR -m -n .jar -r *
-    popd
+    rm $WRKDIR/*.txt
 }
 
 function build_image_for_java
 {
-    echo "building image for $1"
+    echo "   building image for $1"
     pushd ../$1
     ARTIFACT=$(mvn help:evaluate -Dexpression=project.build.finalName | grep -e '^[^\[]')
     popd
+
+    FRAMEWORK_JAR_NAME=$ARTIFACT"_framework"
+    ARTIFACT_JAR=$ARTIFACT"_code"
 
     BASEDOCKERDIR=./docker_images_definitions/java
 
     rm $BASEDOCKERDIR/tmp_for_jars/*.jar
     mkdir -p $BASEDOCKERDIR/tmp_for_jars/decomp
     rm -R $BASEDOCKERDIR/tmp_for_jars/decomp/*
-    
+
+    echo "   build images, splittinh jars into framework and service"    
     splitJarIntoFrameworkAndCode $ARTIFACT $BASEDOCKERDIR/tmp_for_jars ../$1/target
+    rc=$?
+    if [[ $rc -ne 0 ]] ; then
+      echo 'Bulild IMAGE ERROR error : '; exit $rc
+    fi
+    
+    echo "Building image, binaries ready for framework"
+    pushd $BASEDOCKERDIR
+      ls ./tmp_for_jars/*
+      docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $FRAMEWORK_JAR_NAME:latest  .
 
+      echo "Building image, binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)"
+      
+      docker build  --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest  .
+      
+      rc=$?
+    popd
 
-    FRAMEWORK_JAR_NAME=$ARTIFACT"_framework"
-    ARTIFACT_JAR=$ARTIFACT"_code"
+    rm $BASEDOCKERDIR/tmp_for_jars/*.jar
 
-    joinJars $BASEDOCKERDIR/tmp_for_jars/$FRAMEWORK_JAR_NAME".jar" $BASEDOCKERDIR/tmp_for_jars/$ARTIFACT_JAR".jar" $ARTIFACT"_join".jar $BASEDOCKERDIR/tmp_for_jars
-
-    # rm -R $BASEDOCKERDIR/tmp_for_jars/decomp/*
-
-    # rc=$?
-    # if [[ $rc -ne 0 ]] ; then
-    #   echo 'Bulild IMAGE ERROR error : '; exit $rc
-    # fi
-
-    # echo "Building image, binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)"
-
-    # pushd $BASEDOCKERDIR
-
-    # pwd
-    # ls ./tmp_for_jars/*
-    # docker build --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT.jar --build-arg DESTINATION_JAR=$ARTIFACT.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest  .
-
-    # echo "Building image, Image has been built for $ARTIFACT"
-
-    # rc=$?
-
-    # popd
-
-    # rm $BASEDOCKERDIR/tmp_for_jars/*.jar
-
-    # if [[ $rc -ne 0 ]] ; then
-    #   echo "Bulild IMAGE ERROR error : $rc"; exit $rc
-    # fi
-
+    if [[ $rc -ne 0 ]] ; then
+      echo "Bulild IMAGE ERROR error : $rc"; exit $rc
+    fi
     echo "Building image, we've built image for $1, $ARTIFACT --> $2 ($DOCKER_STACK_IMAGE_VERSION)"
 }
 

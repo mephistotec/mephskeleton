@@ -1,16 +1,15 @@
-FROM openjdk:13-alpine
+FROM mephrestapi:latest
 
 MAINTAINER mephistos
 
 ARG ORIGIN_JAR
 ARG DESTINATION_JAR
 ARG BUILD_ID_INFO
-ENV DESTINATION_JAR $DESTINATION_JAR
+ARG FINAL_JAR
+ENV FINAL_JAR $FINAL_JAR
 ENV BUILD_ID_INFO $BUILD_ID_INFO
-
-VOLUME /var/log /var/log
 COPY $ORIGIN_JAR /data/$DESTINATION_JAR
-ADD ./image_scripts/*.sh /data/
-RUN chmod 777 /data/*.sh
-#HEALTHCHECK --interval=10s --timeout=3s --retries=10 CMD /data/health.sh
+
+RUN . /data/join_jars.sh 
+
 CMD . /data/start_app.sh
