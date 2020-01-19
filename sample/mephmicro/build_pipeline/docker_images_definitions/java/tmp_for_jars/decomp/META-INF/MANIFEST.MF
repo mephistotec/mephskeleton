@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Archiver-Version: Plexus Archiver
-Created-By: Apache Maven 3.5.3
-Built-By: dani
-Build-Jdk: 13.0.1
-Main-Class: org.springframework.boot.loader.JarLauncher
-Start-Class: com.meph.RESTApp
-Spring-Boot-Version: 1.2.6.RELEASE
-
