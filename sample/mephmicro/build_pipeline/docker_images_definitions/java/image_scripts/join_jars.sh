@@ -1,5 +1,6 @@
+echo "Join jars init"
 pushd /data
-    mkdir -p decomp
+    mkdir -p ./decomp
 
     ls *.jar | while read fichero;
     do

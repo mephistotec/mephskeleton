@@ -34,9 +34,11 @@ echo "Docker image Stack version $DOCKER_STACK_IMAGE_VERSION"
 export DOCKER_STACK_NAME=mephmicro
 
 #Images
+export DOCKER_RESTAPI_FWK_IMAGE_NAME=${DOCKER_STACK_NAME}-restapi-framework
 export DOCKER_RESTAPI_IMAGE_NAME=${DOCKER_STACK_NAME}-restapi
 
 #Images
+export DOCKER_ENGINE_FWK_IMAGE_NAME=${DOCKER_STACK_NAME}-engine-framework
 export DOCKER_ENGINE_IMAGE_NAME=${DOCKER_STACK_NAME}-engine
 
 #Default k8s descriptors values (you can set specific environment values en the env_<environment>.sh script)

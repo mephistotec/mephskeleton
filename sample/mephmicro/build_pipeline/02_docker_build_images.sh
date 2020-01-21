@@ -60,11 +60,14 @@ function build_image_for_java
     echo "Building image, binaries ready for framework"
     pushd $BASEDOCKERDIR
       ls ./tmp_for_jars/*
-      docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $FRAMEWORK_JAR_NAME:latest  .
+      command="docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:latest ."
+      echo "$command"
+      $(command);
 
-      echo "Building image, binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)"
-      
-      docker build  --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest  .
+      echo "Building image, binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)     (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "      
+      command="docker build  --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest ."
+      echo "$command"
+      $(command);
       
       rc=$?
     popd
@@ -83,7 +86,7 @@ export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last
 # Construimos los javas
 if [ -d "../mephmicro-restapiApp" ]; then
     echo "Building image, building image for restApi  ($DOCKER_RESTAPI_IMAGE_NAME)"
-    build_image_for_java mephmicro-restapiApp $DOCKER_RESTAPI_IMAGE_NAME
+    build_image_for_java mephmicro-restapiApp $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_RESTAPI_FWK_IMAGE_NAME
     rc=$?
     if [[ $rc -ne 0 ]] ; then
        echo "Bulild IMAGE ERROR error : $rc"; exit $rc
@@ -93,7 +96,7 @@ fi;
 echo "Building engine image?"
 if [ -d "../mephmicro-engineApp" ]; then
     echo "Building image, building image for engine, $DOCKER_RESTAPI_IMAGE_NAME"
-    build_image_for_java mephmicro-engineApp $DOCKER_ENGINE_IMAGE_NAME
+    build_image_for_java mephmicro-engineApp $DOCKER_ENGINE_IMAGE_NAME $DOCKER_ENGINE_FWK_IMAGE_NAME
     rc=$?
     if [[ $rc -ne 0 ]] ; then
        echo "Bulild IMAGE ERROR error : $rc"; exit $rc
