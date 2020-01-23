@@ -56,19 +56,14 @@ function build_image_for_java
     if [[ $rc -ne 0 ]] ; then
       echo 'Bulild IMAGE ERROR error : '; exit $rc
     fi
-    
-    echo "Building image, binaries ready for framework"
+    echo "-------------------- ANTES DE IMAGES ---------------------"
+    ls -la $BASEDOCKERDIR/tmp_for_jars
+    echo "----------------------------------------------------"
     pushd $BASEDOCKERDIR
-      ls ./tmp_for_jars/*
-      command="docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:latest ."
-      echo "$command"
-      $(command);
-
+    echo "Building image, binaries ready for framework"
+      #docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:latest .
       echo "Building image, binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)     (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "      
-      command="docker build  --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest ."
-      echo "$command"
-      $(command);
-      
+      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
       rc=$?
     popd
 
