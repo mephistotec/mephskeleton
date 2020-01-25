@@ -6,7 +6,7 @@
     <name>mephmicro-restApi</name>
     <packaging>jar</packaging>
     <description>API Rest</description>
-    <version>DEVELOP-SNAPSHOT-2</version>
+    <version>DEVELOP-SNAPSHOT</version>
     <parent>
         <groupId>com.meph</groupId>
         <artifactId>mephmicro</artifactId>
