@@ -38,7 +38,9 @@ function build_image_for_java
 {
     echo "   building image for $1"
     pushd ../$1
-    ARTIFACT=$(mvn help:evaluate -Dexpression=project.build.finalName | grep -e '^[^\[]')
+      ARTIFACT=$(mvn help:evaluate -Dexpression=project.build.finalName | grep -e '^[^\[]')
+      FRAMEWORK_VERSION=$(mvn dependency:tree | grep ":" | grep -v mephmicro  | grep -v Total | grep -v Finish | md5)
+      FRAMEWORK_EXISTS=$(docker images | grep  )
     popd
 
     FRAMEWORK_JAR_NAME=$ARTIFACT"_framework"
@@ -60,8 +62,8 @@ function build_image_for_java
     ls -la $BASEDOCKERDIR/tmp_for_jars
     echo "----------------------------------------------------"
     pushd $BASEDOCKERDIR
-    echo "Building image, binaries ready for framework"
-      #docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:latest .
+      echo "Building image, binaries ready for framework"
+      docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:latest .
       echo "Building image, binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)     (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "      
       docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
       rc=$?
@@ -81,7 +83,7 @@ export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last
 # Construimos los javas
 if [ -d "../mephmicro-restapiApp" ]; then
     echo "Building image, building image for restApi  ($DOCKER_RESTAPI_IMAGE_NAME)"
-    build_image_for_java mephmicro-restapiApp $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_RESTAPI_FWK_IMAGE_NAME
+    build_image_for_java mephmicro-restapiApp $DOCKER_REGISTRY_REPOSITORY_PREFIX/$DOCKER_RESTAPI_IMAGE_NAME $DOCKER_REGISTRY_REPOSITORY_PREFIX/$DOCKER_RESTAPI_FWK_IMAGE_NAME
     rc=$?
     if [[ $rc -ne 0 ]] ; then
        echo "Bulild IMAGE ERROR error : $rc"; exit $rc

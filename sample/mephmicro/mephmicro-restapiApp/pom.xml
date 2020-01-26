@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.meph</groupId>
 			<artifactId>mephmicro-restapi</artifactId>
-			<version>DEVELOP-SNAPSHOT-2</version>
+			<version>DEVELOP-SNAPSHOT</version>
 		</dependency>
 		<!-- Non functionality dependencies -->
 		<dependency>
