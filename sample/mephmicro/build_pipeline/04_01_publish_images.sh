@@ -10,25 +10,18 @@ function publishImage
    pi_ORIGINAL_IMAGE=$2
    pi_VERSION=$3
 
-   echo "   image publication : tagging as $pi_ORIGINAL_IMAGE:$pi_VERSION $pi_REGISTRY_URL$pi_ORIGINAL_IMAGE:$pi_VERSION"
-
-   docker tag $pi_ORIGINAL_IMAGE:$pi_VERSION $pi_REGISTRY_URL/$pi_ORIGINAL_IMAGE:$pi_VERSION
-
-   echo "   image publication : tagging as  $pi_ORIGINAL_IMAGE:$pi_VERSION $pi_REGISTRY_URL$pi_ORIGINAL_IMAGE:latest"
-   docker tag $pi_ORIGINAL_IMAGE:$pi_VERSION $pi_REGISTRY_URL/$pi_ORIGINAL_IMAGE:latest
-
-   echo "   image publication : login at registry if needed"
+   echo "Publishing imagess - image publication : login at registry if needed"
    loginRegistry
 
     rc=$?
     if [[ $rc -ne 0 ]] ; then
-      echo '   image publication : Error in access to registry !!!'; exit $rc
+      echo "Publishing imagess - image publication : Error in access to registry !!!'; exit $rc"
     fi
 
-   echo "   image publication : pushing to registry [$pi_REGISTRY_URL/$pi_ORIGINAL_IMAGE:$pi_VERSION]"
+   echo "Publishing imagess - image publication : pushing to registry [$pi_REGISTRY_URL/$pi_ORIGINAL_IMAGE:$pi_VERSION]"
 
    command="docker push $pi_REGISTRY_URL/$pi_ORIGINAL_IMAGE:$pi_VERSION"
-   echo "   echo image publication : running $command"
+   echo "Publishing imagess - echo image publication : running $command"
    eval "$command"
     rc=$?
     if [[ $rc -ne 0 ]] ; then
@@ -45,10 +38,10 @@ function publishImage
 
 #Building only needed modules
 if [ -d "../mephmicro-restapiApp" ]; then
-    publishImage $DOCKER_REGISTRY_REPOSITORY_PREFIX $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_STACK_IMAGE_VERSION
+    publishImage $DOCKER_REGISTRY_REPOSITORY_PREFIX$DOCKER_RESTAPI_IMAGE_NAME:$DOCKER_STACK_IMAGE_VERSION
     if [ "$ENTORNO_PIPELINE" == "pre" -o  "$ENTORNO_PIPELINE" == "pro" ]; then
         echo "Push of image without build number $DOCKER_RESTAPI_IMAGE_NAME $STACK_VERSION"
-        publishImage $DOCKER_REGISTRY_REPOSITORY_PREFIX $DOCKER_RESTAPI_IMAGE_NAME $STACK_VERSION
+        publishImage $DOCKER_REGISTRY_REPOSITORY_PREFIX$DOCKER_RESTAPI_IMAGE_NAME$STACK_VERSION
     fi
 
     rc=$?
