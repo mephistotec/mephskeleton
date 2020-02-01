@@ -22,9 +22,11 @@ done
 
 ## ---------------------  CONFIGURATIOIN MANAGEMENT ---------------------
 
+pushd ..
 export MAVEN_SETTINGS= #CUSTOM_USER_VALUE : You could stablish your maven settings here
 export STACK_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
 echo "Stack version $STACK_VERSION"
+popd
 
 #Stack version with buildnumber for docker images
 export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)

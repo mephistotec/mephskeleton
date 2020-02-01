@@ -52,6 +52,9 @@ function build_image_for_java
     FRAMEWORK_JAR_NAME=$ARTIFACT"_framework"
     ARTIFACT_JAR=$ARTIFACT"_code"
 
+    FRAMEWORK_LABEL=$ARTIFACT"_framework:"$STACK_VERSION
+    ARTIFACT_LABEL=$ARTIFACT":"$STACK_VERSION
+
     BASEDOCKERDIR=./docker_images_definitions/java
 
     rm $BASEDOCKERDIR/tmp_for_jars/*.jar
@@ -70,12 +73,12 @@ function build_image_for_java
     pushd $BASEDOCKERDIR
       if [[ $FRAMEWORK_EXISTS -ne 1 ]]; then
         echo "Building image - binaries ready for framework $3:$FRAMEWORK_VERSION"
-        docker build  -f Dockerfile_framework --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:$FRAMEWORK_VERSION .
+        docker build  -f Dockerfile_framework --build-arg LABELFWK="$FRAMEWORK_LABEL" --build-arg ORIGIN_JAR=./tmp_for_jars/$FRAMEWORK_JAR_NAME.jar --build-arg DESTINATION_JAR=$FRAMEWORK_JAR_NAME.jar --tag $3:$FRAMEWORK_VERSION .
       else
         echo "Building image - Existing version of framework is the latest, don't need to create";
       fi
-      echo "Building image - binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)     (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "      
-      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3:$FRAMEWORK_VERSION  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
+      echo "Building image - binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)     (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "
+      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg LABEL="$ARTIFACT_LABEL" --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3:$FRAMEWORK_VERSION  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
       rc=$?
     popd
 
