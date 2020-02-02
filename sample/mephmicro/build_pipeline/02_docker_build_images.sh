@@ -67,9 +67,7 @@ function build_image_for_java
     if [[ $rc -ne 0 ]] ; then
       echo 'Building image - Bulild IMAGE ERROR error : '; exit $rc
     fi
-    echo "-------------------- ANTES DE IMAGES ---------------------"
-    ls -la $BASEDOCKERDIR/tmp_for_jars
-    echo "----------------------------------------------------"
+
     pushd $BASEDOCKERDIR
       if [[ $FRAMEWORK_EXISTS -ne 1 ]]; then
         echo "Building image - binaries ready for framework $3:$FRAMEWORK_VERSION"
@@ -77,8 +75,8 @@ function build_image_for_java
       else
         echo "Building image - Existing version of framework is the latest, don't need to create";
       fi
-      echo "Building image - binaries ready for $1, $ARTIFACT --> $2:($DOCKER_STACK_IMAGE_VERSION)     (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "
-      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg LABEL="$ARTIFACT_LABEL" --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BUILD_ID_INFO=$DOCKER_STACK_IMAGE_VERSION  --build-arg BASE_IMAGE=$3:$FRAMEWORK_VERSION  --tag $2:$DOCKER_STACK_IMAGE_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
+      echo "Building image - binaries ready for $1, $ARTIFACT (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "
+      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg LABEL="$ARTIFACT_LABEL" --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BASE_IMAGE=$3:$FRAMEWORK_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
       rc=$?
     popd
 
@@ -87,17 +85,8 @@ function build_image_for_java
     if [[ $rc -ne 0 ]] ; then
       echo "Building image - Bulild IMAGE ERROR error : $rc"; exit $rc
     fi
-    echo "Building image - we've built image for $1, $ARTIFACT --> $2 ($DOCKER_STACK_IMAGE_VERSION)"
+    echo "Building image - we've built image for $1, $ARTIFACT --> $2"
 }
-
-echo $(date +%s) > ./stack_definitions/last_build_version.txt
-export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)
-
-IMAGE_PREFIX=""
-if [ "" != "$DOCKER_REGISTRY_REPOSITORY_PREFIX" ] ; then
-  IMAGE_PREFIX="$DOCKER_REGISTRY_REPOSITORY_PREFIX/";
-  echo "Building image - Our image prefix will be $IMAGE_PREFIX";
-fi  
 
 # Construimos los javas
 if [ -d "../mephmicro-restapiApp" ]; then

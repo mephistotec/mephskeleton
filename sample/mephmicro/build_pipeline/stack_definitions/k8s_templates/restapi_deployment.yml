@@ -12,6 +12,7 @@ spec:
       labels:
         k8s-app: mephmicro-restapi
       annotations:
+        deploymentVersionTstamp: "<deploymentVersionTstamp>"
     spec:
       containers:
         - name: app

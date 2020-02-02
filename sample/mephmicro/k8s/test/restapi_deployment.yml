@@ -12,13 +12,14 @@ spec:
       labels:
         k8s-app: mephmicro-restapi
       annotations:
+        deploymentVersionTstamp: "1580581509"
     spec:
       containers:
         - name: app
           envFrom:
             - configMapRef:
                 name: configmap-mephmicro-restapi
-          image: localhost:5000/mephmicro-restapi:1.1578218554
+          image: localhost:5000/mephmicro-restapi:DEVELOP-SNAPSHOT
           ports:
             - name: http
               containerPort: 8080

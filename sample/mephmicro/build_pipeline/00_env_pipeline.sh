@@ -28,10 +28,6 @@ export STACK_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e 
 echo "Stack version $STACK_VERSION"
 popd
 
-#Stack version with buildnumber for docker images
-export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)
-echo "Docker image Stack version $DOCKER_STACK_IMAGE_VERSION"
-
 #Stack name
 export DOCKER_STACK_NAME=mephmicro
 
@@ -56,10 +52,19 @@ export RESTAPI_K8S_DOMAIN_NAME_POSTFIX=
 #Definition of active profiles for spring framework if nneded
 export SPRING_PROFILES_ACTIVE=$PIPELINE_ENVIRONMENT
 
+#Timestamp
+export STACK_TIMESTAMP=$(date +%s)
+
 ## ---------------------  REGISTRY ---------------------
 #Registry 
 #CUSTOM_USER_VALUE : here you can set your registry domain name value
 export DOCKER_REGISTRY_REPOSITORY_PREFIX=localhost:5000
+
+IMAGE_PREFIX=""
+if [ "" != "$DOCKER_REGISTRY_REPOSITORY_PREFIX" ] ; then
+  IMAGE_PREFIX="$DOCKER_REGISTRY_REPOSITORY_PREFIX/";
+  echo "Building image - Our image prefix will be $IMAGE_PREFIX";
+fi  
 
 #Registry login
 #CUSTOM_USER_VALUE : here you coul set your login registry method

@@ -13,7 +13,7 @@ then
     exit -1
 fi
 
-images_final_version=$DOCKER_STACK_IMAGE_VERSION
+images_final_version=$STACK_VERSION
 deploy_command="kubectl apply -f"
 namespace=$K8S_ENV_NAMESPACE_PREFIX$K8S_NAMESPACE$K8S_ENV_NAMESPACE_POSTFIX
 domain=$RESTAPI_K8S_DOMAIN_NAME_PREFIX$RESTAPI_K8S_DOMAIN_NAME$RESTAPI_K8S_DOMAIN_NAME_POSTFIX
@@ -36,6 +36,7 @@ pushd ./stack_definitions/k8s_templates
             sed "s/<env>/$environment/g" |
             sed "s/<k8s_registry_prefix>/$registry_prefix/g" |            
             sed "s/<spring_profiles_active>/$spring_profiles_active/g" |
+            sed "s/<deploymentVersionTstamp>/$STACK_TIMESTAMP/g" |
             sed "s/<version>/$images_final_version/g" > ../../../k8s/$environment/$fichero
             rc=$?
         fi
