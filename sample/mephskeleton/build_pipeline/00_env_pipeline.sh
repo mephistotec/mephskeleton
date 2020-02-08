@@ -10,7 +10,7 @@ echo "Stack version $STACK_VERSION"
 popd
 
 #Stack name
-export DOCKER_STACK_NAME=mephmicro
+export DOCKER_STACK_NAME=mephskeleton
 
 #Images
 export DOCKER_RESTAPI_FWK_IMAGE_NAME=${DOCKER_STACK_NAME}-restapi-framework
@@ -27,7 +27,7 @@ export K8S_ENV_NAMESPACE_POSTFIX=
 
 #Default k8s descriptors values (you can set specific environment values en the env_<environment>.sh script)
 export RESTAPI_K8S_DOMAIN_NAME=meph.com
-export RESTAPI_K8S_DOMAIN_NAME_PREFIX=mephmicro.
+export RESTAPI_K8S_DOMAIN_NAME_PREFIX=mephskeleton.
 export RESTAPI_K8S_DOMAIN_NAME_POSTFIX=
 
 
