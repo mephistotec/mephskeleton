@@ -1,20 +1,4 @@
 <configuration>
-	<if condition='isDefined("catalina.home")'>
-		<then>
-			<property name="log.folder" value="${catalina.base}/logs"/>
-		</then>
-		<else>
-			<property name="log.folder" value="/var/log/tomcat8"/>
-		</else>
-	</if>
-	<property name="LOG_FILE" value="${log.folder}/mephskeleton-spring.log"/>
-	<!--	<include resource="org/springframework/boot/logging/logback/base.xml" />-->
-	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-
-	<logger name="org.springframework" level="ERROR"/>
-
-	<springProperty scope="context" name="app_name" source="spring.application.name" />
-
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>%d{DD/MM HH:mm:ss.SSS} [%thread] %-5level [${project.name}] [TraceId: %X{X-B3-TraceId:-0}, SpanId: %X{X-B3-SpanId:-0}, SpanExport: %X{X-Span-Export:-0}] %logger{36} - %msg%n</pattern>
@@ -42,15 +26,11 @@
 			</providers>
 		</encoder>
 	</appender>
-
-
-	<springProfile name="dev">
+	<springProfile name="!test,!pre,!pro">
 		<root level="INFO">
 			<appender-ref ref="consoleAppender" />
 		</root>
 	</springProfile>
-
-	<!-- Resto de paquetes de la aplicación. -->
 	<springProfile name="test,pre,pro">
 		<root level="INFO">
 			<appender-ref ref="consoleAppenderJson" />

@@ -1,18 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.meph.mephskeleton</groupId>
+	<groupId>com.meph</groupId>
 	<artifactId>mephskeleton-restapiApp</artifactId>
-	<name>mephskeleton-restapiapp</name>
+	<name>mephskeletonapp</name>
 	<packaging>jar</packaging>
 	<description>API Rest Deploy Docker</description>
 	<version>DEVELOP-SNAPSHOT</version>
 	<parent>
-		<groupId>com.meph.mephskeleton</groupId>
+		<groupId>com.meph</groupId>
 		<artifactId>mephskeleton</artifactId>
 		<version>DEVELOP-SNAPSHOT</version>
 	</parent>
 	<dependencies>
+		<dependency>
+			<groupId>com.meph</groupId>
+			<artifactId>mephskeleton-restapi</artifactId>
+			<version>DEVELOP-SNAPSHOT</version>
+		</dependency>
+		<!-- Non functionality dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -30,19 +36,31 @@
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.meph.mephskeleton</groupId>
-			<artifactId>mephskeleton-restapi</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
 		</dependency>
+		<!-- Jackson due to SpringBootStarterParent dependency problems -->
 		<dependency>
-			<groupId>org.codehaus.janino</groupId>
-			<artifactId>janino</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

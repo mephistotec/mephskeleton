@@ -3,8 +3,6 @@ spring:
       default-domain: mephskeleton_restapi
    application:
       name: mephskeleton_restapi
-logging:
-  config: classpath:logback-spring.xml
 info:
   app:
     name: ${project.name}

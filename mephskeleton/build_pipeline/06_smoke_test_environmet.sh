@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
-#--------------------------------------------------------------------------
-# Requiere que se definan las variables : paral el pull - push
-#
-# es necesario que especifiquemos el entorno a verificar -e <entorno> asi
-# como la version que deberiamos tener en ese entorno -v
-#--------------------------------------------------------------------------
 
 . ./00_env_pipeline.sh
 
@@ -50,8 +44,7 @@ function testVersion
 
 function checkHealthAndVersion
 {
-    #echo "Validando health para $URLS_HEALTH_CHECK"
-
+    echo "CheckHealth - Launching smoke test to validate version."
     cat tmp/urls_health.txt | while read urlhealth;
     do
         echo "Validando $urlhealth"
@@ -60,55 +53,58 @@ function checkHealthAndVersion
 
         rc=$?
         if [[ $rc -ne 0 ]] ; then
-          echo '--- Error en healthcheck'; return $rc
+          echo "CheckHealth - healthcheck error"; return $rc
         fi
-        echo "Health OK para $urlhealth"
+        echo "CheckHealth - health ok for $urlhealth"
     done;
 
     rc=$?
     if [[ $rc -ne 0 ]] ; then
-      echo '--- Error en healthcheck, no miramos versiones';
+      echo "CheckHealth - Error checking healthcheck";
       return $rc;
     else
-        echo "Validando VERSION para $URLS_VERSION_CHECK"
+        echo "CheckHealth - check version for $URLS_VERSION_CHECK"
 
 
         cat tmp/urls_version.txt  | tr ',' '\n' | while read urlVersion;
         do
-            echo "Validando $urlVersion $STACK_VERSION"
+            echo "CheckHealth - checking $urlVersion $STACK_VERSION"
             testVersion $urlVersion $STACK_VERSION;
             rc=$?
             if [[ $rc -ne 0 ]] ; then
-              echo '--- Error en check version $urlVersion $STACK_VERSION'; return $rc
+              echo 'CheckHealth - Error in version checj $urlVersion $STACK_VERSION'; return $rc
             fi
 
-            echo "Version OK para $STACK_VERSION $urlVersion"
+            echo 'CheckHealth - Version ok for $STACK_VERSION $urlVersion'
         done;
 
     fi
     rc=$?
     if [[ $rc -ne 0 ]] ; then
-      echo '--- Error en check health / version'; return $rc
+      echo 'CheckHealth - Error checking and version.'; return $rc
     fi
-    echo "Test Completo"
     return 0
 }
+
+domain=$RESTAPI_K8S_DOMAIN_NAME_PREFIX$RESTAPI_K8S_DOMAIN_NAME$RESTAPI_K8S_DOMAIN_NAME_POSTFIX
+echo "$domain/health" > tmp/urls_health.txt 
+echo "$domain/info" > tmp/urls_version.txt 
 
 
 COUNTER=0
 rc=0
 while [  $COUNTER -lt 40 ]; do
 
-    echo "Lanzamos test , iteracion $COUNTER"
+    echo "CheckHealth - launching check, try attempt $COUNTER"
 
     checkHealthAndVersion;
 
     rc=$?
-    echo "resultado test : $rc"
+    echo "CheckHealth - test result : $rc"
 
     if [[ $rc -ne 0 ]] ; then
         let COUNTER=$COUNTER+1;
-        echo "Intento de validacion $COUNTER. Nos dormimos 30s esperando";
+        echo "CheckHealth - trying for $COUNTER time";
         sleep 3
     else
         let COUNTER=100;
@@ -116,8 +112,8 @@ while [  $COUNTER -lt 40 ]; do
 done;
 
 if [[ $rc -ne 0 ]] ; then
-  echo '--- Error en check health / version'; exit -1
+  echo 'CheckHealth - Error en check health / version'; exit -1
 fi
 
-echo "Test de healt y version correcto"
+echo 'CheckHealth - check ok'
 
