@@ -6,17 +6,27 @@ BASEDNSDOMAIN=meph.com
 #JENKINS_CREDENTIALS=jenkins.cicd.user
 #APPLICATION_TYPE=micro
 PACKAGE=com.meph
-
+BITBUCKETUSER=
+BITBUCKETPASS=
+BITBUCKETTEAM=
+BITBUCKETPROJECTKEY=
+BITBUCKETURL="https://api.bitbucket.org/2.0/repositories"
+BITBUCKETFIRSTCOMMIT="Repo creation"
+RESCODE=0
 
 if [ "$#" -lt 2 ]; then
-  echo "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes>"
-  echo "   -g | --groupid sets the group id of your maven project , default: $GROUPID"
-  echo "   -r | --docker_registry registry domain name to push images,"
-  echo "                          you can manage it in build_pipeline/00_env_pipeline.sh when artifact is generated "
-  echo "   -ns | --namespace Namespace for your kubernetes elements, default: $NAMESPACE"
-  echo "   -dns | --dnsbasename dns base name for your applications, default: $BASEDNSDOMAIN"
-#  echo "   -jc | --jenkins_credentials jenkins credentials ID to use in your jenkins tasks, default $JENKINS_CREDENTIALS"
-#  echo "   -app | --application_type appliction type micro | worker | full (worker + micro), default : $APPLICATION_TYPE"
+  echo -e "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes>"
+  echo -e "\t-g or --groupid\tsets the group id of your maven project , default: $GROUPID"
+  echo -e "\t-r or -docker_registry\tregistry domain name to push images,"
+  echo -e "\t\tyou can manage it in build_pipeline/00_env_pipeline.sh when artifact is generated "
+  echo -e "\t-ns or --namespace\tNamespace for your kubernetes elements, default: $NAMESPACE"
+  echo -e "\t-dns or --dnsbasename\tdns base name for your applications, default: $BASEDNSDOMAIN"
+  echo -e "\t-bbuser or --bitbucket_username\tusername to create repository in bitbucket"
+  echo -e "\t-bbpass or --bitbucket_password\t[optional] password to create repository in bitbucket"
+  echo -e "\t-bbteam or --bitbucket_team\towner team for the repository"
+  echo -e "\t-bbprojectkey or --bitbucket_project_key\tproject key to create repository in bitbucket"
+#  echo -e "   -jc | --jenkins_credentials jenkins credentials ID to use in your jenkins tasks, default $JENKINS_CREDENTIALS"
+#  echo -e "   -app | --application_type appliction type micro | worker | full (worker + micro), default : $APPLICATION_TYPE"
   exit -1
 fi
 
@@ -65,15 +75,81 @@ while true; do
         fi
         APPLICATION_TYPE=$2
         shift;shift ;;
+    -bbuser | --bitbucket_username )
+        BITBUCKETUSER=$2
+        shift;shift ;;
+    -bbpass | --bitbucket_password )
+        BITBUCKETPASS=$2
+        shift;shift ;;
+    -bbprojectkey | --bitbucket_project_key )
+        BITBUCKETPROJECTKEY=$2
+        shift;shift ;;
+    -bbteam | --bitbucket_team )
+        BITBUCKETTEAM=$2
+        shift;shift ;;
     -- ) shift ;;
     * ) break ;;
   esac
 done
 
+
 shift $(($OPTIND - 1))
 ARTIFACTID=$1
 
-echo "Preparing service for artifact $1"
+function echoerr
+{
+  echo "[ERROR] $@" 1>&2;
+}
+
+function createBitbucketProjectIfNeeded
+{
+  reponame=$1
+  bitbucketcred=
+
+  if [ "$BITBUCKETUSER" != ""]
+  then
+    if [ "$BITBUCKETPASS" != ""]
+    then
+      bitbucketcred=$BITBUCKETUSER:$BITBUCKETPASS
+    else
+      bitbucketcred=$BITBUCKETUSER
+    fi
+    if [ "$BITBUCKETTEAM" = ""] && [ "$BITBUCKETPROJECTKEY" != "" ]
+    then
+
+      result=$(curl -X POST -s -u $bitbucketcred "$BITBUCKETURL/$BITBUCKETTEAM/$reponame" -H "Content-Type: application/json"  -d '{"has_wiki": true, "is_private": true, "project": {"key": "'$BITBUCKETPROJECTKEY'"}}')
+      remote_url=$(echo $result | jq -r ".links.clone[0].href")
+      echo "   Pushing to repository '$remote_url'"
+
+      if [ "" = "$remote_url" ]
+      then 
+          echoerr "Error creating repo";
+          RESCODE=-1;
+      else
+          if [ "null" = "$remote_url" ]
+          then 
+              echoerr "Error creating repo";
+              RESCODE=-1;
+          fi
+      fi;
+
+      if [[ $RESCODE -ne 0 ]] ; then
+        echoerr "Due to errors in repo creation we cannot push your code"
+      else
+        git init
+        if [[ $rc -eq 0 ]] ; then git add .; fi
+        if [[ $rc -eq 0 ]] ; then git commit -m "$BITBUCKETFIRSTCOMMIT"; fi
+        if [[ $rc -eq 0 ]] ; then git remote add origin "$remote_url"; fi
+        if [[ $rc -eq 0 ]] ; then git remote -v; fi
+        if [[ $rc -eq 0 ]] ; then git push -u origin master; fi
+        if [[ $rc -eq 0 ]] ; then git checkout -b develop; fi
+        if [[ $rc -eq 0 ]] ; then git push --set-upstream origin develop; fi
+        RESCODE=$rc
+      fi
+    fi
+  fi
+}
+
 
 function cleanModules
 {
@@ -236,104 +312,105 @@ function calculaFicherosKubernetesFinales
 }
 
 
-
-if [ "" == "" ]
-then
-
-# We could change maven settings but we don't
-#export MAVEN_SETTINGS="--settings $(pwd)/settings.xml"
-echo "Applying maven settings [$MAVEN_SETTINGS]"
- pushd mephskeleton
-   pwd
-   echo "Cleaning maven context ..."
-   mvn $MAVEN_SETTINGS clean install
-   echo "Creating archetype ..."
-   mvn $MAVEN_SETTINGS  archetype:create-from-project
-   echo "Installing archetype ..."
-   pushd target/generated-sources/archetype
-     mvn $MAVEN_SETTINGS  install
-   popd
- popd
- echo "Cleaing project folder ..."
- rm -fR ./built_project
- mkdir built_project
- pushd built_project
-  echo "Building project from archetype ..."
-  rm *.zip
-  mvn archetype:generate \
-      -DarchetypeGroupId=com.meph.mephskeleton \
-      -DarchetypeArtifactId=mephskeleton-archetype \
-      -DarchetypeVersion=DEVELOP-SNAPSHOT \
-      -DgroupId=$GROUPID -DartifactId=$ARTIFACTID -Dversion=DEVELOP-SNAPSHOT\
-      -DarchetypeRepository=../mephskeleton/target/generated-sources/archetype/ \
-      -DinteractiveMode=false
-  echo "Now, what archetype does not do :\) ..."
-  echo "Copying pipeline ..."
-  cp -R ../mephskeleton/build_pipeline/* $ARTIFACTID/build_pipeline/
-  mkdir -p $ARTIFACTID/jenkinsfile_parts
-  cp -R ../mephskeleton/jenkinsfile_parts/* $ARTIFACTID/jenkinsfile_parts
-
-  #echo "Preparing kubernetes descriptors ..."
-  #buildKubernetesTemplates $ARTIFACTID $DOCKERREGISTRYDOMAINNAME $NAMESPACE $BASEDNSDOMAIN
-  echo "Adding .gitignore \( guessing you're using git, if not, you can clean it..."
-  cp ../mephskeleton/.gitignore $ARTIFACTID/
-
-
-  echo "Replacing namespace where needed ..."
-  replaceAll "mephnamespace" $NAMESPACE
-
-  echo "Replacing domain where needed ..."
-  replaceAll "#BASEDNSDOMAIN#" "$BASEDNSDOMAIN"
-
-  echo "Replacing artifactid where needed ..."
-  replaceAll "mephskeleton" $ARTIFACTID
-
-  echo "Applying gesistry [$DOCKERREGISTRYDOMAINNAME] ..."
-  if [ "$DOCKERREGISTRYDOMAINNAME" == "" ]; then
-    echo "WARN : Docker repository not defined, you'll have to edit build_pipeline/00_env_pipeline.sh to set it!!!"
-  else
-    replaceDomain $DOCKERREGISTRYDOMAINNAME
-  fi
-
-  #echo "Setting jenkins credentials to [$JENKINS_CREDENTIALS]"
-  #reemplazaJenkinsCredentials $JENKINS_CREDENTIALS
-
-  echo "Adding permissions for shell scripts..."
-  find . -name "*.sh" | while read file; do chmod 744 $file; done
-  chmod 744 ./$ARTIFACTID/build_pipeline/*.sh
-  chmod 744 ./$ARTIFACTID/jenkins_tasks/*.sh
-
-  else
-   pushd built_project
-  fi;
-
-  pushd $ARTIFACTID
-
-      echo "Cleaning temp files..."
-      rm -Rf ./build_pipeline/tmp/*
-      rm -Rf ./build_pipeline/stack_definitions/config_generada/*
-
-      echo "Refactoring classes for package $PACKAGE..."
-      moveClassesToPackage $PACKAGE $ARTIFACTID
-
-      echo "Removing not needed components ..."
-      # Nos petamos lo que toque segun el tipo de aplicación
-      if [ "$APPLICATION_TYPE" = "micro" ]; then
-        cleanModules engineApp engineapp engine
-      fi
-      #if [  "$APPLICATION_TYPE" = "worker" ]; then
-      #  cleanModules restapiApp restapiapp restapi
-      #fi
+function buildprojectFromArchetype
+{
+  # We could change maven settings but we don't
+  #export MAVEN_SETTINGS="--settings $(pwd)/settings.xml"
+  echo "Applying maven settings [$MAVEN_SETTINGS]"
+  pushd mephskeleton
+    pwd
+    echo "Cleaning maven context ..."
+    mvn $MAVEN_SETTINGS clean install
+    echo "Creating archetype ..."
+    mvn $MAVEN_SETTINGS  archetype:create-from-project
+    echo "Installing archetype ..."
+    pushd target/generated-sources/archetype
+      mvn $MAVEN_SETTINGS  install
+    popd
   popd
-popd
+  echo "Cleaing project folder ..."
+  rm -fR ./built_project
+  mkdir built_project
+  pushd built_project
+    echo "Building project from archetype ..."
+    rm *.zip
+    mvn archetype:generate \
+        -DarchetypeGroupId=com.meph.mephskeleton \
+        -DarchetypeArtifactId=mephskeleton-archetype \
+        -DarchetypeVersion=DEVELOP-SNAPSHOT \
+        -DgroupId=$GROUPID -DartifactId=$ARTIFACTID -Dversion=DEVELOP-SNAPSHOT\
+        -DarchetypeRepository=../mephskeleton/target/generated-sources/archetype/ \
+        -DinteractiveMode=false
+    echo "Now, what archetype does not do :\) ..."
+    echo "Copying pipeline ..."
+    cp -R ../mephskeleton/build_pipeline/* $ARTIFACTID/build_pipeline/
+    mkdir -p $ARTIFACTID/jenkinsfile_parts
+    cp -R ../mephskeleton/jenkinsfile_parts/* $ARTIFACTID/jenkinsfile_parts
 
-echo "Jenkins files generation \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
+    #echo "Preparing kubernetes descriptors ..."
+    #buildKubernetesTemplates $ARTIFACTID $DOCKERREGISTRYDOMAINNAME $NAMESPACE $BASEDNSDOMAIN
+    echo "Adding .gitignore \( guessing you're using git, if not, you can clean it..."
+    cp ../mephskeleton/.gitignore $ARTIFACTID/
+  popd
+}
 
+function replaceNamesInBuiltProject
+{
+  pushd built_project
+    echo "Replacing namespace where needed ..."
+    replaceAll "mephnamespace" $NAMESPACE
+
+    echo "Replacing domain where needed ..."
+    replaceAll "#BASEDNSDOMAIN#" "$BASEDNSDOMAIN"
+
+    echo "Replacing artifactid where needed ..."
+    replaceAll "mephskeleton" $ARTIFACTID
+
+    echo "Applying gesistry [$DOCKERREGISTRYDOMAINNAME] ..."
+    if [ "$DOCKERREGISTRYDOMAINNAME" == "" ]; then
+      echo "WARN : Docker repository not defined, you'll have to edit build_pipeline/00_env_pipeline.sh to set it!!!"
+    else
+      replaceDomain $DOCKERREGISTRYDOMAINNAME
+    fi
+
+    #echo "Setting jenkins credentials to [$JENKINS_CREDENTIALS]"
+    #reemplazaJenkinsCredentials $JENKINS_CREDENTIALS
+
+    echo "Adding permissions for shell scripts..."
+    find . -name "*.sh" | while read file; do chmod 744 $file; done
+    chmod 744 ./$ARTIFACTID/build_pipeline/*.sh
+    chmod 744 ./$ARTIFACTID/jenkins_tasks/*.sh
+    pushd $ARTIFACTID
+
+        echo "Cleaning temp files..."
+        rm -Rf ./build_pipeline/tmp/*
+        rm -Rf ./build_pipeline/stack_definitions/config_generada/*
+
+        echo "Refactoring classes for package $PACKAGE..."
+        moveClassesToPackage $PACKAGE $ARTIFACTID
+
+        echo "Removing not needed components ..."
+        # Nos petamos lo que toque segun el tipo de aplicación
+        if [ "$APPLICATION_TYPE" = "micro" ]; then
+          cleanModules engineApp engineapp engine
+        fi
+        #if [  "$APPLICATION_TYPE" = "worker" ]; then
+        #  cleanModules restapiApp restapiapp restapi
+        #fi
+    popd
+  popd
+}
+
+echo "Preparing service for artifact $1"
+
+buildprojectFromArchetype
+replaceNamesInBuiltProject
+#echo "Jenkins files generation \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
 #. ./generaJenkinsFiles.sh $ARTIFACTID $8
-
-echo "Jenkins files generated \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
-
-exit 0;
+#echo "Jenkins files generated \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
 pushd built_project
-   zip -r $ARTIFACTID.zip ./$ARTIFACTID
+   pushd ./$ARTIFACTID
+      createBitbucketProjectIfNeeded $ARTIFACTID
+    popd
+    zip -r $ARTIFACTID.zip ./$ARTIFACTID
 popd

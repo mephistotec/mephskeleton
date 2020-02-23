@@ -1,0 +1,14 @@
+       stage('Smoke test pre') {
+            when {  expression { return env.GIT_BRANCH.contains('/release/') || env.GIT_BRANCH.contains('/hotfix/') } }
+            steps
+            {
+              withCredentials([usernamePassword(credentialsId: '#jenkins.credentials.id#', usernameVariable: 'CICD_USER', passwordVariable: 'CICD_PASS')])
+              {
+                //milestone(7)
+                  echo 'Desplegamos en PRE'
+                  dir('./build_pipeline') {
+                      sh './06_smoke_test_environmet.sh -f jenkins -e pre'
+                  }
+               }
+            }
+       }
