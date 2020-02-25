@@ -4,16 +4,15 @@ pipeline {
     environment {
         mvnhome= tool 'M3'
         PATH = "${mvnhome}/bin:$PATH"
+        ENVIRONMENT= "${env.ENVIRONMENT}"
         BRANCH="${env.BRANCH_NAME}"
     }
 
     stages
     {
-
-       stage('Init pipeline') {
+        stage('Pipeline initialization') {
            steps
            {
-                //milestone(1)
                 dir('./build_pipeline') {
                     sh 'chmod 770 *.sh'
                 }
@@ -23,21 +22,28 @@ pipeline {
         stage('Build software') {
            steps
            {
-                //milestone(1)
                 dir('./build_pipeline') {
-                    sh 'echo "------------ $PATH"'
                     sh 'export PATH="${mvnhome}:$PATH" && ./01_01_build_software.sh -f jenkins'
                 }
            }
         }
 
-       stage('Unit Test') {
+        stage('Unit Test') {
            steps
            {
-                //milestone(2)
                 dir('./build_pipeline') {
-                    sh 'echo $(pwd)'
                     sh 'export PATH="${mvnhome}:$PATH" && ./01_02_build_unit_tests.sh -f jenkins'
                 }
            }
         }
+
+        stage('Build Images') {
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh './02_docker_build_images.sh'
+                }
+           }
+        }
+    }
+}

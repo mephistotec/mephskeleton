@@ -2,22 +2,22 @@
 
 . ./00_env_pipeline.sh
 
-aplicaEntorno $ENTORNO_PIPELINE
+aplicaEntorno $PIPELINE_ENVIRONMENT
 
-resultado_check=0
+check_result=0
 
 function testHealth
 {
-    estado=$(curl $1 | jq -r .status);
+    status=$(curl $1 | jq -r .status);
 
     rc=$?
     if [[ $rc -ne 0 ]] ; then
-      echo "--- Error en script healthcheck  $1"; exit $rc
+      echoerr "Error in healthcheck  $1"; exit $rc
     fi
 
-    echo "Validando [$estado]"
+    echo "Ckecking [$status]"
 
-    if [[ "$estado" == "UP" ]] ; then
+    if [[ "$status" == "UP" ]] ; then
        echo "health ok"
     else
        exit 1;
@@ -30,14 +30,14 @@ function testVersion
 
     rc=$?
     if [ $rc -ne 0 ] ; then
-      echo "--- Error en script version $1"; exit $rc
+      echoerr "Error in version check $1"; exit $rc
     fi
 
-    echo "Comparando version [$2] vs [$version]"
+    echo "Checking version [$2] vs [$version]"
     if [ "$version" == "$2" ]; then
-        echo "version ok"
+        echo "Version ok"
     else
-        echo "Error validando version"
+        echoerr "Error validating version."
         exit 1;
     fi;
 }
@@ -53,7 +53,7 @@ function checkHealthAndVersion
 
         rc=$?
         if [[ $rc -ne 0 ]] ; then
-          echo "CheckHealth - healthcheck error"; return $rc
+          echoerr "CheckHealth - healthcheck error"; return $rc
         fi
         echo "CheckHealth - health ok for $urlhealth"
     done;
@@ -72,7 +72,7 @@ function checkHealthAndVersion
             testVersion $urlVersion $STACK_VERSION;
             rc=$?
             if [[ $rc -ne 0 ]] ; then
-              echo 'CheckHealth - Error in version checj $urlVersion $STACK_VERSION'; return $rc
+              echoerr 'CheckHealth - Error in version checj $urlVersion $STACK_VERSION'; return $rc
             fi
 
             echo 'CheckHealth - Version ok for $STACK_VERSION $urlVersion'
@@ -81,7 +81,7 @@ function checkHealthAndVersion
     fi
     rc=$?
     if [[ $rc -ne 0 ]] ; then
-      echo 'CheckHealth - Error checking and version.'; return $rc
+      echoerr 'CheckHealth - Error checking and version.'; return $rc
     fi
     return 0
 }
@@ -104,7 +104,7 @@ while [  $COUNTER -lt 40 ]; do
 
     if [[ $rc -ne 0 ]] ; then
         let COUNTER=$COUNTER+1;
-        echo "CheckHealth - trying for $COUNTER time";
+        echoerr "CheckHealth - trying for $COUNTER time";
         sleep 3
     else
         let COUNTER=100;
@@ -112,7 +112,7 @@ while [  $COUNTER -lt 40 ]; do
 done;
 
 if [[ $rc -ne 0 ]] ; then
-  echo 'CheckHealth - Error en check health / version'; exit -1
+  echoerr 'CheckHealth - Error en check health / version'; exit -1
 fi
 
 echo 'CheckHealth - check ok'

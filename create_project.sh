@@ -13,6 +13,7 @@ BITBUCKETPROJECTKEY=
 BITBUCKETURL="https://api.bitbucket.org/2.0/repositories"
 BITBUCKETFIRSTCOMMIT="Repo creation"
 RESCODE=0
+JENKINSURL=http://jenkins.meph.com/
 
 if [ "$#" -lt 2 ]; then
   echo -e "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes>"
@@ -103,51 +104,53 @@ function echoerr
 
 function createBitbucketProjectIfNeeded
 {
-  reponame=$1
-  bitbucketcred=
+  pushd built_project
+    pushd $ARTIFACTID
+      bitbucketcred=
+      if [ "$BITBUCKETUSER" != "" ]
+      then
+        if [ "$BITBUCKETPASS" != "" ]
+        then
+          bitbucketcred=$BITBUCKETUSER:$BITBUCKETPASS
+        else
+          bitbucketcred=$BITBUCKETUSER
+        fi
+        if [ "$BITBUCKETTEAM" != "" ] && [ "$BITBUCKETPROJECTKEY" != "" ];
+        then
+          command="curl -s -X POST  -u $bitbucketcred $BITBUCKETURL/$BITBUCKETTEAM/$ARTIFACTID -H \"Content-Type: application/json\"  -d '{\"has_wiki\": true, \"is_private\": true, \"project\": {\"key\": \"$BITBUCKETPROJECTKEY\"}}'"
+          result=$(eval "$command")
+          remote_url=$(echo $result | jq -r ".links.clone[0].href")
+          echo "   Pushing to repository '$remote_url'"
 
-  if [ "$BITBUCKETUSER" != ""]
-  then
-    if [ "$BITBUCKETPASS" != ""]
-    then
-      bitbucketcred=$BITBUCKETUSER:$BITBUCKETPASS
-    else
-      bitbucketcred=$BITBUCKETUSER
-    fi
-    if [ "$BITBUCKETTEAM" = ""] && [ "$BITBUCKETPROJECTKEY" != "" ]
-    then
-
-      result=$(curl -X POST -s -u $bitbucketcred "$BITBUCKETURL/$BITBUCKETTEAM/$reponame" -H "Content-Type: application/json"  -d '{"has_wiki": true, "is_private": true, "project": {"key": "'$BITBUCKETPROJECTKEY'"}}')
-      remote_url=$(echo $result | jq -r ".links.clone[0].href")
-      echo "   Pushing to repository '$remote_url'"
-
-      if [ "" = "$remote_url" ]
-      then 
-          echoerr "Error creating repo";
-          RESCODE=-1;
-      else
-          if [ "null" = "$remote_url" ]
+          if [ "" = "$remote_url" ]
           then 
               echoerr "Error creating repo";
               RESCODE=-1;
-          fi
-      fi;
+          else
+              if [ "null" = "$remote_url" ]
+              then 
+                  echoerr "Error creating repo";
+                  RESCODE=-1;
+              fi
+          fi;
 
-      if [[ $RESCODE -ne 0 ]] ; then
-        echoerr "Due to errors in repo creation we cannot push your code"
-      else
-        git init
-        if [[ $rc -eq 0 ]] ; then git add .; fi
-        if [[ $rc -eq 0 ]] ; then git commit -m "$BITBUCKETFIRSTCOMMIT"; fi
-        if [[ $rc -eq 0 ]] ; then git remote add origin "$remote_url"; fi
-        if [[ $rc -eq 0 ]] ; then git remote -v; fi
-        if [[ $rc -eq 0 ]] ; then git push -u origin master; fi
-        if [[ $rc -eq 0 ]] ; then git checkout -b develop; fi
-        if [[ $rc -eq 0 ]] ; then git push --set-upstream origin develop; fi
-        RESCODE=$rc
+          if [[ $RESCODE -ne 0 ]] ; then
+            echoerr "Due to errors in repo creation we cannot push your code"
+          else
+            git init
+            if [[ $rc -eq 0 ]] ; then git add .; fi
+            if [[ $rc -eq 0 ]] ; then git commit -m "$BITBUCKETFIRSTCOMMIT"; fi
+            if [[ $rc -eq 0 ]] ; then git remote add origin "$remote_url"; fi
+            if [[ $rc -eq 0 ]] ; then git remote -v; fi
+            if [[ $rc -eq 0 ]] ; then git push -u origin master; fi
+            #if [[ $rc -eq 0 ]] ; then git checkout -b develop; fi
+            #if [[ $rc -eq 0 ]] ; then git push --set-upstream origin develop; fi
+            RESCODE=$rc
+          fi
+        fi
       fi
-    fi
-  fi
+    popd
+  popd
 }
 
 
@@ -403,14 +406,14 @@ function replaceNamesInBuiltProject
 
 echo "Preparing service for artifact $1"
 
-buildprojectFromArchetype
-replaceNamesInBuiltProject
+#buildprojectFromArchetype
+#replaceNamesInBuiltProject
+createBitbucketProjectIfNeeded
+
 #echo "Jenkins files generation \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
 #. ./generaJenkinsFiles.sh $ARTIFACTID $8
 #echo "Jenkins files generated \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
-pushd built_project
-   pushd ./$ARTIFACTID
-      createBitbucketProjectIfNeeded $ARTIFACTID
-    popd
-    zip -r $ARTIFACTID.zip ./$ARTIFACTID
-popd
+
+#pushd built_project
+#  zip -r $ARTIFACTID.zip ./$ARTIFACTID
+#popd
