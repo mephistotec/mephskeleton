@@ -16,7 +16,7 @@ RESCODE=0
 JENKINSURL=http://jenkins.meph.com/
 
 if [ "$#" -lt 2 ]; then
-  echo -e "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes>"
+  echo -e "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes> [OPTIONS]"
   echo -e "\t-g or --groupid\tsets the group id of your maven project , default: $GROUPID"
   echo -e "\t-r or -docker_registry\tregistry domain name to push images,"
   echo -e "\t\tyou can manage it in build_pipeline/00_env_pipeline.sh when artifact is generated "
@@ -104,19 +104,23 @@ function echoerr
 
 function createBitbucketProjectIfNeeded
 {
+  echo -e "\tBuilding repository for $ARTIFACTID for $BITBUCKETUSER?"
   pushd built_project
     pushd $ARTIFACTID
       bitbucketcred=
       if [ "$BITBUCKETUSER" != "" ]
       then
+        echo -e "\tI have an user..."
         if [ "$BITBUCKETPASS" != "" ]
         then
+          echo -e "\tI have a pass..."
           bitbucketcred=$BITBUCKETUSER:$BITBUCKETPASS
         else
           bitbucketcred=$BITBUCKETUSER
         fi
         if [ "$BITBUCKETTEAM" != "" ] && [ "$BITBUCKETPROJECTKEY" != "" ];
         then
+          echo -e "\tI have team and project key, lets go..."
           command="curl -s -X POST  -u $bitbucketcred $BITBUCKETURL/$BITBUCKETTEAM/$ARTIFACTID -H \"Content-Type: application/json\"  -d '{\"has_wiki\": true, \"is_private\": true, \"project\": {\"key\": \"$BITBUCKETPROJECTKEY\"}}'"
           result=$(eval "$command")
           remote_url=$(echo $result | jq -r ".links.clone[0].href")
@@ -338,7 +342,7 @@ function buildprojectFromArchetype
     echo "Building project from archetype ..."
     rm *.zip
     mvn archetype:generate \
-        -DarchetypeGroupId=com.meph.mephskeleton \
+        -DarchetypeGroupId=com.meph \
         -DarchetypeArtifactId=mephskeleton-archetype \
         -DarchetypeVersion=DEVELOP-SNAPSHOT \
         -DgroupId=$GROUPID -DartifactId=$ARTIFACTID -Dversion=DEVELOP-SNAPSHOT\
@@ -347,13 +351,12 @@ function buildprojectFromArchetype
     echo "Now, what archetype does not do :\) ..."
     echo "Copying pipeline ..."
     cp -R ../mephskeleton/build_pipeline/* $ARTIFACTID/build_pipeline/
-    mkdir -p $ARTIFACTID/jenkinsfile_parts
-    cp -R ../mephskeleton/jenkinsfile_parts/* $ARTIFACTID/jenkinsfile_parts
-
-    #echo "Preparing kubernetes descriptors ..."
-    #buildKubernetesTemplates $ARTIFACTID $DOCKERREGISTRYDOMAINNAME $NAMESPACE $BASEDNSDOMAIN
-    echo "Adding .gitignore \( guessing you're using git, if not, you can clean it..."
+    #mkdir -p $ARTIFACTID/jenkinsfile_parts
+    #cp -R ../mephskeleton/jenkinsfile_parts/* $ARTIFACTID/jenkinsfile_parts
+    echo "Adding .gitignore \( guessing you're using git, if not, you can clean it..."    
     cp ../mephskeleton/.gitignore $ARTIFACTID/
+    echo "Copying Jenkinsfile"
+    cp ../mephskeleton/Jenkinsfile $ARTIFACTID/  
   popd
 }
 
@@ -382,7 +385,7 @@ function replaceNamesInBuiltProject
     echo "Adding permissions for shell scripts..."
     find . -name "*.sh" | while read file; do chmod 744 $file; done
     chmod 744 ./$ARTIFACTID/build_pipeline/*.sh
-    chmod 744 ./$ARTIFACTID/jenkins_tasks/*.sh
+    #chmod 744 ./$ARTIFACTID/jenkins_tasks/*.sh
     pushd $ARTIFACTID
 
         echo "Cleaning temp files..."
@@ -406,8 +409,8 @@ function replaceNamesInBuiltProject
 
 echo "Preparing service for artifact $1"
 
-#buildprojectFromArchetype
-#replaceNamesInBuiltProject
+buildprojectFromArchetype
+replaceNamesInBuiltProject
 createBitbucketProjectIfNeeded
 
 #echo "Jenkins files generation \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
