@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 ./01_01_build_software.sh $@
 
 rc=$?

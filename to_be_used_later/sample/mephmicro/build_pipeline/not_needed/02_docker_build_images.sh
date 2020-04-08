@@ -104,7 +104,7 @@ echo $(date +%s) > ./stack_definitions/last_build_version.txt
 export DOCKER_STACK_IMAGE_VERSION=$STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)
 
 echo "Building restapi image?"
-# Construimos los javas
+# Build java artifacts
 if [ -d "../mephmicro-restapiApp" ]; then
     build_image_for_java mephmicro-restapiApp $DOCKER_RESTAPI_IMAGE_NAME
     rc=$?

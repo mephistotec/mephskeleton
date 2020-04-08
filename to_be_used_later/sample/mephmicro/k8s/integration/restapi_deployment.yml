@@ -12,7 +12,7 @@ spec:
       labels:
         k8s-app: mephmicro-restapi
       annotations:
-        deploymentVersionTstamp: "1581191474"
+        deploymentVersionTag: "1581191474"
     spec:
       containers:
         - name: app

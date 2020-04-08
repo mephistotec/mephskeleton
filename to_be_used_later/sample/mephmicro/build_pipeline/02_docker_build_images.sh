@@ -88,7 +88,7 @@ function build_image_for_java
     echo "Building image - we've built image for $1, $ARTIFACT --> $2"
 }
 
-# Construimos los javas
+# Build java artifacts
 if [ -d "../mephmicro-restapiApp" ]; then
     echo "Building image - building image for restApi  ($DOCKER_RESTAPI_IMAGE_NAME)"
     build_image_for_java mephmicro-restapiApp $IMAGE_PREFIX$DOCKER_RESTAPI_IMAGE_NAME $IMAGE_PREFIX$DOCKER_RESTAPI_FWK_IMAGE_NAME

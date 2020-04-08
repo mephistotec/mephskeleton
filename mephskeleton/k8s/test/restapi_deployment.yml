@@ -12,7 +12,7 @@ spec:
       labels:
         k8s-app: mephskeleton-restapi
       annotations:
-        deploymentVersionTstamp: "1580581509"
+        deploymentVersionTag: "1580581509"
     spec:
       containers:
         - name: app

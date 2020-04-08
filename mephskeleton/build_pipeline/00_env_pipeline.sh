@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 . ./utils_pipeline.sh
 
 
@@ -6,6 +6,7 @@
 pushd ..
 export MAVEN_SETTINGS= #CUSTOM_USER_VALUE : You could stablish your maven settings here
 export STACK_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
+export COMMIT_VERSION=$(git rev-parse HEAD)
 echo "Stack version $STACK_VERSION"
 popd
 
@@ -29,10 +30,6 @@ export K8S_ENV_NAMESPACE_POSTFIX=
 export RESTAPI_K8S_DOMAIN_NAME=#BASEDNSDOMAIN#
 export RESTAPI_K8S_DOMAIN_NAME_PREFIX=mephskeleton.
 export RESTAPI_K8S_DOMAIN_NAME_POSTFIX=
-
-
-#Timestamp
-export STACK_TIMESTAMP=$(date +%s)
 
 ## ---------------------  REGISTRY ---------------------
 #Registry 

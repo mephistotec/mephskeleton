@@ -32,7 +32,7 @@ export RESTAPI_K8S_DOMAIN_NAME_POSTFIX=
 
 
 #Timestamp
-export STACK_TIMESTAMP=$(date +%s)
+export COMMIT_VERSION=$(date +%s)
 
 ## ---------------------  REGISTRY ---------------------
 #Registry 

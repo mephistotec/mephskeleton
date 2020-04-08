@@ -7,7 +7,7 @@ pushd ..
 
 
 #Para evitar problemas de depedencias entre modulos
-mvn $MAVEN_SETTINGS $SONAR_PARAMS  sonar:sonar
+mvn $MAVEN_SETTINGS $SONAR_PARAMS  $SONAR_GOAL
 
 rc=$?
 if [[ $rc -ne 0 ]] ; then

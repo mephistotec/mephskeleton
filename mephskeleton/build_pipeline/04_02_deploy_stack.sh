@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 . ./00_env_pipeline.sh
 . ./utils_pipeline.sh
@@ -36,7 +36,7 @@ pushd ./stack_definitions/k8s_templates
             sed "s/<env>/$environment/g" |
             sed "s/<k8s_registry_prefix>/$registry_prefix/g" |            
             sed "s/<spring_profiles_active>/$spring_profiles_active/g" |
-            sed "s/<deploymentVersionTstamp>/$STACK_TIMESTAMP/g" |
+            sed "s/<deploymentVersionTag>/$COMMIT_VERSION/g" |
             sed "s/<version>/$images_final_version/g" > ../../../k8s/$environment/$fichero
             rc=$?
         fi
@@ -52,11 +52,13 @@ if [[ $rc -eq 0 ]] ; then
                 rc=$?
             else 
                 echoerr "   Not deploying $fichero due previous errors"
+                exit -1
             fi
         done
     popd
 else
     echoerr "   ERROR - Not deploying descriptors"
+    exit $rc
 fi
 
 if [[ $rc -ne 0 ]] ; then

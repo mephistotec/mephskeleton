@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 # Writing in error channel
 echoerr() { (>&2 echo "$@"); }
 

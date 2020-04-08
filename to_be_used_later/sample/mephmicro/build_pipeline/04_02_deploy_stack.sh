@@ -36,7 +36,7 @@ pushd ./stack_definitions/k8s_templates
             sed "s/<env>/$environment/g" |
             sed "s/<k8s_registry_prefix>/$registry_prefix/g" |            
             sed "s/<spring_profiles_active>/$spring_profiles_active/g" |
-            sed "s/<deploymentVersionTstamp>/$STACK_TIMESTAMP/g" |
+            sed "s/<deploymentVersionTag>/$COMMIT_VERSION/g" |
             sed "s/<version>/$images_final_version/g" > ../../../k8s/$environment/$fichero
             rc=$?
         fi

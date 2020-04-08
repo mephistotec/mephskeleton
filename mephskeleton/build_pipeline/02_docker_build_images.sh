@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 . ./00_env_pipeline.sh
 
 basePath=$(pwd)
@@ -88,7 +88,7 @@ function build_image_for_java
     echo "Building image - we've built image for $1, $ARTIFACT --> $2"
 }
 
-# Construimos los javas
+# Build java artifacts
 if [ -d "../mephskeleton-restapiApp" ]; then
     echo "Building image - building image for restApi  ($DOCKER_RESTAPI_IMAGE_NAME)"
     build_image_for_java mephskeleton-restapiApp $IMAGE_PREFIX$DOCKER_RESTAPI_IMAGE_NAME $IMAGE_PREFIX$DOCKER_RESTAPI_FWK_IMAGE_NAME
