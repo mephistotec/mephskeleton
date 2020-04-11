@@ -5,7 +5,7 @@ mkdir -p ./decomp
 
 ls *.jar | while read fichero;
 do
-    echo "Procesando $fichero"
+    echo "Processing $fichero"
     mv $fichero ./decomp/$fichero
     cd decomp
         unzip -q $fichero
@@ -13,7 +13,7 @@ do
     cd ..        
 done;
 cd decomp
-    echo "Zipando $FINAL_JAR"
+    echo "Zip of $FINAL_JAR"
     zip  -q $FINAL_JAR -m -n .jar -r *
     mv $FINAL_JAR ..
 cd ..

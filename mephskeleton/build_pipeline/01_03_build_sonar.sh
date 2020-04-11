@@ -5,6 +5,7 @@ RESCODE=0
 
 pushd ..
 
+echo "$SONAR_PARAMS"
 
 #Para evitar problemas de depedencias entre modulos
 mvn $MAVEN_SETTINGS $SONAR_PARAMS  sonar:sonar

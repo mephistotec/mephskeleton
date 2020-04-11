@@ -1,5 +1,6 @@
 #!/bin/bash
 . ./00_env_pipeline.sh
+
 . ./utils_pipeline.sh
 
 function publishImage
@@ -27,16 +28,22 @@ function publishImage
 
 #Building only needed modules
 if [ -d "../mephskeleton-restapiApp" ]; then
-    publishImage $IMAGE_PREFIX$DOCKER_RESTAPI_IMAGE_NAME:$STACK_VERSION
-    publishImage $IMAGE_PREFIX$DOCKER_RESTAPI_IMAGE_NAME:latest
+    pushd ../mephskeleton-restapiApp
+      calculate_framework_version
+    popd
+    publishImage $DOCKER_RESTAPI_FWK_IMAGE_NAME:$FRAMEWORK_VERSION
+    publishImage $DOCKER_RESTAPI_IMAGE_NAME:$STACK_VERSION
     rc=$?
     if [[ $rc -ne 0 ]] ; then
       echo 'Error pushing image $DOCKER_RESTAPI_IMAGE_NAME!!!'; exit $rc
     fi
 fi;
 if [ -d "../mephskeleton-engineApp" ]; then
-    publishImage $IMAGE_PREFIX$DOCKER_ENGINE_IMAGE_NAME:$STACK_VERSION
-    publishImage $IMAGE_PREFIX$DOCKER_ENGINE_IMAGE_NAME:latest
+    pushd ../mephskeleton-engineApp
+      calculate_framework_version
+    popd
+    publishImage $DOCKER_ENGINE_FWK_IMAGE_NAME:$FRAMEWORK_VERSION
+    publishImage $DOCKER_ENGINE_IMAGE_NAME:$STACK_VERSION
     rc=$?
     . ./environment_scripts/clean_docker_env.sh
     if [[ $rc -ne 0 ]] ; then

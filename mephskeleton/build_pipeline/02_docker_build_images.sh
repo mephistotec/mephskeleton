@@ -3,6 +3,20 @@
 
 basePath=$(pwd)
 
+FRAMEWORK_VERSION=0
+
+function calculate_framework_version
+{
+  FRAMEWORK_VERSION=$(mvn dependency:tree | grep ":" | grep -v mephskeleton  | grep -v Total | grep -v Finish | md5)
+  if [[ "$FRAMEWORK_VERSION" == "" ]] ; then
+    echo "Building image - cannot use hash, looking for simulation of hash ..."
+    NUM_DEPENDENCIES=$(mvn dependency:tree | grep ":" | grep -v mephskeleton  | grep -v Total | grep -v Finish | wc -l)
+    DEP_SIZE=$(mvn dependency:tree | grep ":" | grep -v mephskeleton  | grep -v Total | grep -v Finish | wc -c)
+    FRAMEWORK_VERSION=$(echo "$NUM_DEPENDENCIES$DEP_SIZE" | xargs | sed 's/ //g')
+  fi
+  echo "Building image - calculated framework version as $FRAMEWORK_VERSION"
+}
+
 function splitJarIntoFrameworkAndCode
 {
     ARTIFACT=$1
@@ -44,9 +58,9 @@ function build_image_for_java
     echo "Building image - building image for $1"
     pushd ../$1
       ARTIFACT=$(mvn help:evaluate -Dexpression=project.build.finalName | grep -e '^[^\[]')
-      FRAMEWORK_VERSION=$(mvn dependency:tree | grep ":" | grep -v mephskeleton  | grep -v Total | grep -v Finish | md5)
+      calculate_framework_version      
       FRAMEWORK_EXISTS=$(docker images | grep "$3" | grep "$FRAMEWORK_VERSION" | wc -l )
-      echo "Building image - Does framework exist ($3:$FRAMEWORK_VERSION) : $FRAMEWORK_EXISTS"
+      echo "Building image - Does framework exist ($3:$FRAMEWORK_VERSION)? $FRAMEWORK_EXISTS"
     popd
 
     FRAMEWORK_JAR_NAME=$ARTIFACT"_framework"
@@ -76,7 +90,7 @@ function build_image_for_java
         echo "Building image - Existing version of framework is the latest, don't need to create";
       fi
       echo "Building image - binaries ready for $1, $ARTIFACT (./tmp_for_jars/$ARTIFACT_JAR.jar , $ARTIFACT_JAR.jar) "
-      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg LABEL="$ARTIFACT_LABEL" --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BASE_IMAGE=$3:$FRAMEWORK_VERSION --tag $2:$STACK_VERSION  --tag $2:latest .
+      docker build  --build-arg FINAL_JAR=$ARTIFACT.jar --build-arg LABEL="$ARTIFACT_LABEL" --build-arg ORIGIN_JAR=./tmp_for_jars/$ARTIFACT_JAR.jar --build-arg DESTINATION_JAR=$ARTIFACT_JAR.jar --build-arg BASE_IMAGE=$3:$FRAMEWORK_VERSION --tag $2:$STACK_VERSION .
       rc=$?
     popd
 
@@ -91,17 +105,16 @@ function build_image_for_java
 # Build java artifacts
 if [ -d "../mephskeleton-restapiApp" ]; then
     echo "Building image - building image for restApi  ($DOCKER_RESTAPI_IMAGE_NAME)"
-    build_image_for_java mephskeleton-restapiApp $IMAGE_PREFIX$DOCKER_RESTAPI_IMAGE_NAME $IMAGE_PREFIX$DOCKER_RESTAPI_FWK_IMAGE_NAME
+    build_image_for_java mephskeleton-restapiApp $DOCKER_RESTAPI_IMAGE_NAME $DOCKER_RESTAPI_FWK_IMAGE_NAME
     rc=$?
     if [[ $rc -ne 0 ]] ; then
        echo "Bulild IMAGE ERROR error : $rc"; exit $rc
     fi
 fi;
 
-echo "Building engine image?"
 if [ -d "../mephskeleton-engineApp" ]; then
     echo "Building image - building image for engine, $DOCKER_RESTAPI_IMAGE_NAME"
-    build_image_for_java mephskeleton-engineApp $IMAGE_PREFIX$DOCKER_ENGINE_IMAGE_NAME $IMAGE_PREFIX$DOCKER_ENGINE_FWK_IMAGE_NAME
+    build_image_for_java mephskeleton-engineApp $DOCKER_ENGINE_IMAGE_NAME $DOCKER_ENGINE_FWK_IMAGE_NAME
     rc=$?
     if [[ $rc -ne 0 ]] ; then
        echo "Building image - Bulild IMAGE ERROR error : $rc"; exit $rc

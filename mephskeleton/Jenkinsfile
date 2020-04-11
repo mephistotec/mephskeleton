@@ -1,3 +1,8 @@
+def needs_build() { 
+    script {  
+        return sh(script : 'cd build_pipeline;./build_needed.sh -f jenkins; echo ', returnStdout: true).trim()
+    }
+}
 pipeline {
     agent any
 
@@ -6,6 +11,8 @@ pipeline {
         PATH = "${mvnhome}/bin:$PATH"
         ENVIRONMENT= "${env.ENVIRONMENT}"
         BRANCH="${env.BRANCH_NAME}"
+        PIPELINE=true
+        NEEDS_BUILD=needs_build();
     }
 
     stages
@@ -19,7 +26,21 @@ pipeline {
            }
         }
 
+        stage('Pipeline ask') {
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh 'cat ./result_check.txt'
+                }
+           }
+        }
+
+
         stage('Build software') {
+           when {
+                // case insensitive regular expression for truthy values
+                expression { return NEEDS_BUILD == "true" }
+           }
            steps
            {
                 dir('./build_pipeline') {
@@ -29,6 +50,10 @@ pipeline {
         }
 
         stage('Unit Test') {
+           when {
+                // case insensitive regular expression for truthy values
+                expression { return NEEDS_BUILD == "true" }
+           }
            steps
            {
                 dir('./build_pipeline') {
@@ -36,14 +61,73 @@ pipeline {
                 }
            }
         }
-
-        stage('Build Images') {
+        /*
+        stage('Sonar') {
+           when {
+                // case insensitive regular expression for truthy values
+                expression { return NEEDS_BUILD == "true" }
+           }
            steps
            {
                 dir('./build_pipeline') {
-                    sh './02_docker_build_images.sh'
+                    sh 'export PATH="${mvnhome}:$PATH" && ./01_03_build_sonar.sh -f jenkins'
                 }
            }
+        }*/
+
+        stage('Build Images') {
+           when {
+               allOf{
+                    // case insensitive regular expression for truthy values
+                    expression { return NEEDS_BUILD == "true" }
+                    branch 'master' 
+               }
+           }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./02_docker_build_images.sh -f jenkins'
+                }
+            }
         }
+
+        stage('Publish Images') {
+           when {
+               allOf{
+                    // case insensitive regular expression for truthy values
+                    expression { return NEEDS_BUILD == "true" }
+                    branch 'master' 
+               }
+           }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./04_01_publish_images.sh -f jenkins'
+                }
+            }
+        }
+
+        stage('Deploy to integration') {
+           when { branch 'master' }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./04_02_deploy_stack.sh -f jenkins -e integration'
+                }
+            }
+        }
+
+        stage('Deploy to pro') {
+            when { 
+                expression { BRANCH_NAME ==~ /release\/.*/ }
+            }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./04_02_deploy_stack.sh -f jenkins -e pro'
+                }
+            }
+        }
+
     }
 }
