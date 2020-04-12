@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mephmicro-restapi-deployment
+  namespace: meph
+spec:
+  selector:
+    matchLabels:
+      k8s-app: mephmicro-restapi
+  template:
+    metadata:
+      labels:
+        k8s-app: mephmicro-restapi
+      annotations:
+        deploymentVersionTag: "1580581509"
+    spec:
+      containers:
+        - name: app
+          envFrom:
+            - configMapRef:
+                name: configmap-mephmicro-restapi
+          image: localhost:5000/mephmicro-restapi:DEVELOP-SNAPSHOT
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 120
+            httpGet:
+              path: /health
+              port: http
+          livenessProbe:
+            initialDelaySeconds: 120
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            limits:
+              cpu: 0.2
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
