@@ -1,0 +1,6 @@
+#spring:
+#   datasource:
+#      url: URL-test
+#      username: usr-tes
+#      password: pass-test
+

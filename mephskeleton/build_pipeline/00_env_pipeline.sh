@@ -1,151 +1,122 @@
-#!/usr/bin/env bash
-
-## ---------------------------------------------------------
-##  Config equipo
-## ---------------------------------------------------------
-
-#Collection de destino
-export  DOCKER_REGISTRY_REPO=#MANGODOMAIN#
-
-## ---------------------------------------------------------
-##  CONFIGURACIONES GLOBALES
-## ---------------------------------------------------------
-export DOCKER_REGISTRY_MNG_BASE_URL=495248209902.dkr.ecr.eu-west-1.amazonaws.com/mango/
-export DOCKER_REGISTRY_MNG_REPOSITORY=$DOCKER_REGISTRY_MNG_BASE_URL$DOCKER_REGISTRY_REPO/
-
-export S3_MNG_PRE_BASE_URL=pre-mng-releases/code
-export S3_MNG_PRO_BASE_URL=mng-releases/code
-
-#Estas vaiables se aplican en la creacion del proyecto
-export K8S_ENV_LIMIT_CPU_ENGINE=1.2
-export K8S_ENV_REQUEST_CPU_ENGINE=1
-export K8S_LIMIT_MEM_ENGINE=512M
-export K8S_REQUEST_MEM_ENGINE=420M
-export ENV_JAVA_OPTS_ENGINE="-XX:MaxRAM=384m -Xmx256m -Xms256m"
-
-export K8S_ENV_LIMIT_CPU_FULL=1.2
-export K8S_ENV_REQUEST_CPU_FULL=1
-export K8S_LIMIT_MEM_FULL=512M
-export K8S_REQUEST_MEM_FULL=420M
-export ENV_JAVA_OPTS_FULL="-XX:MaxRAM=384m -Xmx256m -Xms256m"
-
-export K8S_ENV_LIMIT_CPU_RESTAPI=1.2
-export K8S_ENV_REQUEST_CPU_RESTAPI=1
-export K8S_LIMIT_MEM_RESTAPI=512M
-export K8S_REQUEST_MEM_RESTAPI=420M
-export ENV_JAVA_OPTS_RESTAPI="-XX:MaxRAM=384m -Xmx256m -Xms256m"
-
-
-
+#!/bin/bash
 . ./utils_pipeline.sh
 
-# Limpiamos config de DOCKER para limpiar de ejecuciones anteriores
-unset DOCKER_HOST
-unset DOCKER_STACK_VERSION
-unset DOCKER_TLS_VERIFY
-unset DOCKER_CERT_PATH
-
-
-#
-# Definicion de la version del artrfacto
-#
-## Extraemos la version del artefacto padre
 pushd ..
-export ARTIFACT_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
-export DOCKER_STACK_VERSION=$ARTIFACT_VERSION
-echo "La version por defecto es $DOCKER_STACK_VERSION"
+export MAVEN_SETTINGS= #CUSTOM_USER_VALUE : You could stablish your maven settings here
+#export STACK_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
+export STACK_VERSION=$(git rev-parse --short HEAD)
+export CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 popd
 
-export DOCKER_STACK_IMAGE_VERSION=$DOCKER_STACK_VERSION\.$(cat ./stack_definitions/last_build_version.txt)
-echo "DOCKER STACK IMAGE VERSION $DOCKER_STACK_IMAGE_VERSION"
+#Stack name
+export DOCKER_STACK_NAME=mephskeleton
 
-#
-# Aceptamos -f / --flags para inicializar opciones de generacion definidas en fichero environment_scripts/opt_<opcion>.sh
-# Aceptamos -e / --env para inicializar variables en fichero environment_scripts/env_<opcion>.sh
-# Aceptamos -v / --verison para seleccionar la versiónque queremos generar
-echoerr "PARAMETROS ENV $@"
 
+#Default k8s descriptors values (you can set specific environment values en the env_<environment>.sh script)
+export K8S_NAMESPACE=meph
+export K8S_ENV_NAMESPACE_PREFIX=
+export K8S_ENV_NAMESPACE_POSTFIX=
+
+#Default k8s descriptors values (you can set specific environment values en the env_<environment>.sh script)
+export RESTAPI_K8S_DOMAIN_NAME=meph.com
+export RESTAPI_K8S_DOMAIN_NAME_PREFIX=mephskeleton.
+export RESTAPI_K8S_DOMAIN_NAME_POSTFIX=
+
+
+## ---------------------  REGISTRY ---------------------
+#Registry 
+#CUSTOM_USER_VALUE : here you can set your registry domain name value
+export DOCKER_REGISTRY_REPOSITORY_PREFIX=localhost:5000
+export DOCKER_REGISTRY_REPOSITORY=http://localhost:5000
+
+IMAGE_PREFIX=""
+if [ "" != "$DOCKER_REGISTRY_REPOSITORY_PREFIX" ] ; then
+  IMAGE_PREFIX="$DOCKER_REGISTRY_REPOSITORY_PREFIX/";
+  echo "Building image - Our image prefix will be $IMAGE_PREFIX";
+fi  
+
+
+#Images
+export DOCKER_RESTAPI_FWK_IMAGE_NAME=${IMAGE_PREFIX}${DOCKER_STACK_NAME}-restapi-framework
+export DOCKER_RESTAPI_IMAGE_NAME=${IMAGE_PREFIX}${DOCKER_STACK_NAME}-restapi
+
+#Images
+export DOCKER_ENGINE_FWK_IMAGE_NAME=${IMAGE_PREFIX}${DOCKER_STACK_NAME}-engine-framework
+export DOCKER_ENGINE_IMAGE_NAME=${IMAGE_PREFIX}${DOCKER_STACK_NAME}-engine
+
+#Registry login
+#CUSTOM_USER_VALUE : here you coul set your login registry method
+function loginRegistry
+{
+    echo "Login to registry: default behaivour, don't need to login ;)";
+}
+
+## By default , not in pipeline
+RUNNING_PIPELINE=false
+
+## SONAR
+export SONAR_USER=admin
+export SONAR_PASSWORD=admin
+export SONAR_HOST_URL=http://sonar-ip-service
+
+export SONAR_GOAL="sonar:sonar"
+if [ "$SONAR_PASSWORD" == "" ];
+then
+    export SONAR_PARAMS="-Dsonar.login=$SONAR_USER -Dsonar.host.url=$SONAR_HOST_URL"
+else
+    export SONAR_PARAMS="-Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWORD -Dsonar.host.url=$SONAR_HOST_URL"
+fi
+
+## ---------------------  OPTIONS MANAGEMENT ---------------------
+
+echo "Processing options : $@"
+
+#Manage modifier for the pipeline commands
 OPTS=$(getopt "-o f:e: -l flags:env:" -- $@)
-
 if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
-
 eval set -- "$OPTS"
-
-echoerr "--- Inicializamos opciones y entornos con params $OPTS"
+echoerr "Evaluating options $OPTS"
 
 while true; do
   case "$1" in
-    -f | --flags )
-        echo "Setting flag $2"
-        FLAG_PIPELINE=$2;
-        option_filename="./environment_scripts/opt_$2.sh";
-        if [ ! -f  $option_filename ];
+    -e | --env )
+        PIPELINE_ENVIRONMENT=$2
+        echo "Processing environment flags $2"
+        env_filename="./environment_scripts/env_$2.sh";
+        if [ ! -f  $env_filename ];
         then
-            echoerr "ERROR : No existe $option_filename";
+            echoerr "ERROR : It does not exist $env_filename";
             exit -1;
         fi
-        echoerr "====> inicializando opt [$2] --> $option_filename";
-        eval ". $option_filename";
+        echo "Running environment file $env_filename"
+        eval ". $env_filename";
         shift;shift ;;
+    -f | --opt )
+            echo "Processing option flags $2"
+            env_filename="./environment_scripts/opt_$2.sh";
+            if [ ! -f  $env_filename ];
+            then
+                echoerr "ERROR : It does not exist $env_filename";
+                exit -1;
+            fi
 
-    -v | --version )
-        export DOCKER_STACK_VERSION=$2;
-        shift;shift ;;
-    -e | --env )
-        ENTORNO_PIPELINE=$2
-        echo "Setting entorno $2"
-        shift;shift ;;
+            if [[ "$2" == "jenkins" ]];
+            then
+                RUNNING_PIPELINE=true;
+            fi
+
+            echo "Running opt file $env_filename"
+            eval ". $env_filename";
+            shift;shift ;;        
     -- ) shift ;;
     * ) break ;;
   esac
 done
 
-mkdir -p ./tmp
-mkdir -p ./stack_definitions/config_generada
-mkdir -p ./tmp/zip_s3_files
+## ---------------------  CONFIGURATIOIN MANAGEMENT ---------------------
 
-echoerr "--- Inicializadas opciones y entornos"
+#Definition of active profiles for spring framework if nneded
+export SPRING_PROFILES_ACTIVE=$PIPELINE_ENVIRONMENT
 
-#Nombre del stack
-export DOCKER_STACK_NAME=mephskeleton
-
-#Imagenes
-export DOCKER_RESTAPI_IMAGE_NAME=${DOCKER_STACK_NAME}-restapi
-export DOCKER_RESTAPI_DOMAIN_NAME=${DOCKER_STACK_NAME}-restapi
-
-#Imagenes
-export DOCKER_ENGINE_IMAGE_NAME=${DOCKER_STACK_NAME}-engine
-export DOCKER_ENGINE_DOMAIN_NAME=${DOCKER_STACK_NAME}-engine
-
-#Imagenes
-export DOCKER_SINGLEAPP_IMAGE_NAME=${DOCKER_STACK_NAME}
-export DOCKER_SINGLEAPP_DOMAIN_NAME=${DOCKER_STACK_NAME}
-
-#Repositorio UCP para la aplicacipn
-export DOCKER_REGISTRY_MNG_REPOSITORY=${DOCKER_REGISTRY_MNG_REPOSITORY}
-
-
-#Aplicamos los flags (se aplican siempre independientemente del entorno)
-#aplicaFlag
-
-# Configuracion MAVEN
-export MAVEN_SETTINGS="--settings $(pwd)/tools/settings.xml"
-
-#Gestion scripts de integracion
-export compose_salida_integracion="last_docker_compose_mock_test_integracion.yml"
-
-echoerr "--- Preparamos el entorno de aceptacion"
-echoerr "-----------------------------------"
-env | grep DOCKER
-echoerr "-----------------------------------"
-
-#Mirasmo si hemos seteado lo que nos jace falta
-echo "---------------------------------------------------"
-echo "---------------------------------------------------"
-echo "------------------  USUARIOS GIT / JENKINS --------"
-echo "---------------------------------------------------"
-echo "---------------------------------------------------"
-echo "[$USER_GIT][$CICD_USER] / reg: [$CICD_REGISTRY_USER]"
-echo "---------------------------------------------------"
-echo "---------------------------------------------------"
-echo "---------------------------------------------------"
+## --------------------- determine if build is needed ---------------------
+echo "Running in pipeline $RUNNING_PIPELINE"

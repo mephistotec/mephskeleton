@@ -1,0 +1,31 @@
+spring:
+   jpa:
+      databasePlatform: org.hibernate.dialect.Oracle10gDialect
+      show-sql: false
+      hibernate:
+         ddl-auto:
+   jmx:
+      default-domain: mephskeleton_engine
+   application:
+      name: mephskeleton_engine
+flyway:
+  enabled: false
+hibernate:
+  jdbc:
+    batch_size: 1000
+logging:
+  config: classpath:logback-spring.xml
+info:
+  app:
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+endpoints:
+  enabled: false
+  health.enabled: true
+  info.enabled: true
+  metrics.enabled: true
+management:
+  endpoints:
+    web:
+      base-path: /

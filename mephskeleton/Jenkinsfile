@@ -1,0 +1,133 @@
+def needs_build() { 
+    script {  
+        return sh(script : 'cd build_pipeline;./build_needed.sh -f jenkins; echo ', returnStdout: true).trim()
+    }
+}
+pipeline {
+    agent any
+
+    environment {
+        mvnhome= tool 'M3'
+        PATH = "${mvnhome}/bin:$PATH"
+        ENVIRONMENT= "${env.ENVIRONMENT}"
+        BRANCH="${env.BRANCH_NAME}"
+        PIPELINE=true
+        NEEDS_BUILD=needs_build();
+    }
+
+    stages
+    {
+        stage('Pipeline initialization') {
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh 'chmod 770 *.sh'
+                }
+           }
+        }
+
+        stage('Pipeline ask') {
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh 'cat ./result_check.txt'
+                }
+           }
+        }
+
+
+        stage('Build software') {
+           when {
+                // case insensitive regular expression for truthy values
+                expression { return NEEDS_BUILD == "true" }
+           }
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./01_01_build_software.sh -f jenkins'
+                }
+           }
+        }
+
+        stage('Unit Test') {
+           when {
+                // case insensitive regular expression for truthy values
+                expression { return NEEDS_BUILD == "true" }
+           }
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./01_02_build_unit_tests.sh -f jenkins'
+                }
+           }
+        }
+        /*
+        stage('Sonar') {
+           when {
+                // case insensitive regular expression for truthy values
+                expression { return NEEDS_BUILD == "true" }
+           }
+           steps
+           {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./01_03_build_sonar.sh -f jenkins'
+                }
+           }
+        }*/
+
+        stage('Build Images') {
+           when {
+               allOf{
+                    // case insensitive regular expression for truthy values
+                    expression { return NEEDS_BUILD == "true" }
+                    branch 'master' 
+               }
+           }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./02_docker_build_images.sh -f jenkins'
+                }
+            }
+        }
+
+        stage('Publish Images') {
+           when {
+               allOf{
+                    // case insensitive regular expression for truthy values
+                    expression { return NEEDS_BUILD == "true" }
+                    branch 'master' 
+               }
+           }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./04_01_publish_images.sh -f jenkins'
+                }
+            }
+        }
+
+        stage('Deploy to integration') {
+           when { branch 'master' }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./04_02_deploy_stack.sh -f jenkins -e integration'
+                }
+            }
+        }
+
+        stage('Deploy to pro') {
+            when { 
+                expression { BRANCH_NAME ==~ /release\/.*/ }
+            }
+            steps
+            {
+                dir('./build_pipeline') {
+                    sh 'export PATH="${mvnhome}:$PATH" && ./04_02_deploy_stack.sh -f jenkins -e pro'
+                }
+            }
+        }
+
+    }
+}
