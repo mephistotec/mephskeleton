@@ -13,7 +13,10 @@ BITBUCKETPROJECTKEY=
 BITBUCKETURL="https://api.bitbucket.org/2.0/repositories"
 BITBUCKETFIRSTCOMMIT="Repo creation"
 RESCODE=0
-JENKINSURL=http://jenkins.meph.com/
+GIT_REPO_URL=
+JENKINSURL=
+JENKINSAPICREDENTIALS=
+JENKINSGITCREDENTIALS=
 
 if [ "$#" -lt 2 ]; then
   echo -e "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes> [OPTIONS]"
@@ -26,6 +29,9 @@ if [ "$#" -lt 2 ]; then
   echo -e "\t-bbpass or --bitbucket_password\t[optional] password to create repository in bitbucket"
   echo -e "\t-bbteam or --bitbucket_team\towner team for the repository"
   echo -e "\t-bbprojectkey or --bitbucket_project_key\tproject key to create repository in bitbucket"
+  echo -e "\t-jurl or --jenkins_url key to create repository in bitbucket"
+  echo -e "\t-japicred or --jenkins_api_cred\tCredentials for jenkins API user:API_TOKE"
+  echo -e "\t-jgitcred or --jenkins_git_credentials_id\tCredentials id to use to access git."¡
 #  echo -e "   -jc | --jenkins_credentials jenkins credentials ID to use in your jenkins tasks, default $JENKINS_CREDENTIALS"
 #  echo -e "   -app | --application_type appliction type micro | worker | full (worker + micro), default : $APPLICATION_TYPE"
   exit -1
@@ -88,11 +94,20 @@ while true; do
     -bbteam | --bitbucket_team )
         BITBUCKETTEAM=$2
         shift;shift ;;
+    -jurl | --jenkins_url )
+        echo "jenkins url $2"
+        JENKINSURL=$2
+        shift;shift ;;
+    -japicred | --jenkins_api_cred )
+        JENKINSAPICREDENTIALS=$2
+        shift;shift ;;
+    -jgitcred | --jenkins_git_credentials_id )
+        JENKINSGITCREDENTIALS=$2
+        shift;shift ;;        
     -- ) shift ;;
-    * ) break ;;
+    * )  break ;;
   esac
 done
-
 
 shift $(($OPTIND - 1))
 ARTIFACTID=$1
@@ -120,15 +135,16 @@ function createBitbucketProjectIfNeeded
         fi
         if [ "$BITBUCKETTEAM" != "" ] && [ "$BITBUCKETPROJECTKEY" != "" ];
         then
-          echo -e "\tI have team and project key, lets go..."
-          command="curl -s -X POST  -u $bitbucketcred $BITBUCKETURL/$BITBUCKETTEAM/$ARTIFACTID -H \"Content-Type: application/json\"  -d '{\"has_wiki\": true, \"is_private\": true, \"project\": {\"key\": \"$BITBUCKETPROJECTKEY\"}}'"
+          echo -e "\tI have team and project key, lets go... $BITBUCKETURL/$BITBUCKETTEAM/$ARTIFACTID"
+          command="curl -X POST  -u $bitbucketcred $BITBUCKETURL/$BITBUCKETTEAM/$ARTIFACTID -H \"Content-Type: application/json\"  -d '{\"has_wiki\": true, \"is_private\": true, \"project\": {\"key\": \"$BITBUCKETPROJECTKEY\"}}'"
           result=$(eval "$command")
+          echo "$result"
           remote_url=$(echo $result | jq -r ".links.clone[0].href")
-          echo "   Pushing to repository '$remote_url'"
+          echo '   Pushing to repository '$remote_url
 
           if [ "" = "$remote_url" ]
           then 
-              echoerr "Error creating repo";
+              echoerr "Error creating repo $result";
               RESCODE=-1;
           else
               if [ "null" = "$remote_url" ]
@@ -147,8 +163,7 @@ function createBitbucketProjectIfNeeded
             if [[ $rc -eq 0 ]] ; then git remote add origin "$remote_url"; fi
             if [[ $rc -eq 0 ]] ; then git remote -v; fi
             if [[ $rc -eq 0 ]] ; then git push -u origin master; fi
-            #if [[ $rc -eq 0 ]] ; then git checkout -b develop; fi
-            #if [[ $rc -eq 0 ]] ; then git push --set-upstream origin develop; fi
+            if [[ $rc -eq 0 ]] ; then GIT_REPO_URL=$remote_url; fi
             RESCODE=$rc
           fi
         fi
@@ -184,6 +199,7 @@ function cleanModules
   echo "-------------------"
 }
 
+# String to replace, replacement string
 function replaceAll
 {
       echo "Replacing names $1 $2"
@@ -200,6 +216,29 @@ function replaceAll
              fgrep -Rl $patternReplace . | while read file; do echo "Modifying $file....."; sed -i  "s/$patternReplace/$patternCollection/g" $file; done
              ;;
         esac
+}
+
+#  String to replace, replacement string, origin , destination
+function replaceInFile
+{
+  echo "Replacing names $1 $2"
+  patternReplace=$(echo "$1" | sed 's/\./\\\./g')
+  patternCollection=$(echo "$2" | sed 's/\./\\\./g')
+  patternCollection=$(echo $patternCollection | sed 's/\//\\\//g')
+  file=$3;
+
+  case "$(uname -s)" in
+
+      Darwin)
+        echo '  MacoS replace'
+        echo "Modifying $file....."; sed -i '' "s/$patternReplace/$patternCollection/g" $file;
+        ;;
+      *)
+        echo '  Linuz replaces'
+        echo "Modifying $file....."; sed -i  "s/$patternReplace/$patternCollection/g" $file;
+        ;;
+  esac
+
 }
 
 function reemplazaJenkinsCredentials
@@ -236,47 +275,6 @@ function replaceDomain
          ;;
     esac
 }
-
-
-# function buildKubernetesTemplates
-# {
-#     export k8sfolder="./$1/infrastructure/k8s";
-#     echo "   Building kubernetes templates in [$k8sfolder]";
-#     mkdir -p $k8sfolder
-#     echo "   Building applications template ...";
-#     aplicaciones="restapi engine";
-#     echo "   Iterating throug pods ...";
-#     ls ../k8s_templates | while read fichero;
-#     do
-#         echo "   Processing descriptor $fichero"
-#         for aplicacion in $aplicaciones; do
-#             echo "   Building descriptor $fichero for $aplicacion ..."
-#             echo "   Writing kubernetes $fichero in $k8sfolder/$aplicacion_$fichero";
-#             name="$1-$aplicacion"
-#             repo="$1-$aplicacion"
-#             registryDomain="$2"
-#             namespace="$3"
-#             dnsbasename="$4"
-#             echo "   Applying  $name $repo in $(pwd)  and $k8sfolder/$aplicacion_$fichero"
-#             cat "../k8s_templates/$fichero" |
-#                     sed "s/<limit_cpu_value>/<limit_cpu_value_$aplicacion>/g" |
-#                     sed "s/<limit_memory_value>/<limit_memory_value_$aplicacion>/g" |
-#                     sed "s/<request_cpu_value>/<request_cpu_value_$aplicacion>/g" |
-#                     sed "s/<env_java_opts>/<env_java_opts_$aplicacion>/g" |
-#                     sed "s/<request_memory_value>/<request_memory_value_$aplicacion>/g" |
-#                     sed "s/<name>/$name/g" |
-#                     sed "s/<namespace>/$namespace/g" |
-#                     sed "s/<docker-registry-domain-name>/$registryDomain/g" |
-#                     sed "s/<dnsbasename>/$dnsbasename/g" |
-#                     sed "s/<aplication-repo-name>/$repo/g" > $k8sfolder/$aplicacion\_$fichero;
-#         done
-#     done
-#     echo "   ---------------------------------------------------------------------"
-#     echo "   IMPORTANT "
-#     echo "   Customized k8s templates. You cant manage your request and limit "
-#     echo "   resources editing your configuration script. Default values have been set."
-#     echo "   ---------------------------------------------------------------------"
-# }
 
 function moveClassesToPackage
 {
@@ -407,16 +405,58 @@ function replaceNamesInBuiltProject
   popd
 }
 
+function buildJenkinsTaskIfNeeded
+{
+  pushd jenkins
+  echo "Checking jenkins task creation..."
+  if [ "$JENKINSURL" != "" ]; then
+    echo "Checking jenkins task creation... got Url"
+    if [ "$JENKINSAPICREDENTIALS" != "" ]; then
+      echo "Checking jenkins task creation... got credentials"
+      if [ "$JENKINSGITCREDENTIALS" != "" ]; then
+        echo "Checking jenkins task creation... got git credentials"
+        echo "Git repo : $GIT_REPO_URL"
+        if [ "$GIT_REPO_URL" != "" ]; then
+          echo "Jenkins, checking folder $BITBUCKETPROJECTKEY"
+          existsFolder=$(curl -s -X GET $JENKINSURL'/job/'$BITBUCKETPROJECTKEY'/config.xml' -u $JENKINSAPICREDENTIALS -i | grep "HTTP/" | grep -v 100 | cut -d" " -f2)
+          if [ "$existsFolder" = "404" ]; then
+            existsFolder=$(curl -s -XPOST $JENKINSURL'/createItem?name='$BITBUCKETPROJECTKEY -u $JENKINSAPICREDENTIALS --data-binary @jenkins_folder_template.xml -H "Content-Type:text/xml" -i | grep "HTTP/" | grep -v 100 | cut -d" " -f2)
+            echo 'Folder creation result: with '$JENKINSURL'/createItem?name='$BITBUCKETPROJECTKEY' : '$existsFolder
+          else
+            echo "Jenkins, no need to create folder"
+          fi;
+          
+          folder="/job/$BITBUCKETPROJECTKEY/";
+
+          if [[ "$existsFolder" == "200" ]];
+          then
+              echo "Creating jenkins task ...$ARTIFACTID with $GIT_REPO_URL";              
+              rm ./jenkins_template_tmp.xml;
+              cp ./jenkins_template.xml ./jenkins_template_tmp.xml
+              replaceInFile "GIT_REPOSITORY" "$GIT_REPO_URL" ./jenkins_template_tmp.xml;
+              replaceInFile "GIT_CREDENTIALS_ID" "$JENKINSGITCREDENTIALS" ./jenkins_template_tmp.xml;
+              existsTask=$(curl -s -XPOST $JENKINSURL$folder'createItem?name='$ARTIFACTID -u $JENKINSAPICREDENTIALS --data-binary @jenkins_template_tmp.xml -H "Content-Type:text/xml" -i | grep "HTTP/" | grep -v 100 | cut -d" " -f2)
+          else 
+            echo 'Could not find folder in jenkins '$BITBUCKETPROJECTKEY
+          fi;
+
+          if [ "$existsTask" == "200" ]; then 
+              echo "Jenkins task created $BITBUCKETPROJECTKEY/$ARTIFACTID"
+          else 
+            echo 'Could not create task '$BITBUCKETPROJECTKEY' with '"$JENKINSURL$folder"'createItem?name='$ARTIFACTID' result :'$existsTask
+          fi
+        else
+          echo "We don't create jenkins task due to we don't have a git repo."
+        fi
+      fi
+    fi
+  fi;
+  popd
+}
+
 echo "Preparing service for artifact $1"
 
 buildprojectFromArchetype
 replaceNamesInBuiltProject
 createBitbucketProjectIfNeeded
-
-#echo "Jenkins files generation \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
-#. ./generaJenkinsFiles.sh $ARTIFACTID $8
-#echo "Jenkins files generated \[$(pwd)\]\[$ARTIFACTID\]\[$8\]"
-
-#pushd built_project
-#  zip -r $ARTIFACTID.zip ./$ARTIFACTID
-#popd
+buildJenkinsTaskIfNeeded

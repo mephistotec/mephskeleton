@@ -1,8 +1,0 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: configmap-mephmicro-restapi
-  namespace: <k8s_namespace>
-data:
-  ENVIRONMENT: <env>
-  SPRING_PROFILES_ACTIVE : <spring_profiles_active>
