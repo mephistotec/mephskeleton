@@ -1,5 +1,7 @@
 # mephskeleton
 
+[TOC]
+
 ## Intro
 
 This service template tool offers a way to create springboot k8s microservices and its CI/CD pipeline. These functionalities ar covered:
@@ -10,11 +12,11 @@ This service template tool offers a way to create springboot k8s microservices a
 
 It's build over a maven archetype (yes maven, didn't have time enough to learn the needed gradle skills :) ). 
 
-### Main features
+## Main features
 
 With this tool we can create a CI pipeline based on Jenkins as automation to run it and a git repository to manage your code versions. This pipeline has thes main traits:
 
-* As we said, it generates microservices based on **Springboot framework**, based on them it creates **docker images** that will be deployed in **kubernetes**.
+* As it's been said, it generates microservices based on **Springboot framework**, it encapsulates them into **docker images** that will be deployed in **kubernetes**.
 * It's based on maven and we use the **multi-module parent's pom for dependency version managment.**
 * It's oriented to work with **trunk based development**. Every feature you merge & push to your master branch should be ready to production. 
 * It considers two deployment environmnents: **integration & production**. 
@@ -24,7 +26,7 @@ With this tool we can create a CI pipeline based on Jenkins as automation to run
 > You could turn it quickly to a CD pipeline if you enable master branch to be deployed to the production environment
 > in the supplied Jenkinsfile.
 
-### Cool features: just two tips to enhance pipeline speed
+## Cool features: just two tips to enhance pipeline speed
 
 We've tried to focus our efforts in deployment and pipeline speed. If we consider these steps:
 
@@ -36,12 +38,15 @@ We've tried to focus our efforts in deployment and pipeline speed. If we conside
 * deploy
 
 Not all these steps can be speeded up but, not all of them need to be run every time we run our pipeline. Following simple actions we can reduce our pipeline execution time:
-* Our images are splitted in two parts, what we consider frameork and busines code separately, that we join lately. That implies that if you only modify your bussines code and you don't add/modify any dependency, only this part of the image will be rebuilt.
-* We use commmit id to version our images. It enables us to skip some steps that have been processed before with the same version of code. So:
-  * It's fast to go from integration to production since steps like building, testing, creating images,.. don't need to be repeated.
-  * It's fast to deploy a version previously deployed since all these mentioned stops have previously been processed.
 
-## Base Use Case (with shell script pipeline)
+* **Images are splitted in two parts, framework nd business**: this allow the pipeline to deal with them separately and joins them in the final image. So,if you only modify your bussines code and you don't add/modify any dependency, only this part of the image will need to be rebuilt.
+
+
+* **Use of commit id to tag images** . It enables us to skip some steps that have been processed before with the same version of code:
+  * It's **fast to go from integration to production** since steps like building, testing, creating images,.. don't need to be repeated.
+  * It's **fast to deploy a version previously deployed** since all these mentioned stops have previously been processed.
+
+# Base Use Case (with shell script pipeline)
 
 To create a new microservice is as easy as launch the create project script:
 
