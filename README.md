@@ -48,7 +48,7 @@ Not all these steps can be speeded up but, not all of them need to be run every 
   * It's **fast to go from integration to production** since steps like building, testing, creating images,.. don't need to be repeated.
   * It's **fast to deploy a version previously deployed** since all these mentioned stops have previously been processed.
 
-# Base Use Case (with shell script pipeline)
+## Base Use Case (with shell script pipeline)
 
 To create a new microservice is as easy as launch the create project script:
 
@@ -83,8 +83,8 @@ To do so you can add the commands you need to each of the environment scripts de
 
 | Variables | Use |
 | --- | --- | --- |
-| K8S_NAMESPACE<br>K8S_ENV_NAMESPACE_PREFIX<br>K8S_ENV_NAMESPACE_POSTFIX | The combination of these three variables determine the deployment namespace for our k8s objects.
-|RESTAPI_K8S_DOMAIN_NAME<br>RESTAPI_K8S_DOMAIN_NAME_PREFIX<br>RESTAPI_K8S_DOMAIN_NAME_POSTFIX | The combination of these variables determine the domain used to map in the k8s ingress the requests to your service.
+| K8S_NAMESPACE  K8S_ENV_NAMESPACE_PREFIX  K8S_ENV_NAMESPACE_POSTFIX | The combination of these three variables determine the deployment namespace for our k8s objects.
+|RESTAPI_K8S_DOMAIN_NAME  RESTAPI_K8S_DOMAIN_NAME_PREFIX  RESTAPI_K8S_DOMAIN_NAME_POSTFIX | The combination of these variables determine the domain used to map in the k8s ingress the requests to your service.
 
 On the other hand, and used for all environments, we have *build_pipeline/00_env_pipeline.sh* script where you could customize your docker registry / docker registry prefix for your images as well as the login command you need to launch for your registry.
 
@@ -100,5 +100,19 @@ If you wan't to build a complete pipeline you need to go further with our micros
 To do so you'll need to launch the create project command this way:
 
 `
-./create_project.sh -r localhost:5000 -ns <my base kubernetes namespace> -bbprojectkey <project key where to create repo> -bbuser <my bitbucket user> -bbpass <my bitbucket pass> -bbteam <bitbucket team>  -jurl <jenkins url> -japicred <jenkins user:jenkins api key> -jgitcred <your git credentials id in jenkins> <microservice name> <package for java classes>
+./create_project.sh -r <registry url> -ns <my base kubernetes namespace>
+-bbprojectkey <project key where to create repo> -bbuser <my bitbucket user> 
+-bbpass <my bitbucket pass> -bbteam <bitbucket team>  -jurl <jenkins url> 
+-japicred <jenkins user:jenkins api key> -jgitcred <your git credentials id in jenkins> <microservice name> <package for java classes>
 `
+
+This example works for me using a local docker Desktop kubernetes stack with a local registry at *localhost:5000*:
+
+`
+./create_project.sh -r http://localhost:5000 -ns meph -bbprojectkey MEPHISTOS -bbuser mephistos -bbpass xxxxxxx -bbteam 3dteam  -jurl https://bitbucket.org -japicred jenkins_deploy:xxxxxxxxx -jgitcred git_creD_user mynewapi com.meph.mynewapi
+`
+
+Another option you can apply is to create a jenkins task to run this command adding just the parameters to set your service name and package.
+
+
+
