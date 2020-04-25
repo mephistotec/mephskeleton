@@ -8,7 +8,7 @@ export CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 popd
 
 #Stack name
-export DOCKER_STACK_NAME=mephskeleton
+export DOCKER_STACK_NAME=mephmicroapi
 
 #k8S
 export K8S_NAMESPACE=meph
@@ -17,15 +17,15 @@ export K8S_ENV_NAMESPACE_POSTFIX=
 
 #K8s domain values
 export RESTAPI_K8S_DOMAIN_NAME=meph.com
-export RESTAPI_K8S_DOMAIN_NAME_PREFIX=mephskeleton.
+export RESTAPI_K8S_DOMAIN_NAME_PREFIX=mephmicroapi.
 export RESTAPI_K8S_DOMAIN_NAME_POSTFIX=
 
 
 ## ---------------------  REGISTRY ---------------------
 #Registry 
 #CUSTOM_USER_VALUE : here you can set your registry domain name value
-export DOCKER_REGISTRY_REPOSITORY_PREFIX=#REGISTRY_DOMAIN_NAME#
-export DOCKER_REGISTRY_REPOSITORY=#REGISTRY_URL#
+export DOCKER_REGISTRY_REPOSITORY_PREFIX=localhost:5000
+export DOCKER_REGISTRY_REPOSITORY=http://localhost:5000
 
 #Registry login
 #CUSTOM_USER_VALUE : here you coul set your login registry method

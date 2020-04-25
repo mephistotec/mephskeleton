@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: configmap-mephmicroapi-restapi
+  namespace: meph
+data:
+  ENVIRONMENT: test
+  SPRING_PROFILES_ACTIVE : test

@@ -19,7 +19,7 @@ JENKINSAPICREDENTIALS=
 JENKINSGITCREDENTIALS=
 
 if [ "$#" -lt 2 ]; then
-  echo -e "Only  $# params. Use: create_project.sh  <artifcatid> <package for your classes> [OPTIONS]"
+  echo -e "Only  $# params. Use: create_project.sh  <artifcatid> [OPTIONS]"
   echo -e "\t-g or --groupid\tsets the group id of your maven project , default: $GROUPID"
   echo -e "\t-r or -docker_registry\tregistry domain name to push images,"
   echo -e "\t\tyou can manage it in build_pipeline/00_env_pipeline.sh when artifact is generated "
@@ -58,8 +58,14 @@ while true; do
         PACKAGE=$2
         shift;shift ;;
     -r | --docker_registry )
-        echo "Setting registry $2"
-        DOCKERREGISTRYDOMAINNAME=$2
+        echo "Setting registry $2 "
+        DOCKERREGISTRYURL=$2
+        if [[ $2 == *"://"* ]]; then
+          DOCKERREGISTRYDOMAINAME=$(echo $2 | cut -d"/" -f3-);
+        else 
+          DOCKERREGISTRYDOMAINAME=$2
+        fi        
+        echo "after setting registry $2 : $DOCKERREGISTRYURL / $DOCKERREGISTRYDOMAIN"
         shift;shift ;;
     -ns | --namespace )
         echo "Setting namespace $2"
@@ -111,6 +117,7 @@ done
 
 shift $(($OPTIND - 1))
 ARTIFACTID=$1
+
 
 function echoerr
 {
@@ -259,7 +266,7 @@ function reemplazaJenkinsCredentials
 
 function replaceDomain
 {
-    echo "Applying registry [$1] ..."
+    echo "Applying registry [$1] in [$2] ..."
     patternCollection=$1
     patternCollection=$(echo $patternCollection | sed 's/\//\\\//g')
 
@@ -267,11 +274,11 @@ function replaceDomain
 
        Darwin)
          echo '   MacoS replace'
-         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Modifying $file....."; sed -i '' "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Modifying $file....."; sed -i '' "s/=$2/=$patternCollection/g" $file; done
          ;;
        *)
          echo '   Linuz replaces'
-         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Modifying $file....."; sed -i  "s/=#REGISTRY_DOMAIN_NAME#/=$patternCollection/g" $file; done
+         fgrep -Rl "=#REGISTRY_DOMAIN_NAME#" . | while read file; do echo "Modifying $file....."; sed -i  "s/=$2/=$patternCollection/g" $file; done
          ;;
     esac
 }
@@ -370,11 +377,12 @@ function replaceNamesInBuiltProject
     echo "Replacing artifactid where needed ..."
     replaceAll "mephskeleton" $ARTIFACTID
 
-    echo "Applying gesistry [$DOCKERREGISTRYDOMAINNAME] ..."
-    if [ "$DOCKERREGISTRYDOMAINNAME" == "" ]; then
+    echo "Applying gesistry [$DOCKERREGISTRYDOMAINAME] ..."
+    if [ "$DOCKERREGISTRYDOMAINAME" == "" ]; then
       echo "WARN : Docker repository not defined, you'll have to edit build_pipeline/00_env_pipeline.sh to set it!!!"
     else
-      replaceDomain $DOCKERREGISTRYDOMAINNAME
+      replaceDomain $DOCKERREGISTRYURL "#REGISTRY_URL#"
+      replaceDomain $DOCKERREGISTRYDOMAINAME "#REGISTRY_DOMAIN_NAME#"
     fi
 
     #echo "Setting jenkins credentials to [$JENKINS_CREDENTIALS]"

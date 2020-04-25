@@ -1,0 +1,10 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: mephmicroapi-restapi-pdb
+  namespace: meph-integration 
+spec:
+  minAvailable: 50%
+  selector:
+    matchLabels:
+      k8s-app: mephmicroapi-restapi
