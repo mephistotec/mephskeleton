@@ -83,7 +83,7 @@ To do so you can add the commands you need to each of the environment scripts de
 
 | Variables | Use |
 | --- | --- | --- |
-| K8S_NAMESPACE <br>K8S_ENV_NAMESPACE_PREFIX</br> K8S_ENV_NAMESPACE_POSTFIX | The combination of these three variables determine the deployment namespace for our k8s objects.
+| K8S_NAMESPACE. K8S_ENV_NAMESPACE_PREFIX  K8S_ENV_NAMESPACE_POSTFIX | The combination of these three variables determine the deployment namespace for our k8s objects.
 |RESTAPI_K8S_DOMAIN_NAME <br>RESTAPI_K8S_DOMAIN_NAME_PREFIX</br> RESTAPI_K8S_DOMAIN_NAME_POSTFIX | The combination of these variables determine the domain used to map in the k8s ingress the requests to your service.
 
 On the other hand, and used for all environments, we have *build_pipeline/00_env_pipeline.sh* script where you could customize your docker registry / docker registry prefix for your images as well as the login command you need to launch for your registry.
