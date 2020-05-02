@@ -1,5 +1,0 @@
-#spring:
-#   datasource:
-#      url: URL-dev
-#      username: usr-dev
-#      password: pass-dev
