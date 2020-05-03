@@ -118,7 +118,6 @@ done
 shift $(($OPTIND - 1))
 ARTIFACTID=$1
 
-
 function echoerr
 {
   echo "[ERROR] $@" 1>&2;

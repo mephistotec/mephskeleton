@@ -8,7 +8,7 @@
     <name>mephskeleton</name>
     <description>Proyecto padre. Gestiona dependency management y versiones como properties</description>
     <organization>
-        <name>Mango Online</name>
+        <name>mephistotech</name>
     </organization>
 
     <properties>
